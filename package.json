@@ -17,8 +17,19 @@
   },
   "homepage": "https://github.com/Bill0106/site-frontend-app#readme",
   "dependencies": {
-    "axios": "^0.15.3",
-    "normalize.css": "^5.0.0"
+    "@angular/common": "^2.4.9",
+    "@angular/compiler": "^2.4.9",
+    "@angular/core": "^2.4.9",
+    "@angular/http": "^2.4.9",
+    "@angular/platform-browser": "^2.4.9",
+    "@angular/platform-browser-dynamic": "^2.4.9",
+    "@angular/router": "^3.4.9",
+    "@types/node": "^7.0.5",
+    "core-js": "^2.4.1",
+    "normalize.css": "^5.0.0",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.2.0",
+    "zone.js": "^0.7.7"
   },
   "devDependencies": {
     "@angularclass/hmr": "^1.2.2",
