@@ -4,7 +4,7 @@ const config = {
   context: path.join(__dirname, '../', 'src'),
   entry: {
     admin: [
-      './app.ts'
+      './main.ts'
     ]
   },
   output: {

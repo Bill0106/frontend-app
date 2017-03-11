@@ -11,8 +11,8 @@ import components from './components'
     HttpModule,
     AppRoutingModule
   ],
-  declarations: [...components],
-  bootstrap: [MainComponents]
+  declarations: components,
+  bootstrap: [ MainComponents ]
 })
 
 class AppModule { }
