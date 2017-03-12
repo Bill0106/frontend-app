@@ -4,7 +4,7 @@ import routes from './views'
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 
 class AppRoutingModule { }

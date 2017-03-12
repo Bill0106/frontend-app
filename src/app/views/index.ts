@@ -4,13 +4,13 @@ import HomeComponent from './home'
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: '**',
     redirectTo: '/',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ]
 
 export default routes

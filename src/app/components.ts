@@ -3,7 +3,7 @@ import HomeComponent from './views/home'
 
 const declarations = [
   MainComponent,
-  HomeComponent
+  HomeComponent,
 ]
 
 export default declarations
