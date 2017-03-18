@@ -1,5 +1,18 @@
-<md-toolbar>
-  <md-icon>menu</md-icon>
-  <span class="app-navbar">Navbar</span>
-</md-toolbar>
-<router-outlet></router-outlet>
+<md-sidenav-container class="app-container">
+  <md-sidenav #sidenav class="app-sidenav">
+    <md-list>
+      <md-list-item>Bill's Hobby</md-list-item>
+      <md-list-item>Games</md-list-item>
+      <md-list-item>Gourmets</md-list-item>
+      <md-list-item>Heathstone</md-list-item>
+    </md-list>
+  </md-sidenav>
+  <md-toolbar class="app-navbar">
+    <span (click)="sidenav.open()" class="app-navbar-menu">
+      <md-icon>menu</md-icon>
+    </span>
+  </md-toolbar>
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+</md-sidenav-container>

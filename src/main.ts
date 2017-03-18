@@ -2,10 +2,11 @@ import 'core-js'
 import 'reflect-metadata'
 import 'zone.js'
 import 'normalize.css'
+import './style'
 
 import { enableProdMode } from '@angular/core'
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
-import { bootloader } from '@angularclass/hmr';
+import { bootloader } from '@angularclass/hmr'
 import AppModule from './app/index'
 
 const platform = platformBrowserDynamic()
