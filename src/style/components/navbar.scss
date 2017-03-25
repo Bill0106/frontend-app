@@ -1,0 +1,25 @@
+.app-container .mat-sidenav-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.app-sidenav {
+  padding: 20px;
+  width: 240px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.app-navbar {
+  position: relative;
+  color: rgb(157, 157, 157);
+  background: transparent;
+  z-index: 9999;
+  .mat-toolbar-row {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.app-navbar-menu {
+  cursor: pointer;
+  .material-icons {
+    display: block;
+  }
+}
