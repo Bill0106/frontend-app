@@ -1,15 +1,15 @@
 .app-container .mat-sidenav-backdrop {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba($black, 0.6);
 }
 .app-sidenav {
   padding: 20px;
   width: 240px;
-  background-color: #fff;
+  background-color: $white;
   box-sizing: border-box;
 }
 .app-navbar {
   position: relative;
-  color: rgb(157, 157, 157);
+  color: $gray150;
   background: transparent;
   z-index: 9999;
   .mat-toolbar-row {

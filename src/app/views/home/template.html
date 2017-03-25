@@ -1,7 +1,44 @@
 <section class="app-home">
-  <ul class="app-home-list">
-    <li>
-      <img src="http://7xtddu.com1.z0.glb.clouddn.com/73ad5a84dcefe956276f1bd07c6316dd.jpg" alt="">
-    </li>
-  </ul>
+  <div class="app-home-list" [ngStyle]="{left: left + '%'}">
+    <div
+      class="app-home-item"
+      *ngFor="let section of sections; let i = index"
+      [ngStyle]="{'background-image': 'url(' + imageDomain + section.background + ')'}"
+    >
+      <div class="app-home-item-inner" *ngIf="i === 0">
+        <img [src]="imageDomain + section.image" alt="{{section.title}}" class="app-home-item-image">
+        <h1>{{ section.title }}</h1>
+        <ul class="app-home-item-contacts">
+          <li *ngFor="let contact of contacts">
+            <a [href]="contact.url" target="_blank" mdTooltip="contact.name">
+              <i [ngClass]="'icon-' + contact.name.toLowerCase()"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="app-home-item-inner" *ngIf="i !== 0">
+        <img
+          [src]="imageDomain + section.image"
+          alt="{{section.title}}"
+          class="app-home-item-image clickable"
+          (click)="goSection(section.link)"
+        >
+        <h2 (click)="goSection(section.link)">{{ section.title }}</h2>
+      </div>
+    </div>
+  </div>
+  <span
+    *ngIf="left !== 0"
+    class="app-home-control prev"
+    (click)="carouselSection('prev')"
+  >
+    <md-icon>chevron_left</md-icon>
+  </span>
+  <span
+    *ngIf="left !== (sections.length - 1) * -100"
+    class="app-home-control next"
+    (click)="carouselSection('next')"
+  >
+    <md-icon>chevron_right</md-icon>
+  </span>
 </section>
