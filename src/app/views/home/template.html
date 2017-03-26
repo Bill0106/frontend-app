@@ -10,7 +10,7 @@
         <h1>{{ section.title }}</h1>
         <ul class="app-home-item-contacts">
           <li *ngFor="let contact of contacts">
-            <a [href]="contact.url" target="_blank" mdTooltip="contact.name">
+            <a [href]="contact.url" target="_blank" [title]="contact.name">
               <i [ngClass]="'icon-' + contact.name.toLowerCase()"></i>
             </a>
           </li>
