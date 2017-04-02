@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser'
 import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@angular/material'
 import MainComponents from './main'
-import AppRoutingModule from './modules'
-import components from './components'
+import { components } from './views'
+import AppRoutingModule from './router'
 
 @NgModule({
   imports: [
@@ -13,7 +13,10 @@ import components from './components'
     MaterialModule,
     AppRoutingModule,
   ],
-  declarations: components,
+  declarations: [
+    MainComponents,
+    ...components,
+  ],
   bootstrap: [ MainComponents ],
 })
 

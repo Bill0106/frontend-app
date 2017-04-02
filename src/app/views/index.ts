@@ -18,4 +18,9 @@ const routes: Routes = [
   },
 ]
 
-export default routes
+const components = [
+  HomeComponent,
+  GamesComponent,
+]
+
+export { routes, components }
