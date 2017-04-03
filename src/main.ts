@@ -6,8 +6,7 @@ import './style'
 
 import { enableProdMode } from '@angular/core'
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
-import { bootloader } from '@angularclass/hmr'
-import AppModule from './app/index'
+import AppModule from './app'
 
 const platform = platformBrowserDynamic()
 

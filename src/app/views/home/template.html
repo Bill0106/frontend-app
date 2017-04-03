@@ -1,12 +1,12 @@
 <section class="app-home">
-  <div class="app-home-list" [ngStyle]="{left: left + '%'}">
+  <div class="app-home-list" [ngStyle]="{ left: left + '%' }">
     <div
       class="app-home-item"
       *ngFor="let section of sections; let i = index"
-      [ngStyle]="{'background-image': 'url(' + imageDomain + section.background + ')'}"
+      [ngStyle]="{ 'background-image': 'url(' + imageDomain + section.background + ')' }"
     >
       <div class="app-home-item-inner" *ngIf="i === 0">
-        <img [src]="imageDomain + section.image" alt="{{section.title}}" class="app-home-item-image">
+        <img [src]="imageDomain + section.image" alt="{{ section.title }}" class="app-home-item-image">
         <h1>{{ section.title }}</h1>
         <ul class="app-home-item-contacts">
           <li *ngFor="let contact of contacts">
@@ -19,7 +19,7 @@
       <div class="app-home-item-inner" *ngIf="i !== 0">
         <img
           [src]="imageDomain + section.image"
-          alt="{{section.title}}"
+          alt="{{ section.title }}"
           class="app-home-item-image clickable"
           (click)="goSection(section.link)"
         >
