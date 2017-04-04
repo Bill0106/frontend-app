@@ -5,19 +5,17 @@ import { MaterialModule } from '@angular/material'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
-import { storeLogger } from 'ngrx-store-logger'
+import { Reducers, Services, Effects } from './services'
+import { ViewComponents } from './views'
 import MainComponents from './main'
-import { components } from './views'
+import Components from './components'
 import AppRoutingModule from './router'
-import { helloReducer } from './services/reducers'
-import Effects from './services/effects'
-import Services from './services/services'
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
-    StoreModule.provideStore(helloReducer),
+    StoreModule.provideStore(Reducers),
     EffectsModule.run(Effects),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5,
@@ -27,7 +25,8 @@ import Services from './services/services'
   ],
   declarations: [
     MainComponents,
-    ...components,
+    ...ViewComponents,
+    ...Components,
   ],
   providers: [ Services ],
   bootstrap: [ MainComponents ],

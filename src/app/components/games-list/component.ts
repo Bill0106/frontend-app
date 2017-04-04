@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'games-list',
-  templateUrl: './games-list',
+  templateUrl: './template',
 })
 
 class GamesList {

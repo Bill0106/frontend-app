@@ -14,7 +14,7 @@ const initState: any = {
   },
 }
 
-export function helloReducer(state: any = initState, action: Action): string {
+export function Reducers(state: any = initState, action: Action): string {
   switch (action.type) {
     case actionTypes.FETCH_GAMES:
       return {
