@@ -1,1 +1,3 @@
-<section class="app-games-1">{{ hello | async }}</section>
+<section class="app-games-1">
+  <games-list [games]="games | async"></games-list>
+</section>

@@ -12,3 +12,5 @@ interface Game {
   genre: number
   description: string
 }
+
+export default Game

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import { HELLO } from '../../services/reducers'
+import Game from '../../models/Game'
+import actionTypes from '../../constants/actionTypes'
 
-interface Game {
-  hello: string
+interface Games {
+  items: Game[]
+  total: number
+  error: any
+  status: string
 }
 
 @Component({
@@ -13,13 +17,13 @@ interface Game {
 })
 
 class GamesComponent implements OnInit {
-  hello: Observable<string>
-  constructor(private store: Store<Game>) {
-    this.hello = store.select('hello')
+  games: Observable<any>
+  constructor(private store: Store<Games>) {
+    this.games = store.select('games')
   }
 
   ngOnInit() {
-    this.store.dispatch({ type: HELLO })
+    this.store.dispatch({ type: actionTypes.FETCH_GAMES, payload: { page: 1 } })
   }
 }
 
