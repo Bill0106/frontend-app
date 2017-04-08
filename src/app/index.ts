@@ -8,8 +8,8 @@ import { EffectsModule } from '@ngrx/effects'
 import { Reducers, Services, Effects } from './services'
 import { ViewComponents } from './views'
 import MainComponents from './main'
-import Components from './components'
 import AppRoutingModule from './router'
+import Pipes from './pipes'
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import AppRoutingModule from './router'
   declarations: [
     MainComponents,
     ...ViewComponents,
-    ...Components,
+    ...Pipes,
   ],
   providers: [ Services ],
   bootstrap: [ MainComponents ],

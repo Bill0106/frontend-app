@@ -1,3 +1,24 @@
-<section class="app-games-1">
-  <games-list [games]="games | async"></games-list>
+<section class="app-games">
+  <div class="app-games-trophy">
+    <a href="http://psnprofiles.com/bill_lord" target="_blank">
+      <img class="app-games-trophy-card" src="http://card.psnprofiles.com/1/bill_lord.png" border="0">
+    </a>
+  </div>
+  <div class="app-games-list">
+    <md-card class="app-games-list-card" *ngFor="let game of games">
+      <div class="card-image" md-card-image>
+        <img [src]="(game.image | imageHelper:'url')">
+      </div>
+      <div class="card-caption">
+        <div class="card-caption-title">
+          <h3>{{ game.title }}</h3>
+        </div>
+        <p>{{ game.name }}</p>
+        <div class="card-caption-footer">
+          <i [ngStyle]="{'width': (game.rate * 15) + 'px'}">{{ game.rate }}</i>
+          <span>{{ game.buy_at | date:"yyyy.MM.dd" }}</span>
+        </div>
+      </div>
+    </md-card>
+  </div>
 </section>

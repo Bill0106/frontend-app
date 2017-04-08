@@ -1,13 +1,37 @@
 /*-------------------
+      Line Height
+--------------------*/
+$lineHeightMini     : 16px;
+$lineHeightSmall    : 18px;
+$lineHeightMedium   : 20px;
+$lineHeightBig      : 25px;
+$lineHeightLarge    : 30px;
+
+/*-------------------
+      Font Size
+--------------------*/
+$fontSizeSmall   : 12px;
+$fontSizeMedium  : 14px;
+$fontSizeBig     : 16px;
+$fontSizeLarge   : 18px;
+$fontSizeHuge    : 20px;
+$fontSizeMassive : 24px;
+
+/*-------------------
         Color
 --------------------*/
 $black: #000;
 $white: #fff;
 
-$gray150: #999;
+$dimGray      : #666;
+$mountainMist : #999;
+
+$bunker : #242628;
+$smalt  : #003791;
 
 /*-------------------
         Image
 --------------------*/
 $imagePath        : 'http://7xtddu.com1.z0.glb.clouddn.com';
 $socialIcons      : '#{$imagePath}/social_icons.png';
+$playStationLogo  : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAQAAACROWYpAAABn0lEQVQ4y+2UTShEURTHRUS8hB73nv99IzYWKLKQBaUsLGwk2SpiochiJhtlqNmI8ZmEMjYWyg4rSlMWYi9NWYnEAiUGXfd9lJkFzXss59y673Te/XU+7rknIyMtjogW1uYZRpguWEhv9AYvQRoSEndY4Y2uPUN+L3Hsa/ACb6IZH5A+qQ+5h/1KP4ck6fvgmkuYppR+aoUu9QEv8JmT+boX+NxJYfsPMK25hSeVHrMKJo2m1Joz11ggO9SQgvcMhZb4UwDLenCCBQScPBctm05Vai+lzB+gck3v4Ut4EOpSaBWDTtgTaOHL7BAvll2KSxZiHUlgQXblNOLmbyH5PZuFhqADD9O+UF1OjzyMOtTQlXkG0QSYYtY9xvma/QhYvlh24HFs0AFZnU0VFMStZX1KLNA8fZo9RN1UiwnxTLsYsWFu56zxgC9Gpk+J64otjSUFToVGL98xn4Bab+jDmN2SFOCd4sZ8nqr677RJrb9Wm7KsfQ62n1FxZH4pin7KS7FJeA61UwSvaqLMIMKqXU8TVsSH0MXry4rTM/2f5AsqHs0Pu9KopwAAAABJRU5ErkJggg==';

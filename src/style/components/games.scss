@@ -1,0 +1,75 @@
+.app-games {
+  margin-top: -64px;
+  padding-top: 84px;
+  background: $bunker;
+}
+.app-games-trophy {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.app-games-list {
+  display: flex;
+  flex-flow: wrap;
+  margin: 0 auto;
+  width: 1140px;
+}
+.app-games-list-card {
+  margin: 0 auto 15px;
+  padding: 0;
+  width: 270px;
+  border-radius: 0 !important;
+  background: $white;
+  box-sizing: border-box;
+  .card-image {
+    cursor: pointer;
+    > img {
+      display: block !important;
+      width: 100%;
+      // opacity: 0;
+      // @include transition(opacity, 0.3s, ease-in-out);
+    }
+  }
+  .card-caption {
+    margin: -16px -24px -24px !important;
+    padding: 15px;
+    .card-caption-title {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      > h3 {
+        margin: 0;
+        font-size: $fontSizeLarge;
+        font-weight: normal;
+        color: $smalt;
+        white-space: nowrap;
+        cursor: pointer;
+        &:hover {
+          color: lighten($smalt, 20%);
+        }
+      }
+    }
+    > p {
+      margin: 0 0 10px;
+      line-height: $lineHeightMedium;
+      font-size: $fontSizeMedium;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      color: $dimGray;
+    }
+    .card-caption-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: $fontSizeSmall;
+      color: $mountainMist;
+      > i {
+        display: block;
+        width: 75px;
+        height: 15px;
+        background: url("#{$playStationLogo}") repeat-x 0 0;
+        background-size: 15px;
+        text-indent: -9999px;
+      }
+    }
+  }
+}

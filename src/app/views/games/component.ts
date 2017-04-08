@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { Observable } from 'rxjs'
 import Game from '../../models/Game'
 import actionTypes from '../../constants/actionTypes'
 
@@ -17,13 +16,18 @@ interface Games {
 })
 
 class GamesComponent implements OnInit {
-  games: Observable<any>
+  games: Game[] = []
   constructor(private store: Store<Games>) {
-    this.games = store.select('games')
+    store.select('games').subscribe((state: Games) => {
+      this.games = this.games.concat(state.items)
+    })
   }
 
   ngOnInit() {
-    this.store.dispatch({ type: actionTypes.FETCH_GAMES, payload: { page: 1 } })
+    this.store.dispatch({
+      type: actionTypes.FETCH_GAMES,
+      payload: { page: 1 },
+    })
   }
 }
 
