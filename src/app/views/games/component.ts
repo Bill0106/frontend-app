@@ -16,6 +16,7 @@ interface Games {
 })
 
 class GamesComponent implements OnInit {
+  private page: number = 1
   games: Game[] = []
   constructor(private store: Store<Games>) {
     store.select('games').subscribe((state: Games) => {
@@ -26,7 +27,7 @@ class GamesComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch({
       type: actionTypes.FETCH_GAMES,
-      payload: { page: 1 },
+      payload: { page: this.page },
     })
   }
 }

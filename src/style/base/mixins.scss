@@ -5,3 +5,13 @@
   -o-transition: $property $duration $function $delay;
   transition: $property $duration $function $delay;
 }
+
+// Linear Gradient
+@mixin linear-gradient($deg, $start, $end) {
+  background-color: $start;
+  background-image: -webkit-linear-gradient($deg, $start, $end);
+  background-image: -moz-linear-gradient($deg, $start, $end);
+  background-image: -o-linear-gradient($deg, $start, $end);
+  background-image: -ms-linear-gradient($deg, $start, $end);
+  background-image: linear-gradient($deg, $start, $end);
+}

@@ -30,24 +30,9 @@
     }
   }
   .card-caption {
-    margin: -16px -24px -24px !important;
-    padding: 15px;
-    .card-caption-title {
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      > h3 {
-        margin: 0;
-        font-size: $fontSizeLarge;
-        font-weight: normal;
-        color: $smalt;
-        white-space: nowrap;
-        cursor: pointer;
-        &:hover {
-          color: lighten($smalt, 20%);
-        }
-      }
-    }
+    position: relative;
+    margin: 0 -24px;
+    padding: 0 15px;
     > p {
       margin: 0 0 10px;
       line-height: $lineHeightMedium;
@@ -57,19 +42,57 @@
       overflow: hidden;
       color: $dimGray;
     }
-    .card-caption-footer {
-      display: flex;
-      justify-content: space-between;
-      font-size: $fontSizeSmall;
-      color: $mountainMist;
-      > i {
-        display: block;
-        width: 75px;
-        height: 15px;
-        background: url("#{$playStationLogo}") repeat-x 0 0;
-        background-size: 15px;
-        text-indent: -9999px;
+  }
+  .card-caption-title {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    > h3 {
+      margin: 0;
+      font-size: $fontSizeLarge;
+      font-weight: normal;
+      color: $smalt;
+      white-space: nowrap;
+      cursor: pointer;
+      &:hover {
+        color: lighten($smalt, 20%);
       }
     }
   }
+  .card-caption-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $fontSizeSmall;
+    color: $mountainMist;
+    > i {
+      display: block;
+      width: 75px;
+      height: 15px;
+      background: url("#{$playStationLogo}") repeat-x 0 0;
+      background-size: 15px;
+      text-indent: -9999px;
+    }
+  }
+  .card-caption-end {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 45px;
+    height: $lineHeightMedium;
+    @include linear-gradient(90deg, rgba($white, 0), rgba($white, 1));
+  }
+}
+.app-games-loading {
+  padding-bottom: 15px;
+ .mat-spinner {
+  margin: 0 auto;
+  width: 50px !important;
+  height: 50px !important;
+  > svg > path {
+    stroke: $white;
+    stroke-width: 5px;
+  } 
+ }
 }

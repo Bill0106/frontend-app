@@ -6,10 +6,10 @@
   </div>
   <div class="app-games-list">
     <md-card class="app-games-list-card" *ngFor="let game of games">
-      <div class="card-image" md-card-image>
-        <img [src]="(game.image | imageHelper:'url')">
+      <div class="card-image" [ngStyle]="{'background-color': (game.image | imageHelper:'color')}" md-card-image>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=">
       </div>
-      <div class="card-caption">
+      <md-card-content class="card-caption">
         <div class="card-caption-title">
           <h3>{{ game.title }}</h3>
         </div>
@@ -18,7 +18,11 @@
           <i [ngStyle]="{'width': (game.rate * 15) + 'px'}">{{ game.rate }}</i>
           <span>{{ game.buy_at | date:"yyyy.MM.dd" }}</span>
         </div>
-      </div>
+        <span class="card-caption-end"></span>
+      </md-card-content>
     </md-card>
+  </div>
+  <div class="app-games-loading">
+    <md-spinner></md-spinner>
   </div>
 </section>
