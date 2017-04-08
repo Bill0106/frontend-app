@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import Game from '../../models/Game'
+import { Game } from '../../models'
 import actionTypes from '../../constants/actionTypes'
 
 interface Games {
@@ -17,18 +18,36 @@ interface Games {
 
 class GamesComponent implements OnInit {
   private page: number = 1
+  private total: number = 0
   games: Game[] = []
-  constructor(private store: Store<Games>) {
+  scrollDisabled: boolean = false
+  constructor(
+    private store: Store<any>,
+    private router: Router,
+  ) {
     store.select('games').subscribe((state: Games) => {
       this.games = this.games.concat(state.items)
+      this.total = state.total
     })
   }
 
-  ngOnInit() {
+  onScroll(): void {
     this.store.dispatch({
       type: actionTypes.FETCH_GAMES,
       payload: { page: this.page },
     })
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch({
+      type: actionTypes.FETCH_GAMES,
+      payload: { page: this.page },
+    })
+  }
+
+  goDetail(url: string): void {
+    const link = ['/games', url]
+    this.router.navigate(link)
   }
 }
 

@@ -11,7 +11,7 @@
       </div>
       <md-card-content class="card-caption">
         <div class="card-caption-title">
-          <h3>{{ game.title }}</h3>
+          <h3 (click)="goDetail(game.url)">{{ game.title }}</h3>
         </div>
         <p>{{ game.name }}</p>
         <div class="card-caption-footer">
