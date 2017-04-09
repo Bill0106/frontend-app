@@ -1,7 +1,6 @@
 import keymirror = require('keymirror')
 import { Action, ActionReducer } from '@ngrx/store'
-import actionTypes from '../constants/actionTypes'
-import actionStatus from '../constants/actionStatus'
+import { actionTypes, actionStatus } from '../constants'
 
 export const HELLO = 'HELLO'
 

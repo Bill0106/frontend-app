@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Game } from '../../models'
-import actionTypes from '../../constants/actionTypes'
+import { actionTypes } from '../../constants'
 
 interface Games {
   items: Game[]

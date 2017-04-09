@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, Effect } from '@ngrx/effects'
 import { Observable } from 'rxjs'
-import actionTypes from '../constants/actionTypes'
-import actionStatus from '../constants/actionStatus'
+import { actionTypes, actionStatus } from '../constants'
 import Services from './services'
 
 @Injectable()
