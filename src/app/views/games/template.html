@@ -7,7 +7,12 @@
   <div class="app-games-list">
     <md-card class="app-games-list-card" *ngFor="let game of games">
       <div class="card-image" [ngStyle]="{'background-color': (game.image | imageHelper:'color')}" md-card-image>
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="
+          [lazyLoad]="(game.image | imageHelper:'url')"
+          [alt]="game.title"
+          [title]="game.title"
+        >
       </div>
       <md-card-content class="card-caption">
         <div class="card-caption-title">

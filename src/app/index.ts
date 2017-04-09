@@ -5,6 +5,7 @@ import { MaterialModule } from '@angular/material'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
+import { LazyLoadImageModule } from 'ng-lazyload-image'
 import { Reducers, Services, Effects } from './services'
 import { ViewComponents } from './views'
 import MainComponents from './main'
@@ -21,6 +22,7 @@ import Pipes from './pipes'
       maxAge: 5,
     }),
     MaterialModule,
+    LazyLoadImageModule,
     AppRoutingModule,
   ],
   declarations: [

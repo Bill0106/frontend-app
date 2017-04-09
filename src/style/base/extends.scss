@@ -1,0 +1,14 @@
+.app-container {
+  margin: 0 auto;
+  width: 1140px;
+  @media #{$screenLaptop} {
+    width: 970px;
+  }
+  @media #{$screenTablet} {
+    width: 750px;
+  }
+  @media #{$screenMobile} {
+    padding: 0 15px;
+    width: auto;
+  }
+}

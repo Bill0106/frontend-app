@@ -5,13 +5,16 @@
 }
 .app-games-trophy {
   margin-bottom: 20px;
+  padding: 0 15px;
   text-align: center;
+  > a > img {
+    max-width: 100%;
+  }
 }
 .app-games-list {
+  @extend .app-container;
   display: flex;
   flex-flow: wrap;
-  margin: 0 auto;
-  width: 1140px;
 }
 .app-games-list-card {
   margin: 0 auto 15px;
@@ -20,13 +23,33 @@
   border-radius: 0 !important;
   background: $white;
   box-sizing: border-box;
+  @media #{$screenLaptop} {
+    width: 220px;
+  }
+  @media #{$screenTablet} {
+    margin: 7.5px;
+    width: 230px;
+  }
+  @media #{$screenMobile} {
+    margin: 10px 0;
+    width: 48%;
+    &:nth-child(odd) {
+      margin-right: 2%;
+    }
+    &:nth-child(even) {
+      margin-left: 2%;
+    }
+  }
   .card-image {
     cursor: pointer;
     > img {
       display: block !important;
       width: 100%;
-      // opacity: 0;
-      // @include transition(opacity, 0.3s, ease-in-out);
+      opacity: 0;
+      @include transition(opacity, 0.3s, ease-in-out);
+      &.ng-lazyloaded {
+        opacity: 1;
+      }
     }
   }
   .card-caption {
