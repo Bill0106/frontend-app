@@ -1,6 +1,6 @@
 {
   "name": "site-frontend-app",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "zhuhaolin.com frontend app",
   "main": "index.js",
   "scripts": {
@@ -42,7 +42,6 @@
   "devDependencies": {
     "@angularclass/hmr": "^1.2.2",
     "@angularclass/hmr-loader": "^3.0.2",
-    "@ngrx/store-devtools": "^3.2.4",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.0.4-rc.2",
     "babel-core": "^6.23.1",
