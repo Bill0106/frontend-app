@@ -4,7 +4,7 @@
       <img class="app-games-trophy-card" src="http://card.psnprofiles.com/1/bill_lord.png" border="0">
     </a>
   </div>
-  <div class="app-games-list">
+  <div class="app-games-list" infinite-scroll [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
     <md-card class="app-games-list-card" *ngFor="let game of games">
       <div class="card-image" [ngStyle]="{'background-color': (game.image | imageHelper:'color')}" md-card-image>
         <img
@@ -27,7 +27,7 @@
       </md-card-content>
     </md-card>
   </div>
-  <div class="app-games-loading">
+  <div class="app-games-loading" [hidden]="allFetched">
     <md-spinner></md-spinner>
   </div>
 </section>

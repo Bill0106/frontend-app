@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Game } from '../../models'
-import { actionTypes } from '../../constants'
+import { actionTypes, actionStatus } from '../../constants'
 
 interface Games {
   items: Game[]
@@ -18,23 +18,28 @@ interface Games {
 
 class GamesComponent implements OnInit {
   private page: number = 1
-  private total: number = 0
   games: Game[] = []
   scrollDisabled: boolean = false
+  allFetched: boolean = true
+
   constructor(
     private store: Store<any>,
     private router: Router,
   ) {
     store.select('games').subscribe((state: Games) => {
-      this.games = this.games.concat(state.items)
-      this.total = state.total
-    })
-  }
+      switch (state.status) {
+        case actionStatus.PENDING:
+          this.scrollDisabled = true
+          break
+        case actionStatus.FETCHED:
+          this.scrollDisabled = false
+          this.page++
+        default:
+          break
+      }
 
-  onScroll(): void {
-    this.store.dispatch({
-      type: actionTypes.FETCH_GAMES,
-      payload: { page: this.page },
+      this.games = state.items
+      this.allFetched = (this.games.length === state.total)
     })
   }
 
@@ -43,6 +48,15 @@ class GamesComponent implements OnInit {
       type: actionTypes.FETCH_GAMES,
       payload: { page: this.page },
     })
+  }
+
+  onScroll(): void {
+    if (!this.allFetched) {
+      this.store.dispatch({
+        type: actionTypes.FETCH_GAMES,
+        payload: { page: this.page },
+      })
+    }
   }
 
   goDetail(url: string): void {

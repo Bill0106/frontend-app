@@ -9,8 +9,8 @@ class Services {
   constructor(private http: Http) { }
 
   getGames(payload) {
-    console.log(payload)
-    return this.http.get('api/games', { headers: this.headers })
+    const params = JSON.parse(payload)
+    return this.http.get(`api/games?limit=20&page=${params.page}`, { headers: this.headers })
       .map(res => ({ type: `${actionTypes.FETCH_GAMES}_${actionStatus.FETCHED}`, payload: res.json() }))
       .catch(err => Observable.of({ type: `${actionTypes.FETCH_GAMES}_${actionStatus.REJECTED}`, payload: err }) )
   }

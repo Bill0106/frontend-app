@@ -28,7 +28,7 @@ export function Reducers(state: any = initState, action: Action): string {
         ...state,
         games: {
           status: actionStatus.FETCHED,
-          items: action.payload.list,
+          items: state.games.items.concat(action.payload.list),
           total: action.payload.total,
         },
       }
