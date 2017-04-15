@@ -27,7 +27,8 @@
       </md-card-content>
     </md-card>
   </div>
-  <div class="app-games-loading" [hidden]="allFetched">
+  <div class="app-games-loading" [hidden]="hideLoading">
     <md-spinner></md-spinner>
   </div>
+  <div class="app-games-error" [hidden]="!error">{{error}}</div>
 </section>

@@ -27,6 +27,7 @@ export function Reducers(state: any = initState, action: Action): string {
       return {
         ...state,
         [payload.state]: {
+          ...state[payload.state],
           status: actionStatus.FETCHED,
           items: state[payload.state].items.concat(payload.data.list),
           total: payload.data.total,
@@ -38,7 +39,7 @@ export function Reducers(state: any = initState, action: Action): string {
         [payload.state]: {
           ...state[payload.state],
           status: actionStatus.REJECTED,
-          error: action.payload.body,
+          error: payload.error,
         },
       }
     default:

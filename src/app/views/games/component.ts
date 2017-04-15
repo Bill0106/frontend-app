@@ -18,9 +18,11 @@ interface Games {
 
 class GamesComponent implements OnInit {
   private page: number = 1
+  private allFetched: boolean = true
   games: Game[]
   scrollDisabled: boolean = false
-  allFetched: boolean = true
+  hideLoading: boolean = false
+  error: string
 
   constructor(
     private store: Store<any>,
@@ -38,17 +40,19 @@ class GamesComponent implements OnInit {
         break
       case actionStatus.FETCHED:
         this.scrollDisabled = false
+        this.games = state.items
+        this.allFetched = (this.games.length === state.total)
+        this.hideLoading = this.allFetched
         this.page++
         break
       case actionStatus.REJECTED:
         this.scrollDisabled = true
+        this.hideLoading = true
+        this.error = state.error
         break
       default:
         break
     }
-
-    this.games = state.items
-    this.allFetched = (this.games.length === state.total)
   }
 
   ngOnInit(): void {
