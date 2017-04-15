@@ -18,7 +18,7 @@ interface Games {
 
 class GamesComponent implements OnInit {
   private page: number = 1
-  games: Game[] = []
+  games: Game[]
   scrollDisabled: boolean = false
   allFetched: boolean = true
 
@@ -26,21 +26,29 @@ class GamesComponent implements OnInit {
     private store: Store<any>,
     private router: Router,
   ) {
-    store.select('games').subscribe((state: Games) => {
-      switch (state.status) {
-        case actionStatus.PENDING:
-          this.scrollDisabled = true
-          break
-        case actionStatus.FETCHED:
-          this.scrollDisabled = false
-          this.page++
-        default:
-          break
-      }
+    store.select('games')
+      .do((state: Games) => this.manageState(state))
+      .subscribe()
+  }
 
-      this.games = state.items
-      this.allFetched = (this.games.length === state.total)
-    })
+  private manageState(state: Games): void {
+    switch (state.status) {
+      case actionStatus.PENDING:
+        this.scrollDisabled = true
+        break
+      case actionStatus.FETCHED:
+        this.scrollDisabled = false
+        this.page++
+        break
+      case actionStatus.REJECTED:
+        this.scrollDisabled = true
+        break
+      default:
+        break
+    }
+
+    this.games = state.items
+    this.allFetched = (this.games.length === state.total)
   }
 
   ngOnInit(): void {
