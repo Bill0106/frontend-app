@@ -14,6 +14,11 @@ class Effects {
     .ofType(actionTypes.FETCH_LIST)
     .map(action => JSON.stringify(action.payload))
     .switchMap(payload => this.services.getList(payload))
+
+  @Effect() getItem$ = this.actions$
+    .ofType(actionTypes.FETCH_ITEM)
+    .map(action => JSON.stringify(action.payload))
+    .switchMap(payload => this.services.getItem(payload))
 }
 
 export default Effects
