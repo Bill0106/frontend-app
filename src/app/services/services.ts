@@ -8,11 +8,11 @@ class Services {
   private headers = new Headers({ 'auth': keys.GET })
   constructor(private http: Http) { }
 
-  getGames(payload) {
+  getList(payload) {
     const params = JSON.parse(payload)
-    return this.http.get(`api/games?limit=20&page=${params.page}`, { headers: this.headers })
-      .map(res => ({ type: `${actionTypes.FETCH_GAMES}_${actionStatus.FETCHED}`, payload: res.json() }))
-      .catch(err => Observable.of({ type: `${actionTypes.FETCH_GAMES}_${actionStatus.REJECTED}`, payload: err }) )
+    return this.http.get(`api/${params.state}?limit=20&page=${params.page}`, { headers: this.headers })
+      .map(res => ({ type: `${actionTypes.FETCH_LIST}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: params.state } }))
+      .catch(err => Observable.of({ type: `${actionTypes.FETCH_LIST}_${actionStatus.REJECTED}`, payload: err }) )
   }
 }
 

@@ -53,16 +53,22 @@ class GamesComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch({
-      type: actionTypes.FETCH_GAMES,
-      payload: { page: this.page },
+      type: actionTypes.FETCH_LIST,
+      payload: {
+        page: this.page,
+        state: 'games',
+      },
     })
   }
 
   onScroll(): void {
     if (!this.allFetched) {
       this.store.dispatch({
-        type: actionTypes.FETCH_GAMES,
-        payload: { page: this.page },
+        type: actionTypes.FETCH_LIST,
+        payload: {
+          page: this.page,
+          state: 'games',
+        },
       })
     }
   }

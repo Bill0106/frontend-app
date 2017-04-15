@@ -2,8 +2,6 @@ import keymirror = require('keymirror')
 import { Action, ActionReducer } from '@ngrx/store'
 import { actionTypes, actionStatus } from '../constants'
 
-export const HELLO = 'HELLO'
-
 const initState: any = {
   games: {
     status: null,
@@ -14,29 +12,31 @@ const initState: any = {
 }
 
 export function Reducers(state: any = initState, action: Action): string {
-  switch (action.type) {
-    case actionTypes.FETCH_GAMES:
+  const { type, payload } = action
+
+  switch (type) {
+    case actionTypes.FETCH_LIST:
       return {
         ...state,
-        games: {
-          ...state.games,
+        [payload.state]: {
+          ...state[payload.state],
           status: actionStatus.PENDING,
         },
       }
-    case `${actionTypes.FETCH_GAMES}_${actionStatus.FETCHED}`:
+    case `${actionTypes.FETCH_LIST}_${actionStatus.FETCHED}`:
       return {
         ...state,
-        games: {
+        [payload.state]: {
           status: actionStatus.FETCHED,
-          items: state.games.items.concat(action.payload.list),
-          total: action.payload.total,
+          items: state[payload.state].items.concat(payload.data.list),
+          total: payload.data.total,
         },
       }
-    case `${actionTypes.FETCH_GAMES}_${actionStatus.REJECTED}`:
+    case `${actionTypes.FETCH_LIST}_${actionStatus.REJECTED}`:
       return {
         ...state,
-        games: {
-          ...state.games,
+        [payload.state]: {
+          ...state[payload.state],
           status: actionStatus.REJECTED,
           error: action.payload.body,
         },

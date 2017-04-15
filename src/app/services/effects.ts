@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { Actions, Effect } from '@ngrx/effects'
-import { Observable } from 'rxjs'
 import { actionTypes, actionStatus } from '../constants'
 import Services from './services'
 
@@ -11,10 +10,10 @@ class Effects {
     private services: Services,
   ) { }
 
-  @Effect() getGames$ = this.actions$
-    .ofType(actionTypes.FETCH_GAMES)
+  @Effect() getList$ = this.actions$
+    .ofType(actionTypes.FETCH_LIST)
     .map(action => JSON.stringify(action.payload))
-    .switchMap(payload => this.services.getGames(payload))
+    .switchMap(payload => this.services.getList(payload))
 }
 
 export default Effects
