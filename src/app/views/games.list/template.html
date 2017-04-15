@@ -12,6 +12,7 @@
           [lazyLoad]="(game.image | imageHelper:'url')"
           [alt]="game.title"
           [title]="game.title"
+          (click)="goDetail(game.url)"
         >
       </div>
       <md-card-content class="card-caption">

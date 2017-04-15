@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router'
 import HomeComponent from './home'
 import GamesComponent from './games.list'
+import GameComponent from './games.detail'
 
 const routes: Routes = [
   {
@@ -9,7 +10,10 @@ const routes: Routes = [
   },
   {
     path: 'games',
-    component: GamesComponent,
+    children: [
+        { path: '', component: GamesComponent },
+        { path: ':url', component: GameComponent },
+    ],
   },
   {
     path: '**',
@@ -21,6 +25,7 @@ const routes: Routes = [
 const ViewComponents = [
   HomeComponent,
   GamesComponent,
+  GameComponent,
 ]
 
 export { routes, ViewComponents }
