@@ -1,1 +1,60 @@
-<section class="app-game">111</section>
+<section class="app-games">
+  <div class="app-games-detail" *ngIf="game">
+    <div class="app-games-detail-header">
+      <div class="app-games-detail-image" [ngStyle]="{'background-color': (game.image | imageHelper:'color')}">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="
+          [alt]="game.title"
+          [title]="game.title"
+          [lazyLoad]="(game.image | imageHelper:'url')"
+        >
+      </div>
+      <div class="app-games-detail-text">
+        <h1>{{ game.title }}</h1>
+        <h2>{{ game.name }}</h2>
+        <p>
+          <span>Release at {{ game.release_at | date: 'MMM dd, yyyy'}}</span>
+          <i>/</i>
+          <span>Buy at {{ game.buy_at | date: 'MMM dd, yyyy'}}</span>
+        </p>
+        <p>
+          <span class="platform">{{ getPlatform() }}</span>
+          <i [hidden]="!trophy">/</i>
+        </p>
+      </div>
+      <div *ngIf="game.rate !== 0" class="app-games-detail-rate">
+        <div>{{ game.rate }}</div>
+        <p>
+          <span>Personal Review</span>
+          <i>{{ getRateText() }}</i>
+        </p>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="35" cy="35" r="30" [ngStyle]="{ 'stroke-dashoffset': (190 - game.rate / 5 * 190) + 'px' }"></circle>
+        </svg>
+      </div>
+    </div>
+    <div class="app-games-detail-body">
+      <div class="app-games-detail-description">
+        <p *ngFor="let paragraph of game.description.split('\n')">{{ paragraph }}</p>
+      </div>
+      <ul class="app-games-detail-info">
+        <li>
+          <span>Developed by:</span>
+          <span>{{ game.developer }}</span>
+        </li>
+        <li>
+          <span>Published by:</span>
+          <span>{{ game.publisher }}</span>
+        </li>
+        <li>
+          <span>Genre:</span>
+          <span>{{ getGenre() }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="app-games-loading" [hidden]="hideLoading">
+    <md-spinner></md-spinner>
+  </div>
+  <div class="app-games-error" [hidden]="!error">{{error}}</div>
+</section>

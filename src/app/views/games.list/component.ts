@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { Game } from '../../models'
+import { Game, GamesState } from '../../models'
 import { actionTypes, actionStatus } from '../../constants'
-
-interface Games {
-  items: Game[]
-  total: number
-  error: any
-  status: string
-}
 
 @Component({
   selector: 'my-games',
@@ -29,11 +22,11 @@ class GamesComponent implements OnInit {
     private router: Router,
   ) {
     store.select('games')
-      .do((state: Games) => this.manageState(state))
+      .do((state: GamesState) => this.manageState(state))
       .subscribe()
   }
 
-  private manageState(state: Games): void {
+  private manageState(state: GamesState): void {
     switch (state.status) {
       case actionStatus.PENDING:
         this.scrollDisabled = true
