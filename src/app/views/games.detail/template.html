@@ -12,11 +12,11 @@
       <div class="app-games-detail-text">
         <h1>{{ game.title }}</h1>
         <h2>{{ game.name }}</h2>
-        <p>
+        <div>
           <span>Release at {{ game.release_at | date: 'MMM dd, yyyy'}}</span>
           <i>/</i>
           <span>Buy at {{ game.buy_at | date: 'MMM dd, yyyy'}}</span>
-        </p>
+        </div>
         <p>
           <span class="platform">{{ getPlatform() }}</span>
           <i [hidden]="!trophy">/</i>
