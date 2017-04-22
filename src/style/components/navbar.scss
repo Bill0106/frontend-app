@@ -2,10 +2,25 @@
   background-color: rgba($black, 0.6);
 }
 .app-sidenav {
-  padding: 20px;
   width: 240px;
   background-color: $white;
   box-sizing: border-box;
+}
+.app-sidenav-list {
+  padding: 0;
+  list-style: none;
+  > li {
+    padding: 15px 20px;
+    cursor: pointer;
+    @include transition(background, 0.3s, ease-in-out);
+    &:hover, &.active {
+      background-color: #eee;
+    }
+    > span {
+      display: block;
+      outline: none;
+    }
+  }
 }
 .app-navbar {
   position: relative;

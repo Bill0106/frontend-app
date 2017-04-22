@@ -1,11 +1,15 @@
 <md-sidenav-container class="app-main">
   <md-sidenav #sidenav class="app-sidenav">
-    <md-list>
-      <md-list-item>Home</md-list-item>
-      <md-list-item>Games</md-list-item>
-      <md-list-item>Gourmets</md-list-item>
-      <md-list-item>Heathstone</md-list-item>
-    </md-list>
+    <ul class="app-sidenav-list">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <span (click)="sidenav.close()" routerLink='/'>Home</span>
+      </li>
+      <li routerLinkActive="active">
+        <span (click)="sidenav.close()" routerLink='/games'>Games</span>
+      </li>
+      <li>Gourmets</li>
+      <li>Heathstone</li>
+    </ul>
   </md-sidenav>
   <md-toolbar class="app-navbar">
     <span (click)="sidenav.open()" class="app-navbar-menu">
