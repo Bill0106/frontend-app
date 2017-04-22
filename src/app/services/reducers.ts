@@ -10,6 +10,11 @@ const initState: any = {
     total: 0,
     error: null,
   },
+  gameTrophy: {
+    status: null,
+    item: null,
+    error: null,
+  },
 }
 
 export function Reducers(state: any = initState, action: Action): string {
@@ -18,6 +23,7 @@ export function Reducers(state: any = initState, action: Action): string {
   switch (type) {
     case actionTypes.FETCH_LIST:
     case actionTypes.FETCH_ITEM:
+    case actionTypes.FETCH_GAME_TROPHY:
       return {
         ...state,
         [payload.state]: {
@@ -27,6 +33,7 @@ export function Reducers(state: any = initState, action: Action): string {
       }
     case `${actionTypes.FETCH_LIST}_${actionStatus.REJECTED}`:
     case `${actionTypes.FETCH_ITEM}_${actionStatus.REJECTED}`:
+    case `${actionTypes.FETCH_GAME_TROPHY}_${actionStatus.REJECTED}`:
       return {
         ...state,
         [payload.state]: {
@@ -46,6 +53,7 @@ export function Reducers(state: any = initState, action: Action): string {
         },
       }
     case `${actionTypes.FETCH_ITEM}_${actionStatus.FETCHED}`:
+    case `${actionTypes.FETCH_GAME_TROPHY}_${actionStatus.FETCHED}`:
       return {
         ...state,
         [payload.state]: {

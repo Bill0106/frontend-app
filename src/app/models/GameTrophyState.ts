@@ -1,9 +1,7 @@
-import Game from './Game'
+import GameTrophy from './GameTrophy'
 
 interface GamesState {
-  items: Game[]
-  item: Game
-  total: number
+  item: GameTrophy
   error: string
   status: string
 }

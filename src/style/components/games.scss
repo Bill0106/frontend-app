@@ -104,7 +104,8 @@
   }
 }
 .app-games-detail {
-  @extend .app-container
+  @extend .app-container;
+  margin-bottom: 20px;
 }
 .app-games-detail-header {
   margin: 40px 0 20px;
@@ -156,13 +157,20 @@
     > i {
       margin: 0 5px;
       font-style: normal;
-      @media #{$screenMobile} {
-        display: none;
-      }
     }
-    > span {
-      &.platform {
-        border-bottom: 1px solid lighten($smalt, 10%);
+    span.platform {
+      border-bottom: 1px solid lighten($smalt, 10%);
+    }
+    span.trophy {
+      position: relative;
+      > i {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 0;
+        height: 1px;
+        background-color: $orangeRed;
       }
     }
   }
@@ -170,6 +178,11 @@
     @media #{$screenMobile} {
       display: block;
       line-height: $lineHeightMedium;
+    }
+    > i {
+      @media #{$screenMobile} {
+        display: none;
+      }
     }
     > span {
       @media #{$screenMobile} {
@@ -305,6 +318,59 @@
       & + span {
         color: $tenne;
       }
+    }
+  }
+}
+.app-games-trophies {
+  @extend .app-container;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+}
+.app-games-trophies-item {
+  margin: 10px 0;
+  padding: 10px;
+  width: calc((100% - 40px) / 3);
+  line-height: $lineHeightMedium;
+  font-size: $fontSizeMedium;
+  color: $white;
+  background-color: $sherpaBlue;
+  box-sizing: border-box;
+  &:not(:nth-child(3n+1)) {
+    margin-left: 20px;
+  }
+  div.body {
+    display: flex;
+    > img {
+      margin-right: 5px;
+      width: 60px;
+      height: 60px;
+      border: 5px solid $kellyGreen;
+      opacity: 0.5;
+      &.earned {
+        opacity: 1;
+      }
+    }
+    > div {
+      > p {
+        margin: 0 0 5px;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      > span {
+        display: block;
+        height: $lineHeightMedium * 2;
+        overflow: hidden;
+      }
+    }
+  }
+  div.footer {
+    margin-top: 10px;
+    > span {
+      font-weight: bold;
+      color: $kellyGreen;
     }
   }
 }

@@ -20,6 +20,10 @@
         <p>
           <span class="platform">{{ getPlatform() }}</span>
           <i [hidden]="!trophy">/</i>
+          <span class="trophy" *ngIf="trophy">
+            {{ trophyCompleted | number: '1.2-2' }}% Trophies Completed
+            <i [ngStyle]="{ 'width': (trophyCompleted) + '%' }"></i>
+          </span>
         </p>
       </div>
       <div *ngIf="game.rate !== 0" class="app-games-detail-rate">
@@ -51,6 +55,18 @@
           <span>{{ getGenre() }}</span>
         </li>
       </ul>
+    </div>
+  </div>
+  <div class="app-games-trophies" *ngIf="game && trophy">
+    <div class="app-games-trophies-item" *ngFor="let item of trophy.trophies">
+      <div class="body">
+        <img [src]="item.image" [alt]="item.title" [title]="item.title" [ngClass]="item.date ? 'earned' : ''"/>
+        <div class="text">
+          <p>{{ item.title }}</p>
+          <span>{{ item.description }}</span>
+        </div>
+      </div>
+      <div class="footer" *ngIf="item.date">Earned at: <span>{{ item.date | date: 'dd MMM yyyy'}}</span></div>
     </div>
   </div>
   <div class="app-games-loading" [hidden]="hideLoading">

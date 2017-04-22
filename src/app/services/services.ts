@@ -21,6 +21,13 @@ class Services {
       .map(res => ({ type: `${actionTypes.FETCH_ITEM}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: obj.state } }))
       .catch(err => Observable.of({ type: `${actionTypes.FETCH_ITEM}_${actionStatus.REJECTED}`, payload: { state: obj.state, error: err.statusText } }) )
   }
+
+  getGameTrophy(payload) {
+    const obj = JSON.parse(payload)
+    return this.http.get(`api/games/${obj.params}/trophy`, { headers: this.headers })
+      .map(res => ({ type: `${actionTypes.FETCH_ITEM}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: obj.state } }))
+      .catch(err => Observable.of({ type: `${actionTypes.FETCH_ITEM}_${actionStatus.REJECTED}`, payload: { state: obj.state, error: err.statusText } }) )
+  }
 }
 
 export default Services

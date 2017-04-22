@@ -19,6 +19,11 @@ class Effects {
     .ofType(actionTypes.FETCH_ITEM)
     .map(action => JSON.stringify(action.payload))
     .switchMap(payload => this.services.getItem(payload))
+
+  @Effect() getGameTrophy$ = this.actions$
+    .ofType(actionTypes.FETCH_GAME_TROPHY)
+    .map(action => JSON.stringify(action.payload))
+    .switchMap(payload => this.services.getGameTrophy(payload))
 }
 
 export default Effects

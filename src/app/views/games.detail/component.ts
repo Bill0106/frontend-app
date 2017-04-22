@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { Game, GamesState } from '../../models'
+import { Game, GamesState, GameTrophy, GameTrophyState } from '../../models'
 import { actionTypes, actionStatus, gamePlatforms, gameGenres } from '../../constants'
 
 @Component({
@@ -11,7 +11,8 @@ import { actionTypes, actionStatus, gamePlatforms, gameGenres } from '../../cons
 
 class GameComponent implements OnInit {
   game: Game
-  trophy: any
+  trophy: GameTrophy
+  trophyCompleted: number
   hideLoading: boolean = false
   error: string
 
@@ -21,7 +22,11 @@ class GameComponent implements OnInit {
   ) {
     store.select('games')
       .do((state: GamesState) => this.getGame(state))
-      .do((state: GamesState) => this.manageState(state))
+      .do((state: GamesState) => this.manageGameState(state))
+      .subscribe()
+
+    store.select('gameTrophy')
+      .do((state: GameTrophyState) => this.manageTrophyState(state))
       .subscribe()
   }
 
@@ -30,14 +35,17 @@ class GameComponent implements OnInit {
       const url = params.url
       const game = state.items.find(item => item.url === url)
 
-      if (game) {
+      if (state.item && state.item.url === url) {
+        this.game = state.item
+        this.hideLoading = true
+      } else if (game) {
         this.game = game
         this.hideLoading = true
       }
     })
   }
 
-  private manageState(state: GamesState): void {
+  private manageGameState(state: GamesState): void {
     switch (state.status) {
       case actionStatus.FETCHED:
         this.game = state.item
@@ -52,6 +60,13 @@ class GameComponent implements OnInit {
     }
   }
 
+  private manageTrophyState(state: GameTrophyState): void {
+    if (state.status === actionStatus.FETCHED) {
+      this.trophy = state.item
+      this.trophyCompleted = state.item.earned / state.item.total * 100
+    }
+  }
+
   ngOnInit() {
     if (!this.game) {
       this.activeRoute.params.forEach((params: Params) => {
@@ -60,6 +75,13 @@ class GameComponent implements OnInit {
           payload: {
             params: params.url,
             state: 'games',
+          },
+        })
+        this.store.dispatch({
+          type: actionTypes.FETCH_GAME_TROPHY,
+          payload: {
+            params: params.url,
+            state: 'gameTrophy',
           },
         })
       })
