@@ -1,21 +1,6 @@
 import keymirror = require('keymirror')
 import { Action, ActionReducer } from '@ngrx/store'
-import { actionTypes, actionStatus } from '../constants'
-
-const initState: any = {
-  games: {
-    status: null,
-    items: [],
-    item: null,
-    total: 0,
-    error: null,
-  },
-  gameTrophy: {
-    status: null,
-    item: null,
-    error: null,
-  },
-}
+import { actionTypes, actionStatus, initState } from '../constants'
 
 export function Reducers(state: any = initState, action: Action): string {
   const { type, payload } = action

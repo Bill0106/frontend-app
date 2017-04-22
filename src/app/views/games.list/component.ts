@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { Game, GamesState } from '../../models'
-import { actionTypes, actionStatus } from '../../constants'
+import { GamesState } from '../../models'
+import { actionTypes, actionStatus, initState } from '../../constants'
 
 @Component({
   selector: 'my-games',
@@ -10,9 +10,9 @@ import { actionTypes, actionStatus } from '../../constants'
 })
 
 class GamesComponent implements OnInit {
-  private page: number = 1
+  private limit: number = 20
   private allFetched: boolean = true
-  games: Game[]
+  games: GamesState = initState.games
   scrollDisabled: boolean = false
   hideLoading: boolean = false
   error: string
@@ -33,10 +33,8 @@ class GamesComponent implements OnInit {
         break
       case actionStatus.FETCHED:
         this.scrollDisabled = false
-        this.games = state.items
-        this.allFetched = (this.games.length === state.total)
+        this.games = state
         this.hideLoading = this.allFetched
-        this.page++
         break
       case actionStatus.REJECTED:
         this.scrollDisabled = true
@@ -48,26 +46,25 @@ class GamesComponent implements OnInit {
     }
   }
 
+  private getGames() {
+    const { items, total } = this.games
+    if (!items.length || items.length !== total) {
+      const page = items.length / this.limit + 1
+      this.store.dispatch({
+        type: actionTypes.FETCH_LIST,
+        payload: { page, state: 'games' },
+      })
+    }
+  }
+
   ngOnInit(): void {
-    this.store.dispatch({
-      type: actionTypes.FETCH_LIST,
-      payload: {
-        page: this.page,
-        state: 'games',
-      },
-    })
+    if (!this.games.items.length) {
+      this.getGames()
+    }
   }
 
   onScroll(): void {
-    if (!this.allFetched) {
-      this.store.dispatch({
-        type: actionTypes.FETCH_LIST,
-        payload: {
-          page: this.page,
-          state: 'games',
-        },
-      })
-    }
+    this.getGames()
   }
 
   goDetail(url: string): void {
