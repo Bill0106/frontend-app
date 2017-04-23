@@ -2,6 +2,7 @@ import { Routes } from '@angular/router'
 import HomeComponent from './home'
 import GamesComponent from './games.list'
 import GameComponent from './games.detail'
+import GourmetsComponent from './gourmets'
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'gourmets',
+    component: GourmetsComponent,
+  },
+  {
     path: '**',
     redirectTo: '/',
     pathMatch: 'full',
@@ -26,6 +31,7 @@ const ViewComponents = [
   HomeComponent,
   GamesComponent,
   GameComponent,
+  GourmetsComponent,
 ]
 
 export { routes, ViewComponents }

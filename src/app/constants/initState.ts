@@ -11,6 +11,12 @@ const initState: any = {
     item: null,
     error: null,
   },
+  gourmets: {
+    status: null,
+    items: [],
+    total: 0,
+    error: null,
+  },
 }
 
 export default initState
