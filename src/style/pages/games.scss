@@ -1,6 +1,6 @@
 .app-games {
   margin-top: -64px;
-  padding-top: 84px;
+  padding-top: 74px;
   min-height: 100vh;
   background: $bunker;
   box-sizing: border-box;
@@ -42,11 +42,9 @@
       margin-left: 2%;
     }
   }
-  .card-image {
+  .app-lazy-image {
+    margin: -24px -24px 20px;
     cursor: pointer;
-    > img {
-      @extend .app-image;
-    }
   }
   .card-caption {
     position: relative;
@@ -106,23 +104,20 @@
 .app-games-detail {
   @extend .app-container;
   margin-bottom: 20px;
+  .app-lazy-image {
+    width: 180px;
+    height: 180px;
+    @media #{$screenMobile} {
+      margin: 0 auto 20px;
+    }
+  }
 }
 .app-games-detail-header {
-  margin: 40px 0 20px;
+  margin: 10px 0 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid $white;
   @media #{$screenTabletAbove} {
     display: flex;
-  }
-}
-.app-games-detail-image {
-  width: 180px;
-  height: 180px;
-  @media #{$screenMobile} {
-    margin: 0 auto 20px;
-  }
-  > img {
-    @extend .app-image;
   }
 }
 .app-games-detail-text {

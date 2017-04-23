@@ -1,14 +1,7 @@
 <section class="app-games">
   <div class="app-games-detail" *ngIf="game">
     <div class="app-games-detail-header">
-      <div class="app-games-detail-image" [ngStyle]="{'background-color': (game.image | imageHelper:'color')}">
-        <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII="
-          [alt]="game.title"
-          [title]="game.title"
-          [lazyLoad]="(game.image | imageHelper:'url')"
-        >
-      </div>
+      <lazy-image [image]="game.image" [text]="game.title"></lazy-image>
       <div class="app-games-detail-text">
         <h1>{{ game.title }}</h1>
         <h2>{{ game.name }}</h2>

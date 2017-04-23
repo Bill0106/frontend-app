@@ -9,6 +9,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image'
 import { InfiniteScrollModule } from 'angular2-infinite-scroll'
 import { Reducers, Services, Effects } from './services'
 import { ViewComponents } from './views'
+import Components from './components'
 import MainComponents from './main'
 import AppRoutingModule from './router'
 import Pipes from './pipes'
@@ -30,6 +31,7 @@ import Pipes from './pipes'
   declarations: [
     MainComponents,
     ...ViewComponents,
+    ...Components,
     ...Pipes,
   ],
   providers: [ Services ],
