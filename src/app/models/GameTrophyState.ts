@@ -1,6 +1,6 @@
 import GameTrophy from './GameTrophy'
 
-interface GamesState {
+class GamesState {
   item: GameTrophy
   error: string
   status: string

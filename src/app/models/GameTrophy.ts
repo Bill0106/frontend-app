@@ -1,4 +1,4 @@
-interface GameTrophy {
+class GameTrophy {
     earned: number
     total: number
     trophies: any

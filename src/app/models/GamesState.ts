@@ -1,6 +1,6 @@
 import Game from './Game'
 
-interface GamesState {
+class GamesState {
   items: Game[]
   item: Game
   total: number
