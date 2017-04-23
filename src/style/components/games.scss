@@ -336,22 +336,30 @@
   color: $white;
   background-color: $sherpaBlue;
   box-sizing: border-box;
-  &:not(:nth-child(3n+1)) {
-    margin-left: 20px;
+  @media #{$screenTabletAbove} {
+    &:not(:nth-child(3n+1)) {
+      margin-left: 20px;
+    }
+  }
+  @media #{$screenMobile} {
+    margin: 0 0 15px;
+    width: 100%;
   }
   div.body {
     display: flex;
     > img {
       margin-right: 10px;
-      width: 60px;
-      height: 60px;
+      width: 66px;
+      height: 66px;
       border: 5px solid $kellyGreen;
       opacity: 0.5;
+      box-sizing: border-box;
       &.earned {
         opacity: 1;
       }
     }
     > div {
+      width: calc(100% - 80px);
       > p {
         margin: 0 0 5px;
         font-weight: bold;

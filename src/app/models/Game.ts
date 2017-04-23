@@ -1,4 +1,5 @@
-interface Game {
+class Game {
+  _id: string
   title: string
   name: string
   publisher: string

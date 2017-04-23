@@ -83,13 +83,15 @@ class GameComponent implements OnInit {
         })
       }
 
-      this.store.dispatch({
-        type: actionTypes.FETCH_GAME_TROPHY,
-        payload: {
-          params: url,
-          state: 'gameTrophy',
-        },
-      })
+      if (!this.game || !this.trophy || this.game._id !== this.trophy.game_id) {
+        this.store.dispatch({
+          type: actionTypes.FETCH_GAME_TROPHY,
+          payload: {
+            params: url,
+            state: 'gameTrophy',
+          },
+        })
+      }
     })
   }
 
