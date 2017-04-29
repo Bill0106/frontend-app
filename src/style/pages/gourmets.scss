@@ -1,0 +1,35 @@
+.app-gourmets {
+  @extend .app-view-container;
+  background-color: $romance;
+}
+.app-gourmets-title {
+  margin-bottom: 20px;
+  text-align: center;
+  > a > img {
+    width: 100%;
+    max-width: 357px;
+  }
+}
+.app-gourmets-list {
+  @extend .app-container;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1020px;
+  @media #{$screenLaptop} {
+    max-width: 850px;
+  }
+  @media #{$screenTablet} {
+    max-width: 680px;
+  }
+  @media #{$screenMobile} {
+    max-width: none;
+  }
+}
+.app-gourmets-list-card {
+  margin: 10px;
+  width: 150px;
+  box-sizing: border-box;
+}
+.app-gourmets-list-card .app-lazy-image {
+  margin: -24px;
+}

@@ -1,9 +1,6 @@
 .app-games {
-  margin-top: -64px;
-  padding-top: 74px;
-  min-height: 100vh;
+  @extend .app-view-container;
   background: $bunker;
-  box-sizing: border-box;
 }
 .app-games-trophy {
   margin-bottom: 20px;

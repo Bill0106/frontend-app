@@ -21,7 +21,7 @@ class GourmetsComponent implements OnInit {
     private store: Store<any>,
     private router: Router,
   ) {
-    store.select('games')
+    store.select('gourmets')
       .do((state: GourmetsState) => this.manageState(state))
       .subscribe()
   }
