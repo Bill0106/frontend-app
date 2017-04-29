@@ -42,6 +42,9 @@
   .app-lazy-image {
     margin: -24px -24px 20px;
     cursor: pointer;
+    @media #{$screenMaterialMobile} {
+      margin: -24px -16px;
+    }
   }
   .card-caption {
     position: relative;
