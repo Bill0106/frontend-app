@@ -11,19 +11,17 @@ $screenMediumMin   : $screenMedium;
 $screenSmall       : 768px;
 $screenSmallMax    : ($screenMediumMin - 1);
 $screenSmallMin    : $screenSmall;
-$screenMini        : 320px;
-$screenMiniMax     : ($screenSmallMin - 1);
-$screenMiniMin     : $screenMini;
 
 // Media Query
-$screenDesktop      : "only screen and (min-width: #{$screenLargeMin})";
-$screenLaptop       : "only screen and (min-width: #{$screenMediumMin}) and (max-width: #{$screenMediumMax})";
-$screenLaptopAbove  : "only screen and (min-width: #{$screenMediumMin})";
-$screenLaptopBlow   : "only screen and (max-width: #{$screenMediumMax})";
-$screenTablet       : "only screen and (min-width: #{$screenSmallMin}) and (max-width: #{$screenSmallMax})";
-$screenTabletAbove  : "only screen and (min-width: #{$screenSmallMin})";
-$screenTabletBelow  : "only screen and (max-width: #{$screenSmallMax})";
-$screenMobile       : "only screen and (max-width: #{$screenMiniMax})";
+$screenDesktop        : "only screen and (min-width: #{$screenLargeMin})";
+$screenLaptop         : "only screen and (min-width: #{$screenMediumMin}) and (max-width: #{$screenMediumMax})";
+$screenLaptopAbove    : "only screen and (min-width: #{$screenMediumMin})";
+$screenLaptopBlow     : "only screen and (max-width: #{$screenMediumMax})";
+$screenTablet         : "only screen and (min-width: #{$screenSmallMin}) and (max-width: #{$screenSmallMax})";
+$screenTabletAbove    : "only screen and (min-width: #{$screenSmallMin})";
+$screenTabletBelow    : "only screen and (max-width: #{$screenSmallMax})";
+$screenMobile         : "only screen and (max-width: #{($screenSmallMin - 1)})";
+$screenMaterialMobile : "only screen and (max-width: 600px)";
 
 /*-------------------
       Line Height

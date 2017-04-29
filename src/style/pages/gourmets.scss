@@ -14,24 +14,60 @@
   @extend .app-container;
   display: flex;
   flex-wrap: wrap;
-  max-width: 1020px;
+  box-sizing: border-box;
+  @media #{$screenDesktop} {
+    padding: 0 20px 20px;
+  }
   @media #{$screenLaptop} {
-    max-width: 850px;
+    padding: 0 45px 20px;
   }
   @media #{$screenTablet} {
-    max-width: 680px;
-  }
-  @media #{$screenMobile} {
-    max-width: none;
+    padding: 0 15px 20px;
   }
 }
 .app-gourmets-list-card {
   margin: 10px;
-  width: 150px;
+  padding: 0 !important;
+  width: 200px;
+  background-color: $white;
   box-sizing: border-box;
+  cursor: pointer;
+  @media #{$screenTablet} {
+    width: 160px;
+  }
+  @media #{$screenMobile} {
+    margin: 10px 0;
+    width: calc((100% - 20px) / 2);
+    &:nth-child(even) {
+      margin-left: 20px;
+    }
+  }
 }
-.app-gourmets-list-card .app-lazy-image {
-  margin: -24px;
+.app-gourmets-list-card .mat-card-header {
+  margin: 0;
+  padding: 16px;
+  height: auto;
+  .mat-card-header-text {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    .mat-card-title {
+      margin: 0;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+  }
+}
+.app-gourmets-list-card .mat-card-content {
+  padding: 16px;
+  > p {
+    margin-bottom: 5px;
+  }
+  > span {
+    font-size: $fontSizeSmall;
+    color: $mountainMist;
+  }
 }
 .app-gourmets-status {
   .app-page-loading .mat-spinner > svg > path {

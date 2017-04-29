@@ -21,9 +21,9 @@ class GamesComponent implements OnInit {
     private store: Store<any>,
     private router: Router,
   ) {
-    store.select('games')
-      .do((state: GamesState) => this.manageState(state))
-      .subscribe()
+    store
+      .select('games')
+      .subscribe((state: GamesState) => this.manageState(state))
   }
 
   private manageState(state: GamesState): void {

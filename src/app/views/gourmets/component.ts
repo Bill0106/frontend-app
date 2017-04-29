@@ -10,7 +10,7 @@ import { actionTypes, actionStatus, initState } from '../../constants'
 })
 
 class GourmetsComponent implements OnInit {
-  private limit: number = 24
+  private limit: number = 20
   gourmets: GourmetsState = initState.gourmets
   scrollDisabled: boolean = false
   loading: boolean = true
@@ -20,10 +20,9 @@ class GourmetsComponent implements OnInit {
     private store: Store<any>,
     private router: Router,
   ) {
-    store.select('gourmets')
-      .subscribe(
-        (state: GourmetsState) => this.manageState(state),
-      )
+    store
+      .select('gourmets')
+      .subscribe((state: GourmetsState) => this.manageState(state))
   }
 
   private manageState(state: GourmetsState): void {
@@ -52,7 +51,7 @@ class GourmetsComponent implements OnInit {
       const page = (items.length / this.limit) + 1
       this.store.dispatch({
         type: actionTypes.FETCH_LIST,
-        payload: { page, state: 'gourmets', limit: this.limit },
+        payload: { page, state: 'gourmets' },
       })
     }
   }
@@ -65,6 +64,10 @@ class GourmetsComponent implements OnInit {
 
   onScroll(): void {
     this.getGourmets()
+  }
+
+  goDetail(url): void {
+    window.open(url, '_blank')
   }
 }
 
