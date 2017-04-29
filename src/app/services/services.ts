@@ -10,7 +10,8 @@ class Services {
 
   getList(payload) {
     const obj = JSON.parse(payload)
-    return this.http.get(`api/${obj.state}?limit=20&page=${obj.page}`, { headers: this.headers })
+    const limit = obj.limit ? obj.limit : 20
+    return this.http.get(`api/${obj.state}?limit=${limit}&page=${obj.page}`, { headers: this.headers })
       .map(res => ({ type: `${actionTypes.FETCH_LIST}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: obj.state } }))
       .catch(err => Observable.of({ type: `${actionTypes.FETCH_LIST}_${actionStatus.REJECTED}`, payload: { state: obj.state, error: err.statusText } }) )
   }

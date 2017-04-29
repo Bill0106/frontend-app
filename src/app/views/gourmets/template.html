@@ -8,7 +8,7 @@
       >
     </a>
   </div>
-  <div class="app-gourmets-list">
+  <div class="app-gourmets-list" infinite-scroll [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
     <md-card class="app-gourmets-list-card" *ngFor="let gourmet of gourmets.items">
       <lazy-image [image]="gourmet.image" [text]="gourmet.food"></lazy-image>
     </md-card>
