@@ -33,3 +33,11 @@
 .app-gourmets-list-card .app-lazy-image {
   margin: -24px;
 }
+.app-gourmets-status {
+  .app-page-loading .mat-spinner > svg > path {
+    stroke: $malta;
+  }
+  .app-page-error {
+    color: $malta;
+  }
+}

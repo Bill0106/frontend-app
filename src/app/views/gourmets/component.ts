@@ -11,10 +11,9 @@ import { actionTypes, actionStatus, initState } from '../../constants'
 
 class GourmetsComponent implements OnInit {
   private limit: number = 24
-  private allFetched: boolean = true
   gourmets: GourmetsState = initState.gourmets
   scrollDisabled: boolean = false
-  hideLoading: boolean = false
+  loading: boolean = true
   error: string
 
   constructor(
@@ -35,11 +34,11 @@ class GourmetsComponent implements OnInit {
       case actionStatus.FETCHED:
         this.scrollDisabled = false
         this.gourmets = state
-        this.hideLoading = this.allFetched
+        this.loading = !(this.gourmets.items.length === state.total)
         break
       case actionStatus.REJECTED:
         this.scrollDisabled = true
-        this.hideLoading = true
+        this.loading = false
         this.error = state.error
         break
       default:
