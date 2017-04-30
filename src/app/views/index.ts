@@ -3,6 +3,7 @@ import HomeComponent from './home'
 import GamesComponent from './games.list'
 import GameComponent from './games.detail'
 import GourmetsComponent from './gourmets'
+import HearthstoneSeasonsComponent from './hearthstone.seasons'
 
 const routes: Routes = [
   {
@@ -21,6 +22,12 @@ const routes: Routes = [
     component: GourmetsComponent,
   },
   {
+    path: 'hearthstone',
+    children: [
+      { path: '', component: HearthstoneSeasonsComponent },
+    ],
+  },
+  {
     path: '**',
     redirectTo: '/',
     pathMatch: 'full',
@@ -32,6 +39,7 @@ const ViewComponents = [
   GamesComponent,
   GameComponent,
   GourmetsComponent,
+  HearthstoneSeasonsComponent,
 ]
 
 export { routes, ViewComponents }
