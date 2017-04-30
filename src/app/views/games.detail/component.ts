@@ -13,21 +13,25 @@ class GameComponent implements OnInit {
   game: Game = null
   trophy: GameTrophy
   trophyCompleted: number
-  hideLoading: boolean = false
+  loading: boolean = true
   error: string
 
   constructor(
     private store: Store<any>,
     private activeRoute: ActivatedRoute,
   ) {
-    store.select('games')
-      .do((state: GamesState) => this.getGame(state))
-      .do((state: GamesState) => this.manageGameState(state))
-      .subscribe()
+    store
+      .select('games')
+      .subscribe((state: GamesState) => {
+        this.getGame(state)
+        if (!this.game) {
+          this.manageGameState(state)
+        }
+      })
 
-    store.select('gameTrophy')
-      .do((state: GameTrophyState) => this.manageTrophyState(state))
-      .subscribe()
+    store
+      .select('gameTrophy')
+      .subscribe((state: GameTrophyState) => this.manageTrophyState(state))
   }
 
   private getGame(state: GamesState): void {
@@ -37,35 +41,45 @@ class GameComponent implements OnInit {
 
       if (state.item && state.item.url === url) {
         this.game = state.item
-        this.hideLoading = true
       } else if (game) {
         this.game = game
-        this.hideLoading = true
       }
     })
   }
 
   private manageGameState(state: GamesState): void {
-    if (!this.game) {
-      switch (state.status) {
-        case actionStatus.FETCHED:
-          this.game = state.item
-          this.hideLoading = true
-          break
-        case actionStatus.REJECTED:
-          this.hideLoading = true
-          this.error = state.error
-          break
-        default:
-          break
-      }
+    switch (state.status) {
+      case actionStatus.FETCHED:
+        this.game = state.item
+        if (this.trophy) {
+          this.loading = false
+        }
+        break
+      case actionStatus.REJECTED:
+        this.loading = false
+        this.error = state.error
+        break
+      default:
+        break
     }
   }
 
   private manageTrophyState(state: GameTrophyState): void {
-    if (state.status === actionStatus.FETCHED && state.item) {
-      this.trophy = state.item
-      this.trophyCompleted = state.item.earned / state.item.total * 100
+    switch (state.status) {
+      case actionStatus.FETCHED:
+        if (state.item) {
+          this.trophy = state.item
+          this.trophyCompleted = state.item.earned / state.item.total * 100
+          if (this.game) {
+            this.loading = false
+          }
+        }
+        break
+      case actionStatus.REJECTED:
+        this.loading = false
+        break
+      default:
+        break
     }
   }
 
