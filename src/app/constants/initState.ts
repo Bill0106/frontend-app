@@ -17,6 +17,13 @@ const initState: any = {
     total: 0,
     error: null,
   },
+  hearthstoneSeasons: {
+    status: null,
+    items: [],
+    item: null,
+    total: 0,
+    error: null,
+  },
 }
 
 export default initState

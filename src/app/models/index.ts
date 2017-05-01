@@ -4,6 +4,8 @@ import GameTrophy from './GameTrophy'
 import GameTrophyState from './GameTrophyState'
 import Gourmet from './Gourmet'
 import GourmetsState from './GourmetsState'
+import HearthstoneSeason from './HearthstoneSeason'
+import HearthstoneSeasonsState from './HearthstoneSeasonsState'
 
 export {
   Game,
@@ -12,4 +14,6 @@ export {
   GameTrophyState,
   Gourmet,
   GourmetsState,
+  HearthstoneSeason,
+  HearthstoneSeasonsState
 }
