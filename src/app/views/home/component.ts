@@ -14,7 +14,7 @@ interface Contact {
 }
 
 @Component({
-  selector: 'my-home',
+  selector: 'app-home',
   templateUrl: './template',
 })
 

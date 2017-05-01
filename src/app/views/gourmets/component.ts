@@ -5,7 +5,7 @@ import { GourmetsState } from '../../models'
 import { actionTypes, actionStatus, initState } from '../../constants'
 
 @Component({
-  selector: 'my-gourmets',
+  selector: 'app-gourmets',
   templateUrl: './template',
 })
 

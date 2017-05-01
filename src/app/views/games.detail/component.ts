@@ -5,7 +5,7 @@ import { Game, GamesState, GameTrophy, GameTrophyState } from '../../models'
 import { actionTypes, actionStatus, gamePlatforms, gameGenres } from '../../constants'
 
 @Component({
-  selector: 'my-game',
+  selector: 'app-game',
   templateUrl: './template',
 })
 
