@@ -381,19 +381,11 @@
     }
   }
 }
-.app-games-loading {
-  padding-bottom: 15px;
- .mat-spinner {
-  margin: 0 auto;
-  width: 50px !important;
-  height: 50px !important;
-  > svg > path {
+.app-games-status {
+  .app-page-loading .mat-spinner > svg > path {
     stroke: $white;
-    stroke-width: 5px;
-  } 
- }
-}
-.app-games-error {
-  text-align: center;
-  color: $orangeRed;
+  }
+  .app-page-error {
+    color: $orangeRed;
+  }
 }

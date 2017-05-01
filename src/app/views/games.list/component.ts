@@ -11,10 +11,9 @@ import { actionTypes, actionStatus, initState } from '../../constants'
 
 class GamesComponent implements OnInit {
   private limit: number = 20
-  private allFetched: boolean = true
   games: GamesState = initState.games
   scrollDisabled: boolean = false
-  hideLoading: boolean = false
+  loading: boolean = true
   error: string
 
   constructor(
@@ -34,11 +33,11 @@ class GamesComponent implements OnInit {
       case actionStatus.FETCHED:
         this.scrollDisabled = false
         this.games = state
-        this.hideLoading = this.allFetched
+        this.loading = (this.games.items.length === state.total)
         break
       case actionStatus.REJECTED:
         this.scrollDisabled = true
-        this.hideLoading = true
+        this.loading = true
         this.error = state.error
         break
       default:

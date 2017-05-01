@@ -25,8 +25,7 @@
       </md-card-content>
     </md-card>
   </div>
-  <div class="app-games-loading" [hidden]="hideLoading">
-    <md-spinner></md-spinner>
+  <div class="app-games-status">
+    <page-status [loading]="loading" [error]="error"></page-status>
   </div>
-  <div class="app-games-error" [hidden]="!error">{{error}}</div>
 </section>
