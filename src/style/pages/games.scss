@@ -12,11 +12,15 @@
 }
 .app-games-list {
   @extend .app-container;
-  display: flex;
-  flex-flow: wrap;
+  @media #{$screenLaptop} {
+    padding: 0 17px;
+  }
+  @media #{$screenTablet} {
+    padding: 0 7px;
+  }
 }
 .app-games-list-card {
-  margin: 0 auto 15px;
+  margin: 7px;
   padding: 0;
   width: 270px;
   border-radius: 0 !important;
