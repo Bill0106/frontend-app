@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { HearthstoneSeasonsState } from '../../models'
 import { actionTypes, actionStatus, initState } from '../../constants'
@@ -17,6 +18,7 @@ class HearthstoneSeasonsComponent implements OnInit {
 
   constructor(
     private store: Store<any>,
+    private router: Router,
   ) {
     store
       .select('hearthstoneSeasons')
@@ -55,6 +57,7 @@ class HearthstoneSeasonsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.router)
     if (!this.seasons.items.length) {
       this.getSeasons()
     }
@@ -62,6 +65,11 @@ class HearthstoneSeasonsComponent implements OnInit {
 
   onScroll(): void {
     this.getSeasons()
+  }
+
+  goDetail(url: string): void {
+    const link = ['/hearthstone/season', url]
+    this.router.navigate(link)
   }
 }
 
