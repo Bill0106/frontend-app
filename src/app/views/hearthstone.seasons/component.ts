@@ -12,7 +12,7 @@ class HearthstoneSeasonsComponent implements OnInit {
   private limit: number = 6
   seasons: HearthstoneSeasonsState = initState.hearthstoneSeasons
   scrollDisabled: boolean = false
-  loading: boolean
+  loading: boolean = true
   error: string
 
   constructor(
@@ -23,7 +23,25 @@ class HearthstoneSeasonsComponent implements OnInit {
       .subscribe((state: HearthstoneSeasonsState) => this.manageState(state))
   }
 
-  private manageState(state: HearthstoneSeasonsState) {}
+  private manageState(state: HearthstoneSeasonsState) {
+    switch (state.status) {
+      case actionStatus.PENDING:
+        this.scrollDisabled = true
+        break
+      case actionStatus.FETCHED:
+        this.scrollDisabled = false
+        this.seasons = state
+        this.loading = (this.seasons.items.length !== state.total)
+        break
+      case actionStatus.REJECTED:
+        this.scrollDisabled = true
+        this.loading = true
+        this.error = state.error
+        break
+      default:
+        break
+    }
+  }
 
   private getSeasons() {
     const { items, total } = this.seasons
@@ -40,6 +58,10 @@ class HearthstoneSeasonsComponent implements OnInit {
     if (!this.seasons.items.length) {
       this.getSeasons()
     }
+  }
+
+  onScroll(): void {
+    this.getSeasons()
   }
 }
 

@@ -1,5 +1,5 @@
 .app-gourmets {
-  @extend .app-view-container;
+  @extend .app-container;
   background-color: $romance;
 }
 .app-gourmets-title {
@@ -11,7 +11,7 @@
   }
 }
 .app-gourmets-list {
-  @extend .app-container;
+  @extend .app-list;
   @media #{$screenDesktop} {
     padding: 0 20px 20px;
   }
@@ -23,11 +23,9 @@
   }
 }
 .app-gourmets-list-card {
+  @extend .app-item;
   margin: 10px;
-  padding: 0 !important;
   width: 200px;
-  background-color: $white;
-  box-sizing: border-box;
   cursor: pointer;
   @media #{$screenTablet} {
     width: 160px;

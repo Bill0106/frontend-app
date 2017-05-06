@@ -1,1 +1,17 @@
-<section class="app-hearthstone">Hearthstone Seasons</section>
+<section class="app-hearthstone">
+  <div class="app-hearthstone-seasons" infinite-scroll [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
+    <md-card class="app-hearthstone-seasons-item" *ngFor="let season of seasons.items">
+      <lazy-image [image]="season.image" [text]="season.title"></lazy-image>
+      <md-card-content>
+        <h2>{{ season.title }}</h2>
+        <p>{{ season.description }}</p>
+      </md-card-content>
+      <md-card-actions>
+        <span>GET DETAIL</span>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div class="app-hearthstone-status">
+    <page-status [loading]="loading" [error]="error"></page-status>
+  </div>
+</section>
