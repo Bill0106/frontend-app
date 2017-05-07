@@ -24,6 +24,12 @@ const initState: any = {
     total: 0,
     error: null,
   },
+  hearthstoneMatches: {
+    items: [],
+    total: 0,
+    error: null,
+    status: null,
+  },
 }
 
 export default initState

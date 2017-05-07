@@ -9,6 +9,7 @@ export function Reducers(state: any = initState, action: Action): string {
     case actionTypes.FETCH_LIST:
     case actionTypes.FETCH_ITEM:
     case actionTypes.FETCH_GAME_TROPHY:
+    case actionTypes.FETCH_HEARTHSTONE_MATCHES:
       return {
         ...state,
         [payload.state]: {
@@ -19,6 +20,7 @@ export function Reducers(state: any = initState, action: Action): string {
     case `${actionTypes.FETCH_LIST}_${actionStatus.REJECTED}`:
     case `${actionTypes.FETCH_ITEM}_${actionStatus.REJECTED}`:
     case `${actionTypes.FETCH_GAME_TROPHY}_${actionStatus.REJECTED}`:
+    case `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.REJECTED}`:
       return {
         ...state,
         [payload.state]: {
@@ -45,6 +47,16 @@ export function Reducers(state: any = initState, action: Action): string {
           ...state[payload.state],
           status: actionStatus.FETCHED,
           item: payload.data,
+        },
+      }
+    case `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.FETCHED}`:
+      return {
+        ...state,
+        'hearthstoneMatches': {
+          ...state['hearthstoneMatches'],
+          status: actionStatus.FETCHED,
+          item: payload.data.list,
+          total: payload.data.total,
         },
       }
     default:

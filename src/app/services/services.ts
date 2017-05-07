@@ -35,6 +35,23 @@ class Services {
       .map(res => ({ type: `${actionTypes.FETCH_ITEM}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: obj.state } }))
       .catch(err => Observable.of({ type: `${actionTypes.FETCH_ITEM}_${actionStatus.REJECTED}`, payload: { state: obj.state, error: err.statusText } }) )
   }
+
+  getHearthstoneMatches(payload) {
+    const obj = JSON.parse(payload)
+    let uri = 'api/hearthstone-matches'
+
+    if (obj.hasOwnProperty('season') && obj.season) {
+      uri = `${uri}?season=${obj.season}`
+    }
+
+    if (obj.hasOwnProperty('deck') && obj.deck) {
+      uri = `${uri}?deck=${obj.season}`
+    }
+
+    return this.http.get(uri, { headers: this.headers })
+      .map(res => ({ type: `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: obj.state } }))
+      .catch(err => Observable.of({ type: `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.REJECTED}`, payload: { state: obj.state, error: err.statusText } }) )
+  }
 }
 
 export default Services

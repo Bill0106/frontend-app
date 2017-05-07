@@ -24,6 +24,11 @@ class Effects {
     .ofType(actionTypes.FETCH_GAME_TROPHY)
     .map(action => JSON.stringify(action.payload))
     .switchMap(payload => this.services.getGameTrophy(payload))
+
+  @Effect() getHearthstoneMatches$ = this.actions$
+    .ofType(actionTypes.FETCH_HEARTHSTONE_MATCHES)
+    .map(action => JSON.stringify(action.payload))
+    .switchMap(payload => this.services.getHearthstoneMatches(payload))
 }
 
 export default Effects
