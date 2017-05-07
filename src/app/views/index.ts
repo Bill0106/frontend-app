@@ -26,7 +26,8 @@ const routes: Routes = [
     path: 'hearthstone',
     children: [
       { path: '', component: HearthstoneSeasonsComponent },
-      { path: 'season/:url', component: HearthstoneSeasonComponent },
+      { path: 'seasons', redirectTo: '/hearthstone', pathMatch: 'full' },
+      { path: 'seasons/:url', component: HearthstoneSeasonComponent },
     ],
   },
   {

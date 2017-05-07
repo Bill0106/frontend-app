@@ -33,10 +33,9 @@ class HearthstoneSeasonComponent implements OnInit {
       const url = params.url
       const season = state.items.find(item => item.url === url)
 
-      if (state.item && state.item.url === url) {
-        this.season = state.item
-      } else if (season) {
+      if (season) {
         this.season = season
+        this.loading = false
       }
     })
   }
@@ -45,6 +44,7 @@ class HearthstoneSeasonComponent implements OnInit {
     switch (state.status) {
       case actionStatus.FETCHED:
         this.season = state.item
+        this.loading = false
         break
       case actionStatus.REJECTED:
         this.loading = false

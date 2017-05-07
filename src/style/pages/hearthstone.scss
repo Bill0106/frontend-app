@@ -61,6 +61,25 @@
     }
   }
 }
+.app-hearthstone-season {
+  > h1 {
+    margin: 0 0 15px;
+    text-align: center;
+    font-size: 36px;
+    line-height: ($lineHeightMedium * 2);
+    color: $regalBlue;
+  }
+  > p {
+    margin: 0 auto 15px;
+    max-width: 760px;
+    line-height: $lineHeightMedium;
+    font-size: $fontSizeMedium;
+  }
+  .app-lazy-image {
+    margin: 0 auto 15px;
+    max-width: 760px;
+  }
+}
 .app-hearthstone-status {
   .app-page-loading .mat-spinner > svg > path {
     stroke: $malta;

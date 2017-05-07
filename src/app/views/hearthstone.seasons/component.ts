@@ -67,7 +67,7 @@ class HearthstoneSeasonsComponent implements OnInit {
   }
 
   goDetail(url: string): void {
-    const link = ['/hearthstone/season', url]
+    const link = ['/hearthstone/seasons', url]
     this.router.navigate(link)
   }
 }

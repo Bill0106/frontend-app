@@ -1,1 +1,10 @@
-<section class="app-hearthstone-season">Hearthstone Season</section>
+<section class="app-hearthstone">
+  <div class="app-hearthstone-season" *ngIf="season">
+    <h1>{{ season.month | date: "MMMM yyyy" }} Season – {{ season.title }}</h1>
+    <p>{{ season.description }}</p>
+    <lazy-image [image]="season.image" [text]="season.title" size="rectangle"></lazy-image>
+  </div>
+  <div class="app-hearthstone-status">
+    <page-status [loading]="loading" [error]="error"></page-status>
+  </div>
+</section>
