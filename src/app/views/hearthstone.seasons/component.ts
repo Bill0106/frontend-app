@@ -57,7 +57,6 @@ class HearthstoneSeasonsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.router)
     if (!this.seasons.items.length) {
       this.getSeasons()
     }

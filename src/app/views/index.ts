@@ -4,6 +4,7 @@ import GamesComponent from './games.list'
 import GameComponent from './games.detail'
 import GourmetsComponent from './gourmets'
 import HearthstoneSeasonsComponent from './hearthstone.seasons'
+import HearthstoneSeasonComponent from './hearthstone.season'
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     path: 'hearthstone',
     children: [
       { path: '', component: HearthstoneSeasonsComponent },
+      { path: 'season/:url', component: HearthstoneSeasonComponent },
     ],
   },
   {
@@ -40,6 +42,7 @@ const ViewComponents = [
   GameComponent,
   GourmetsComponent,
   HearthstoneSeasonsComponent,
+  HearthstoneSeasonComponent,
 ]
 
 export { routes, ViewComponents }
