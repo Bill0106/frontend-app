@@ -3,6 +3,7 @@
     <h1>{{ season.month | date: "MMMM yyyy" }} Season – {{ season.title }}</h1>
     <p>{{ season.description }}</p>
     <lazy-image [image]="season.image" [text]="season.title" size="rectangle"></lazy-image>
+    <hearthstone-matches></hearthstone-matches>
   </div>
   <div class="app-hearthstone-status">
     <page-status [loading]="loading" [error]="error"></page-status>
