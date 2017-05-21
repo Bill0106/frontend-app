@@ -80,6 +80,32 @@
     max-width: 760px;
   }
 }
+.app-hearthstone-season-state {
+  margin-bottom: 10px;
+  text-align: center;
+  > div {
+    display: inline-block;
+    padding-top: 30px;
+    vertical-align: middle;
+    font-size: $fontSizeLarge;
+    &.rank {
+      margin: 0 20px;
+      padding: 0;
+    }
+    > span {
+      display: block;
+      &:first-child {
+        margin-bottom: 10px;
+        line-height: $lineHeightMedium;
+        font-size: $fontSizeBig;
+      }
+      &:last-child {
+        line-height: 50px;
+        font-size: 46px;
+      }
+    }
+  }
+}
 .app-hearthstone-status {
   .app-page-loading .mat-spinner > svg > path {
     stroke: $malta;

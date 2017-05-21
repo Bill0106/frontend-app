@@ -52,10 +52,10 @@ export function Reducers(state: any = initState, action: Action): string {
     case `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.FETCHED}`:
       return {
         ...state,
-        'hearthstoneMatches': {
-          ...state['hearthstoneMatches'],
+        hearthstoneMatches: {
+          ...state.hearthstoneMatches,
           status: actionStatus.FETCHED,
-          item: payload.data.list,
+          items: payload.data.list,
           total: payload.data.total,
         },
       }

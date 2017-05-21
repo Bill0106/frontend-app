@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { HearthstoneSeason, HearthstoneSeasonsState } from '../../models'
+import { HearthstoneSeason, HearthstoneSeasonsState, HearhtstoneMatch, HearthstoneMatchesState } from '../../models'
 import { actionStatus, actionTypes } from '../../constants'
 
 @Component({
@@ -11,6 +11,10 @@ import { actionStatus, actionTypes } from '../../constants'
 
 class HearthstoneSeasonComponent implements OnInit {
   season: HearthstoneSeason = null
+  matches: HearhtstoneMatch[] = []
+  wins: number
+  lose: number
+  total: number
   loading: boolean = true
   error: string
 
@@ -26,6 +30,10 @@ class HearthstoneSeasonComponent implements OnInit {
           this.manageState(state)
         }
       })
+
+    store
+      .select('hearthstoneMatches')
+      .subscribe((state: HearthstoneMatchesState) => this.manageMatchesState(state))
   }
 
   private getSeason(state: HearthstoneSeasonsState): void {
@@ -36,6 +44,7 @@ class HearthstoneSeasonComponent implements OnInit {
       if (season) {
         this.season = season
         this.loading = false
+        this.getMatches(season)
       }
     })
   }
@@ -44,8 +53,35 @@ class HearthstoneSeasonComponent implements OnInit {
     switch (state.status) {
       case actionStatus.FETCHED:
         this.season = state.item
-        this.loading = false
+        this.getMatches(state.item)
         break
+      case actionStatus.REJECTED:
+        this.loading = false
+        this.error = state.error
+        break
+      default:
+        break
+    }
+  }
+
+  private getMatches(season: HearthstoneSeason): void {
+    this.store.dispatch({
+      type: actionTypes.FETCH_HEARTHSTONE_MATCHES,
+      payload: {
+        state: 'hearthstoneMatches',
+        season: season.month,
+      },
+    })
+  }
+
+  private manageMatchesState(state: HearthstoneMatchesState): void {
+    switch (state.status) {
+      case actionStatus.FETCHED:
+        const matches = state.items
+        this.total = matches.length
+        this.wins = matches.filter(match => match.result === 1).length
+        this.lose = matches.filter(match => match.result === -1).length
+        this.loading = false
       case actionStatus.REJECTED:
         this.loading = false
         this.error = state.error
