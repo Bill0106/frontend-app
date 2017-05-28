@@ -5,6 +5,7 @@ import { MaterialModule } from '@angular/material'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 import { LazyLoadImageModule } from 'ng-lazyload-image'
 import { InfiniteScrollModule } from 'angular2-infinite-scroll'
 import { Reducers, Services, Effects } from './services'
@@ -24,6 +25,7 @@ import Pipes from './pipes'
       maxAge: 5,
     }),
     MaterialModule,
+    NgxDatatableModule,
     LazyLoadImageModule,
     InfiniteScrollModule,
     AppRoutingModule,

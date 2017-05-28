@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { HearthstoneSeason, HearthstoneSeasonsState, HearhtstoneMatch, HearthstoneMatchesState } from '../../models'
+import { HearthstoneSeason, HearthstoneSeasonsState, HearthstoneMatch, HearthstoneMatchesState } from '../../models'
 import { actionStatus, actionTypes } from '../../constants'
 
 @Component({
@@ -11,10 +11,11 @@ import { actionStatus, actionTypes } from '../../constants'
 
 class HearthstoneSeasonComponent implements OnInit {
   season: HearthstoneSeason = null
-  matches: HearhtstoneMatch[] = []
+  matches: HearthstoneMatch[] = []
   wins: number
   lose: number
   total: number
+  showMatches: boolean
   loading: boolean = true
   error: string
 
@@ -81,6 +82,7 @@ class HearthstoneSeasonComponent implements OnInit {
         this.total = matches.length
         this.wins = matches.filter(match => match.result === 1).length
         this.lose = matches.filter(match => match.result === -1).length
+        this.showMatches = true
         this.loading = false
       case actionStatus.REJECTED:
         this.loading = false

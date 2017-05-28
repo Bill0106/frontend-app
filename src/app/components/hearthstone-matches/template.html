@@ -1,1 +1,18 @@
-<section class="app-hearthstone-matches">Hearthstone Matches</section>
+<section class="app-hearthstone-matches">
+  <ngx-datatable
+    [columns]="columns"
+    [columnMode]="'force'"
+    [rows]="rows"
+    [headerHeight]="40"
+  >
+  </ngx-datatable>
+  <ng-template #headerTemplate let-column="column">
+    <span class="app-hearthstone-matches-header">{{ column.name }}</span>
+  </ng-template>
+  <ng-template #cellTemplate let-column="column" let-row="row" let-value="value">
+    <div [ngSwitch]="column.name" class="app-hearthstone-matches-cell">
+      <span *ngSwitchCase="'PCT'">{{ value | percent: '1.2-2' }}</span>
+      <span *ngSwitchDefault>{{ value }}</span>
+    </div>
+  </ng-template>
+</section>

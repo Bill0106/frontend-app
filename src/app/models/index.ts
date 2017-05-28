@@ -6,7 +6,7 @@ import Gourmet from './Gourmet'
 import GourmetsState from './GourmetsState'
 import HearthstoneSeason from './HearthstoneSeason'
 import HearthstoneSeasonsState from './HearthstoneSeasonsState'
-import HearhtstoneMatch from './HearthstoneMatch'
+import HearthstoneMatch from './HearthstoneMatch'
 import HearthstoneMatchesState from './HearthstoneMatchesState'
 
 export {
@@ -18,6 +18,6 @@ export {
   GourmetsState,
   HearthstoneSeason,
   HearthstoneSeasonsState,
-  HearhtstoneMatch,
+  HearthstoneMatch,
   HearthstoneMatchesState
 }

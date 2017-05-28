@@ -11,7 +11,7 @@
       </div>
       <div class="wins">{{ wins / total | percent: '1.2-2' }}</div>
     </div>
-    <hearthstone-matches></hearthstone-matches>
+    <hearthstone-matches [type]="'season'" *ngIf="showMatches"></hearthstone-matches>
   </div>
   <div class="app-hearthstone-status">
     <page-status [loading]="loading" [error]="error"></page-status>
