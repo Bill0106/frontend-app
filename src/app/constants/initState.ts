@@ -26,7 +26,6 @@ const initState: any = {
   },
   hearthstoneMatches: {
     items: [],
-    total: 0,
     error: null,
     status: null,
   },

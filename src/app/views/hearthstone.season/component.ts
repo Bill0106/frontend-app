@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { HearthstoneSeason, HearthstoneSeasonsState, HearthstoneMatch, HearthstoneMatchesState } from '../../models'
+import { HearthstoneSeason, HearthstoneSeasonsState, HearthstoneMatch, HearthstoneMatchesState, HearthstoneDeckState } from '../../models'
 import { actionStatus, actionTypes } from '../../constants'
 
 @Component({
@@ -28,13 +28,17 @@ class HearthstoneSeasonComponent implements OnInit {
       .subscribe((state: HearthstoneSeasonsState) => {
         this.getSeason(state)
         if (!this.season) {
-          this.manageState(state)
+          this.manageSeasonState(state)
         }
       })
 
     store
       .select('hearthstoneMatches')
       .subscribe((state: HearthstoneMatchesState) => this.manageMatchesState(state))
+
+    store
+      .select('hearthstoneDecks')
+      .subscribe((state: HearthstoneDeckState) => this.manageDecksState(state))
   }
 
   private getSeason(state: HearthstoneSeasonsState): void {
@@ -50,7 +54,7 @@ class HearthstoneSeasonComponent implements OnInit {
     })
   }
 
-  private manageState(state: HearthstoneSeasonsState): void {
+  private manageSeasonState(state: HearthstoneSeasonsState): void {
     switch (state.status) {
       case actionStatus.FETCHED:
         this.season = state.item
@@ -82,8 +86,35 @@ class HearthstoneSeasonComponent implements OnInit {
         this.total = matches.length
         this.wins = matches.filter(match => match.result === 1).length
         this.lose = matches.filter(match => match.result === -1).length
+        this.getDecks(matches)
+      case actionStatus.REJECTED:
+        this.loading = false
+        this.error = state.error
+        break
+      default:
+        break
+    }
+  }
+
+  private getDecks(matches: HearthstoneMatch[]): void {
+    const idsSet = new Set(matches.map(match => match.deck_id))
+    const ids = Array.from(idsSet).join(',')
+
+    this.store.dispatch({
+      type: actionTypes.FETCH_HEARTHSTONE_DECKS_BY_IDS,
+      payload: {
+        ids,
+        state: 'hearthstoneDecks',
+      },
+    })
+  }
+
+  private manageDecksState(state: HearthstoneDeckState): void {
+    switch (state.status) {
+      case actionStatus.FETCHED:
         this.showMatches = true
         this.loading = false
+        break
       case actionStatus.REJECTED:
         this.loading = false
         this.error = state.error

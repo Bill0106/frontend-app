@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { HearthstoneMatch, HearthstoneSeason } from '../../models'
+import { HearthstoneMatch, HearthstoneSeason, HearthstoneDeck } from '../../models'
 import { actionStatus, actionTypes, hearthstonePlayerClasses } from '../../constants'
 
 @Component({
@@ -12,11 +12,23 @@ class HearthstoneMatchesComponent implements OnInit {
   @Input() type: string
   @ViewChild('headerTemplate') headerTemplate: TemplateRef<any>
   @ViewChild('cellTemplate') cellTemplate: TemplateRef<any>
+
   matches: HearthstoneMatch[]
+  decks: HearthstoneDeck[]
   rows: any
   columns: any
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<any>) {
+    store
+      .select('hearthstoneMatches')
+      .pluck('items')
+      .subscribe((items: HearthstoneMatch[]) => this.matches = items)
+
+    store
+      .select('hearthstoneDecks')
+      .pluck('items')
+      .subscribe((items: HearthstoneDeck[]) => this.decks = items)
+  }
 
   private getStats(matches: HearthstoneMatch[]): any {
     const totalWin = matches.filter(match => match.result === 1).length
@@ -52,30 +64,24 @@ class HearthstoneMatchesComponent implements OnInit {
   }
 
   private getSeasonRows(): any {
-    const deckSets = new Set(this.matches.map(match => match.deck_id))
-    const deckIds = Array.from(deckSets)
     let rows = []
 
-    deckIds.forEach(id => {
-      const matches = this.matches.filter(match => match.deck_id === id)
+    this.decks.forEach(deck => {
+      const matches = this.matches.filter(match => match.deck_id === deck._id)
       let row = this.getStats(matches)
-      row.deck = id
+      row.deck = deck
 
       rows.push(row)
     })
 
     let totalRow = this.getStats(this.matches)
-    totalRow.deck = 'Total'
+    totalRow.deck = { name: 'Total' }
     rows.push(totalRow)
 
     return rows
   }
 
   ngOnInit() {
-    this.store.select('hearthstoneMatches')
-      .pluck('items')
-      .subscribe((items: HearthstoneMatch[]) => this.matches = items)
-
     this.columns = this.getColumns()
     this.rows = this.getSeasonRows()
   }

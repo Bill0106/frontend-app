@@ -59,7 +59,6 @@ export function Reducers(state: any = initState, action: Action): string {
           ...state[payload.state],
           status: actionStatus.FETCHED,
           items: payload.data.list,
-          total: payload.data.total,
         },
       }
     default:
