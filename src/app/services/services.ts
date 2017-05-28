@@ -52,6 +52,13 @@ class Services {
       .map(res => ({ type: `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: obj.state } }))
       .catch(err => Observable.of({ type: `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.REJECTED}`, payload: { state: obj.state, error: err.statusText } }) )
   }
+
+  getHearthstoneDecksByIds(payload) {
+    const obj = JSON.parse(payload)
+    return this.http.get(`api/hearthstone-decks?ids=${obj.ids}`, { headers: this.headers })
+      .map(res => ({ type: `${actionTypes.FETCH_HEARTHSTONE_DECKS_BY_IDS}_${actionStatus.FETCHED}`, payload: { data: res.json(), state: obj.state } }))
+      .catch(err => Observable.of({ type: `${actionTypes.FETCH_HEARTHSTONE_DECKS_BY_IDS}_${actionStatus.REJECTED}`, payload: { state: obj.state, error: err.statusText } }))
+  }
 }
 
 export default Services

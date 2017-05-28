@@ -30,6 +30,12 @@ const initState: any = {
     error: null,
     status: null,
   },
+  hearthstoneDecks: {
+    items: [],
+    item: null,
+    status: null,
+    error: null,
+  },
 }
 
 export default initState
