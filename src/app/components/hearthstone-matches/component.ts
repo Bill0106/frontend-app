@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { HearthstoneMatch, HearthstoneSeason, HearthstoneDeck } from '../../models'
 import { actionStatus, actionTypes, hearthstonePlayerClasses } from '../../constants'
@@ -18,7 +19,10 @@ class HearthstoneMatchesComponent implements OnInit {
   rows: any
   columns: any
 
-  constructor(private store: Store<any>) {
+  constructor(
+    private store: Store<any>,
+    private router: Router,
+  ) {
     store
       .select('hearthstoneMatches')
       .pluck('items')
@@ -84,6 +88,10 @@ class HearthstoneMatchesComponent implements OnInit {
   ngOnInit() {
     this.columns = this.getColumns()
     this.rows = this.getSeasonRows()
+  }
+
+  goDeck(id: string): void {
+    this.router.navigate(['/hearthstone/decks', id])
   }
 }
 

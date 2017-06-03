@@ -12,7 +12,7 @@
   <ng-template #cellTemplate let-column="column" let-row="row" let-value="value">
     <div [ngSwitch]="column.name" class="app-hearthstone-matches-cell">
       <span *ngSwitchCase="'PCT'">{{ value | percent: '1.2-2' }}</span>
-      <span *ngSwitchCase="'Deck'">{{ value.name }}</span>
+      <span *ngSwitchCase="'Deck'" (click)="goDeck(value._id)" class="app-hearthstone-matches-link">{{ value.name }}</span>
       <span *ngSwitchDefault>{{ value }}</span>
     </div>
   </ng-template>
