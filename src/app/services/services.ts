@@ -54,7 +54,7 @@ class Services {
     }
 
     if (obj.hasOwnProperty('deck') && obj.deck) {
-      uri = `${uri}?deck=${obj.season}`
+      uri = `${uri}?deck=${obj.deck}`
     }
 
     return this.http.get(uri, { headers: this.headers })

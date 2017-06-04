@@ -18,6 +18,14 @@
       </div>
     </div>
     <p class="app-hearthstone-deck-tips">*所有牌组均来自 <a href="http://www.hearthpwn.com/" target="_blank">hearthpwn</a> 或者 <a href="http://ls.duowan.com/" target="_blank">多玩</a>，非原创！(All decks are copied from hearhpwn or duowan, not original!)</p>
+    <div class="app-hearthstone-state" *ngIf="total">
+      <div class="left">{{ wins }} W</div>
+      <div class="middle">
+        <span>WIN RATE</span>
+        <span>{{ wins / total | percent: '1.2-2' }}</span>
+      </div>
+      <div class="right">{{ lose }} L</div>
+    </div>
   </div>
   <div class="app-hearthstone-status">
     <page-status [loading]="loading" [error]="error"></page-status>

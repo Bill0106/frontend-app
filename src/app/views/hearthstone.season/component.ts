@@ -11,7 +11,6 @@ import { actionStatus, actionTypes } from '../../constants'
 
 class HearthstoneSeasonComponent implements OnInit {
   season: HearthstoneSeason = null
-  matches: HearthstoneMatch[] = []
   wins: number
   lose: number
   total: number
