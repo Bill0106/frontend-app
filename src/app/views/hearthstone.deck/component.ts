@@ -1,5 +1,5 @@
 import * as moment from 'moment'
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { HearthstoneDeck, HearthstoneDeckState, HearthstoneCard, HearthstoneCardsState, HearthstoneMatch, HearthstoneMatchesState, HearthstoneSeasonsState } from '../../models'
@@ -10,7 +10,8 @@ import { actionStatus, actionTypes } from '../../constants'
   templateUrl: './template',
 })
 
-class HearthstoneDeckComponent implements OnInit {
+class HearthstoneDeckComponent implements OnInit, OnDestroy {
+  id: string
   deck: HearthstoneDeck
   cards: HearthstoneCard[]
   wins: number
@@ -24,6 +25,8 @@ class HearthstoneDeckComponent implements OnInit {
     private store: Store<any>,
     private activeRoute: ActivatedRoute,
   ) {
+    activeRoute.params.subscribe((params: Params) => this.id = params.id)
+
     store
       .select('hearthstoneDecks')
       .subscribe((state: HearthstoneDeckState) => {
@@ -45,21 +48,20 @@ class HearthstoneDeckComponent implements OnInit {
   }
 
   private getDeck(state: HearthstoneDeckState): void {
-    this.activeRoute.params.forEach((params: Params) => {
-      const deck = state.items.find((item: HearthstoneDeck) => item._id === params.id)
-
-      if (!this.deck && deck) {
-        this.deck = deck
-        this.getCardsAndMatches(deck)
-      }
-    })
+    const deck = state.items.find((item: HearthstoneDeck) => item._id === this.id)
+    if (!this.deck && deck) {
+      this.deck = deck
+      this.getCardsAndMatches(deck)
+    }
   }
 
   private manageDeckState(state: HearthstoneDeckState): void {
     switch (state.status) {
       case actionStatus.FETCHED:
-        this.deck = state.item
-        this.getCardsAndMatches(state.item)
+        if (state.item && state.item._id === this.id) {
+          this.deck = state.item
+          this.getCardsAndMatches(state.item)
+        }
         break
       case actionStatus.REJECTED:
         this.loading = false
@@ -92,11 +94,8 @@ class HearthstoneDeckComponent implements OnInit {
     switch (state.status) {
       case actionStatus.FETCHED:
         this.cards = state.items.map((item: HearthstoneCard) => {
-          const count = this.deck.cards.find(x => x.card === item._id).count
-          return {
-            ...item,
-            count,
-          }
+          const card = this.deck.cards.find(x => x.card === item._id)
+          if (card) return { ...item, count: card.count }
         })
         break
       case actionStatus.REJECTED:
@@ -112,11 +111,15 @@ class HearthstoneDeckComponent implements OnInit {
     switch (state.status) {
       case actionStatus.FETCHED:
         const matches = state.items
-        this.total = matches.length
-        this.wins = matches.filter(match => match.result === 1).length
-        this.lose = matches.filter(match => match.result === -1).length
-        const months = matches.map(match => moment(match.time).format('YYYYMM'))
-        this.getMatchSeasons(new Set(months))
+        if (matches.length) {
+          this.total = matches.length
+          this.wins = matches.filter(match => match.result === 1).length
+          this.lose = matches.filter(match => match.result === -1).length
+          const months = matches.map(match => moment(match.time).format('YYYYMM'))
+          this.getMatchSeasons(new Set(months))
+        } else {
+          this.loading = false
+        }
         break
       case actionStatus.REJECTED:
         this.loading = false
@@ -140,8 +143,10 @@ class HearthstoneDeckComponent implements OnInit {
   private manageSeasonsState(state: HearthstoneSeasonsState): void {
     switch (state.status) {
       case actionStatus.FETCHED:
-        this.loading = false
-        this.showMatches = true
+        if (this.total) {
+          this.loading = false
+          this.showMatches = true
+        }
       case actionStatus.REJECTED:
         this.loading = false
         this.error = state.error
@@ -152,16 +157,23 @@ class HearthstoneDeckComponent implements OnInit {
 
   ngOnInit() {
     if (!this.deck) {
-      this.activeRoute.params.forEach((params: Params) => {
-        this.store.dispatch({
-          type: actionTypes.FETCH_ITEM,
-          payload: {
-            params: params.id,
-            state: 'hearthstoneDecks',
-          },
-        })
+      this.store.dispatch({
+        type: actionTypes.FETCH_ITEM,
+        payload: {
+          params: this.id,
+          state: 'hearthstoneDecks',
+        },
       })
     }
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch({
+      type: actionTypes.INIT_STATE,
+      payload: {
+        state: 'hearthstoneCards',
+      },
+    })
   }
 }
 

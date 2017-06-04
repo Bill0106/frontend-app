@@ -1,5 +1,5 @@
 import * as moment from 'moment'
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { HearthstoneMatch, HearthstoneSeason, HearthstoneDeck } from '../../models'
@@ -10,7 +10,7 @@ import { actionStatus, actionTypes, hearthstonePlayerClasses } from '../../const
   templateUrl: './template',
 })
 
-class HearthstoneMatchesComponent implements OnInit {
+class HearthstoneMatchesComponent implements OnInit, OnDestroy {
   @Input() type: string
   @ViewChild('headerTemplate') headerTemplate: TemplateRef<any>
   @ViewChild('cellTemplate') cellTemplate: TemplateRef<any>
@@ -108,6 +108,15 @@ class HearthstoneMatchesComponent implements OnInit {
   ngOnInit() {
     this.columns = this.getColumns()
     this.rows = this.getRows()
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch({
+      type: actionTypes.INIT_STATE,
+      payload: {
+        state: 'hearthstoneMatches',
+      },
+    })
   }
 
   goDeck(id: string): void {

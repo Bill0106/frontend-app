@@ -6,6 +6,11 @@ export function Reducers(state: any = initState, action: Action): string {
   const { type, payload } = action
 
   switch (type) {
+    case actionTypes.INIT_STATE:
+      return {
+        ...state,
+        [payload.state]: initState[payload.state],
+      }
     case actionTypes.FETCH_LIST:
     case actionTypes.FETCH_LIST_BY_IDS:
     case actionTypes.FETCH_ITEM:

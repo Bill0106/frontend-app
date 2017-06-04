@@ -10,6 +10,7 @@ import { actionStatus, actionTypes } from '../../constants'
 })
 
 class HearthstoneSeasonComponent implements OnInit {
+  url: string
   season: HearthstoneSeason = null
   wins: number
   lose: number
@@ -22,6 +23,8 @@ class HearthstoneSeasonComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private store: Store<any>,
   ) {
+    activeRoute.params.subscribe((params: Params) => this.url = params.url)
+
     store
       .select('hearthstoneSeasons')
       .subscribe((state: HearthstoneSeasonsState) => {
@@ -39,21 +42,18 @@ class HearthstoneSeasonComponent implements OnInit {
   }
 
   private getSeason(state: HearthstoneSeasonsState): void {
-    this.activeRoute.params.forEach((params: Params) => {
-      const url = params.url
-      const season = state.items.find(item => item.url === url)
+    const season = state.items.find(item => item.url === this.url)
 
-      if (!this.season && season) {
-        this.season = season
-        this.getMatches(season)
-      }
-    })
+    if (!this.season && season) {
+      this.season = season
+      this.getMatches(season)
+    }
   }
 
   private manageSeasonState(state: HearthstoneSeasonsState): void {
     switch (state.status) {
       case actionStatus.FETCHED:
-        if (state.item) {
+        if (state.item && state.item.url === this.url) {
           this.season = state.item
           this.getMatches(state.item)
         }
@@ -81,10 +81,15 @@ class HearthstoneSeasonComponent implements OnInit {
     switch (state.status) {
       case actionStatus.FETCHED:
         const matches = state.items
-        this.total = matches.length
-        this.wins = matches.filter(match => match.result === 1).length
-        this.lose = matches.filter(match => match.result === -1).length
-        this.getDecks(matches)
+        if (matches.length) {
+          this.total = matches.length
+          this.wins = matches.filter(match => match.result === 1).length
+          this.lose = matches.filter(match => match.result === -1).length
+          this.getDecks(matches)
+        } else {
+          this.loading = false
+        }
+        break
       case actionStatus.REJECTED:
         this.loading = false
         this.error = state.error
@@ -110,8 +115,10 @@ class HearthstoneSeasonComponent implements OnInit {
   private manageDecksState(state: HearthstoneDeckState): void {
     switch (state.status) {
       case actionStatus.FETCHED:
-        this.showMatches = true
-        this.loading = false
+        if (this.total) {
+          this.showMatches = true
+          this.loading = false
+        }
         break
       case actionStatus.REJECTED:
         this.loading = false
@@ -123,19 +130,15 @@ class HearthstoneSeasonComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activeRoute.params.forEach((params: Params) => {
-      const url = params.url
-
-      if (!this.season) {
-        this.store.dispatch({
-          type: actionTypes.FETCH_ITEM,
-          payload: {
-            params: url,
-            state: 'hearthstoneSeasons',
-          },
-        })
-      }
-    })
+    if (!this.season) {
+      this.store.dispatch({
+        type: actionTypes.FETCH_ITEM,
+        payload: {
+          params: this.url,
+          state: 'hearthstoneSeasons',
+        },
+      })
+    }
   }
 }
 

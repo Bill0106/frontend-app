@@ -1,6 +1,7 @@
 import keymirror = require('keymirror')
 
 const actionTypes = keymirror({
+  INIT_STATE: null,
   FETCH_LIST: null,
   FETCH_LIST_BY_IDS: null,
   FETCH_ITEM: null,

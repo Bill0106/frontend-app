@@ -3,7 +3,7 @@
     <h1>{{ season.month | date: "MMMM yyyy" }} Season – {{ season.title }}</h1>
     <p>{{ season.description }}</p>
     <lazy-image [image]="season.image" [text]="season.title" size="rectangle"></lazy-image>
-    <div class="app-hearthstone-state">
+    <div class="app-hearthstone-state" *ngIf="total">
       <div class="left">{{ wins }} - {{ lose }}</div>
       <div class="middle">
         <span>Rank</span>
