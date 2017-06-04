@@ -21,6 +21,7 @@ const initState: any = {
     status: null,
     items: [],
     item: null,
+    matchSeasons: [],
     total: 0,
     error: null,
   },

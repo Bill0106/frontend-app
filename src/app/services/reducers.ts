@@ -7,10 +7,11 @@ export function Reducers(state: any = initState, action: Action): string {
 
   switch (type) {
     case actionTypes.FETCH_LIST:
+    case actionTypes.FETCH_LIST_BY_IDS:
     case actionTypes.FETCH_ITEM:
     case actionTypes.FETCH_GAME_TROPHY:
     case actionTypes.FETCH_HEARTHSTONE_MATCHES:
-    case actionTypes.FETCH_LIST_BY_IDS:
+    case actionTypes.FETCH_HEARTHSTONE_SEASONS_BY_MONTHS:
       return {
         ...state,
         [payload.state]: {
@@ -19,10 +20,11 @@ export function Reducers(state: any = initState, action: Action): string {
         },
       }
     case `${actionTypes.FETCH_LIST}_${actionStatus.REJECTED}`:
+    case `${actionTypes.FETCH_LIST_BY_IDS}_${actionStatus.REJECTED}`:
     case `${actionTypes.FETCH_ITEM}_${actionStatus.REJECTED}`:
     case `${actionTypes.FETCH_GAME_TROPHY}_${actionStatus.REJECTED}`:
     case `${actionTypes.FETCH_HEARTHSTONE_MATCHES}_${actionStatus.REJECTED}`:
-    case `${actionTypes.FETCH_LIST_BY_IDS}_${actionStatus.REJECTED}`:
+    case `${actionTypes.FETCH_HEARTHSTONE_SEASONS_BY_MONTHS}_${actionStatus.REJECTED}`:
       return {
         ...state,
         [payload.state]: {
@@ -59,6 +61,15 @@ export function Reducers(state: any = initState, action: Action): string {
           ...state[payload.state],
           status: actionStatus.FETCHED,
           items: payload.state === 'hearthstoneCards' ? payload.data : payload.data.list,
+        },
+      }
+    case `${actionTypes.FETCH_HEARTHSTONE_SEASONS_BY_MONTHS}_${actionStatus.FETCHED}`:
+      return {
+        ...state,
+        [payload.state]: {
+          ...state[payload.state],
+          status: actionStatus.FETCHED,
+          matchSeasons: payload.data.list,
         },
       }
     default:

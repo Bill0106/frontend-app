@@ -27,6 +27,7 @@
       <div class="right">{{ lose }} L</div>
     </div>
   </div>
+  <hearthstone-matches [type]="'deck'" *ngIf="showMatches"></hearthstone-matches>
   <div class="app-hearthstone-status">
     <page-status [loading]="loading" [error]="error"></page-status>
   </div>

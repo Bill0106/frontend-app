@@ -43,7 +43,7 @@ class HearthstoneSeasonComponent implements OnInit {
       const url = params.url
       const season = state.items.find(item => item.url === url)
 
-      if (season) {
+      if (!this.season && season) {
         this.season = season
         this.loading = false
         this.getMatches(season)

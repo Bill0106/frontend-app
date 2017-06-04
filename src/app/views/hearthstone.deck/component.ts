@@ -1,8 +1,8 @@
-// import * as moment from 'moment'
+import * as moment from 'moment'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { HearthstoneDeck, HearthstoneDeckState, HearthstoneCard, HearthstoneCardsState, HearthstoneMatch, HearthstoneMatchesState } from '../../models'
+import { HearthstoneDeck, HearthstoneDeckState, HearthstoneCard, HearthstoneCardsState, HearthstoneMatch, HearthstoneMatchesState, HearthstoneSeasonsState } from '../../models'
 import { actionStatus, actionTypes } from '../../constants'
 
 @Component({
@@ -38,14 +38,17 @@ class HearthstoneDeckComponent implements OnInit {
     store
       .select('hearthstoneMatches')
       .subscribe((state: HearthstoneMatchesState) => this.manageMatchesState(state))
+
+    store
+      .select('hearthstoneSeasons')
+      .subscribe((state: HearthstoneSeasonsState) => this.manageSeasonsState(state))
   }
 
   private getDeck(state: HearthstoneDeckState): void {
     this.activeRoute.params.forEach((params: Params) => {
-      const id = params.id
-      const deck = state.items.find((item: HearthstoneDeck) => item._id === id)
+      const deck = state.items.find((item: HearthstoneDeck) => item._id === params.id)
 
-      if (deck) {
+      if (!this.deck && deck) {
         this.deck = deck
         this.getCardsAndMatches(deck)
       }
@@ -112,11 +115,36 @@ class HearthstoneDeckComponent implements OnInit {
         this.total = matches.length
         this.wins = matches.filter(match => match.result === 1).length
         this.lose = matches.filter(match => match.result === -1).length
+        const months = matches.map(match => moment(match.time).format('YYYYMM'))
+        this.getMatchSeasons(new Set(months))
         break
       case actionStatus.REJECTED:
         this.loading = false
         this.error = state.error
         break
+      default:
+        break
+    }
+  }
+
+  private getMatchSeasons(months: any): void {
+    this.store.dispatch({
+      type: actionTypes.FETCH_HEARTHSTONE_SEASONS_BY_MONTHS,
+      payload: {
+        state: 'hearthstoneSeasons',
+        months: Array.from(months).join(','),
+      },
+    })
+  }
+
+  private manageSeasonsState(state: HearthstoneSeasonsState): void {
+    switch (state.status) {
+      case actionStatus.FETCHED:
+        this.loading = false
+        this.showMatches = true
+      case actionStatus.REJECTED:
+        this.loading = false
+        this.error = state.error
       default:
         break
     }
