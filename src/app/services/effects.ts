@@ -15,6 +15,11 @@ class Effects {
     .map(action => JSON.stringify(action.payload))
     .switchMap(payload => this.services.getList(payload))
 
+  @Effect() getListByIds$ = this.actions$
+    .ofType(actionTypes.FETCH_LIST_BY_IDS)
+    .map(action => JSON.stringify(action.payload))
+    .switchMap(payload => this.services.getListByIds(payload))
+
   @Effect() getItem$ = this.actions$
     .ofType(actionTypes.FETCH_ITEM)
     .map(action => JSON.stringify(action.payload))
@@ -29,11 +34,6 @@ class Effects {
     .ofType(actionTypes.FETCH_HEARTHSTONE_MATCHES)
     .map(action => JSON.stringify(action.payload))
     .switchMap(payload => this.services.getHearthstoneMatches(payload))
-
-  @Effect() getHearthstoneDecksByIds$ = this.actions$
-    .ofType(actionTypes.FETCH_HEARTHSTONE_DECKS_BY_IDS)
-    .map(action => JSON.stringify(action.payload))
-    .switchMap(payload => this.services.getHearthstoneDecksByIds(payload))
 }
 
 export default Effects

@@ -10,6 +10,8 @@ import HearthstoneMatch from './HearthstoneMatch'
 import HearthstoneMatchesState from './HearthstoneMatchesState'
 import HearthstoneDeck from './HearthstoneDeck'
 import HearthstoneDeckState from './HearthstoneDeckState'
+import HearthstoneCard from './HearthstoneCard'
+import HearthstoneCardsState from './HearthstoneCardsState'
 
 export {
   Game,
@@ -23,5 +25,7 @@ export {
   HearthstoneMatch,
   HearthstoneMatchesState,
   HearthstoneDeck,
-  HearthstoneDeckState
+  HearthstoneDeckState,
+  HearthstoneCard,
+  HearthstoneCardsState,
 }

@@ -108,6 +108,98 @@
     }
   }
 }
+.app-hearthstone-deck {
+  padding-top: 10px;
+  > h1 {
+    margin: 0 0 20px;
+    text-align: center;
+    font-size: 36px;
+  }
+}
+.app-hearthstone-deck-cards {
+  @extend .app-list;
+  display: flex;
+  margin-bottom: 10px;
+}
+.app-hearthstone-deck-card {
+  display: flex;
+  margin-bottom: 1px;
+  padding-right: 1px;
+  width: 25%;
+  line-height: $lineHeightLarge;
+  box-sizing: border-box;
+  .count, .cost {
+    width: $lineHeightBig;
+    text-align: center;
+    font-size: $fontSizeHuge;
+    font-family: Impact;
+  }
+  .cost {
+    color: $white;
+    background-color: $ceruleanBlue;
+  }
+  .count .mat-icon {
+    font-size: $fontSizeHuge + 1px;
+  }
+  .count, .name {
+    color: $laRioja;
+    background-color: $nightRider;
+  }
+  .name {
+    flex: 1 1 0;
+    position: relative;
+    padding-left: 10px;
+    > span {
+      position: relative;
+      z-index: 300;
+      &.rarity-0, &.rarity-1 {
+        color: $white;
+      }
+      &.rarity-2 {
+        color: $dodgerBlue;
+      }
+      &.rarity-3 {
+        color: $blueViolet;
+      }
+      &.rarity-4 {
+        color: $darkOrange;
+      }
+    }
+  }
+  .image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 110px;
+    height: 100%;
+    overflow: hidden;
+    > span {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("#{$hearthstoneMask}") no-repeat 0 0;
+      background-size: cover;
+      z-index: 100;
+    }
+    > img {
+      position: absolute;
+      top: -80px;
+      left: -35px;
+      width: 200px;
+    }
+  }
+}
+.app-hearthstone-deck-tips {
+  @extend .app-list;
+  > a {
+    display: inline-block;
+    margin: 0 5px;
+    text-decoration: none;
+  }
+}
 .app-hearthstone-matches {
   padding-bottom: 20px;
 }

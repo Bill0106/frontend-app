@@ -27,9 +27,7 @@ class HearthstoneSeasonComponent implements OnInit {
       .select('hearthstoneSeasons')
       .subscribe((state: HearthstoneSeasonsState) => {
         this.getSeason(state)
-        if (!this.season) {
-          this.manageSeasonState(state)
-        }
+        if (!this.season) this.manageSeasonState(state)
       })
 
     store
@@ -101,7 +99,7 @@ class HearthstoneSeasonComponent implements OnInit {
     const ids = Array.from(idsSet).join(',')
 
     this.store.dispatch({
-      type: actionTypes.FETCH_HEARTHSTONE_DECKS_BY_IDS,
+      type: actionTypes.FETCH_LIST_BY_IDS,
       payload: {
         ids,
         state: 'hearthstoneDecks',

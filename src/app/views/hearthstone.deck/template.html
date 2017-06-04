@@ -1,5 +1,25 @@
 <section class="app-hearthstone">
   <div class="app-hearthstone-deck" *ngIf="deck">
     <h1>{{ deck.name }}</h1>
+    <div class="app-hearthstone-deck-cards" *ngIf="cards">
+      <div class="app-hearthstone-deck-card" *ngFor="let card of cards">
+        <span class="cost">{{ card.cost }}</span>
+        <div class="name">
+          <span [ngClass]="'rarity-' + card.rarity">{{ card.name }}</span>
+          <div class="image">
+            <span></span>
+            <img [src]="card.image" [alt]="card.name">
+          </div>
+        </div>
+        <span class="count" *ngIf="card.rarity !== 4">{{ card.count }}</span>
+        <span class="count" *ngIf="card.rarity === 4">
+          <md-icon>star</md-icon>
+        </span>
+      </div>
+    </div>
+    <p class="app-hearthstone-deck-tips">*所有牌组均来自 <a href="http://www.hearthpwn.com/" target="_blank">hearthpwn</a> 或者 <a href="http://ls.duowan.com/" target="_blank">多玩</a>，非原创！(All decks are copied from hearhpwn or duowan, not original!)</p>
+  </div>
+  <div class="app-hearthstone-status">
+    <page-status [loading]="loading" [error]="error"></page-status>
   </div>
 </section>
