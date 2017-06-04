@@ -109,6 +109,8 @@
   }
 }
 .app-hearthstone-deck {
+  @extend .app-list;
+  display: block;
   padding-top: 10px;
   > h1 {
     margin: 0 0 20px;
@@ -117,8 +119,8 @@
   }
 }
 .app-hearthstone-deck-cards {
-  @extend .app-list;
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 .app-hearthstone-deck-card {
@@ -129,6 +131,7 @@
   line-height: $lineHeightLarge;
   box-sizing: border-box;
   .count, .cost {
+    position: relative;
     width: $lineHeightBig;
     text-align: center;
     font-size: $fontSizeHuge;
@@ -139,6 +142,9 @@
     background-color: $ceruleanBlue;
   }
   .count .mat-icon {
+    position: absolute;
+    top: 4px;
+    left: 1px;
     font-size: $fontSizeHuge + 1px;
   }
   .count, .name {
@@ -202,7 +208,7 @@
   }
 }
 .app-hearthstone-matches {
-  padding: 0 15px 20px;
+  padding-bottom: 20px;
 }
 .app-hearthstone-matches-header {
   display: block;
