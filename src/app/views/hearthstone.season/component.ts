@@ -45,7 +45,6 @@ class HearthstoneSeasonComponent implements OnInit {
 
       if (!this.season && season) {
         this.season = season
-        this.loading = false
         this.getMatches(season)
       }
     })
@@ -54,8 +53,10 @@ class HearthstoneSeasonComponent implements OnInit {
   private manageSeasonState(state: HearthstoneSeasonsState): void {
     switch (state.status) {
       case actionStatus.FETCHED:
-        this.season = state.item
-        this.getMatches(state.item)
+        if (state.item) {
+          this.season = state.item
+          this.getMatches(state.item)
+        }
         break
       case actionStatus.REJECTED:
         this.loading = false

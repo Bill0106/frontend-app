@@ -13,6 +13,7 @@
     <div [ngSwitch]="column.name" class="app-hearthstone-matches-cell">
       <span *ngSwitchCase="'PCT'">{{ value | percent: '1.2-2' }}</span>
       <span *ngSwitchCase="'Deck'" (click)="goDeck(value._id)" class="app-hearthstone-matches-link">{{ value.name }}</span>
+      <span *ngSwitchCase="'Season'" (click)="goSeason(value.url)" class="app-hearthstone-matches-link">{{ value.title }}</span>
       <span *ngSwitchDefault>{{ value }}</span>
     </div>
   </ng-template>

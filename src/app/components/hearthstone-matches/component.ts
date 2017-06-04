@@ -1,3 +1,4 @@
+import * as moment from 'moment'
 import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
@@ -16,6 +17,7 @@ class HearthstoneMatchesComponent implements OnInit {
 
   matches: HearthstoneMatch[]
   decks: HearthstoneDeck[]
+  seasons: HearthstoneSeason[]
   rows: any
   columns: any
 
@@ -32,6 +34,11 @@ class HearthstoneMatchesComponent implements OnInit {
       .select('hearthstoneDecks')
       .pluck('items')
       .subscribe((items: HearthstoneDeck[]) => this.decks = items)
+
+    store
+      .select('hearthstoneSeasons')
+      .pluck('matchSeasons')
+      .subscribe((items: HearthstoneSeason[]) => this.seasons = items)
   }
 
   private getStats(matches: HearthstoneMatch[]): any {
@@ -55,7 +62,7 @@ class HearthstoneMatchesComponent implements OnInit {
 
   private getColumns(): any {
     let columns = hearthstonePlayerClasses.map(item => ({ name: item.name }))
-    columns.unshift({ name: this.type === 'season' ? 'Deck' : 'Season' })
+    columns.unshift({ name: this.type === 'season' ? 'Season' : 'Deck' })
     columns.push({ name: 'Total' })
     columns.push({ name: 'PCT' })
     columns = columns.map(column => {
@@ -67,19 +74,32 @@ class HearthstoneMatchesComponent implements OnInit {
     return columns
   }
 
-  private getSeasonRows(): any {
+  private getRows(): any {
+    let totalRow = this.getStats(this.matches)
     let rows = []
 
-    this.decks.forEach(deck => {
-      const matches = this.matches.filter(match => match.deck_id === deck._id)
-      let row = this.getStats(matches)
-      row.deck = deck
+    if (this.type === 'deck') {
+      this.decks.forEach((deck: HearthstoneDeck) => {
+        const matches = this.matches.filter(match => match.deck_id === deck._id)
+        let row = this.getStats(matches)
+        row.deck = deck
 
-      rows.push(row)
-    })
+        rows.push(row)
+      })
+      totalRow.deck = { name: 'Total' }
+    }
 
-    let totalRow = this.getStats(this.matches)
-    totalRow.deck = { name: 'Total' }
+    if (this.type === 'season') {
+      this.seasons.forEach((season: HearthstoneSeason) => {
+        const matches = this.matches.filter((match: HearthstoneMatch) => moment(match.time).format('YYYYMM') === moment(season.month).format('YYYYMM'))
+        let row = this.getStats(matches)
+        row.season = season
+
+        rows.push(row)
+      })
+      totalRow.season = { title: 'Total' }
+    }
+
     rows.push(totalRow)
 
     return rows
@@ -87,11 +107,15 @@ class HearthstoneMatchesComponent implements OnInit {
 
   ngOnInit() {
     this.columns = this.getColumns()
-    this.rows = this.getSeasonRows()
+    this.rows = this.getRows()
   }
 
   goDeck(id: string): void {
     this.router.navigate(['/hearthstone/decks', id])
+  }
+
+  goSeason(url: string): void {
+    this.router.navigate(['/hearthstone/seasons', url])
   }
 }
 
