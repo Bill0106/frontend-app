@@ -1,5 +1,5 @@
 import * as moment from 'moment'
-import { Component, Input, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { HearthstoneMatch, HearthstoneSeason, HearthstoneDeck } from '../../models'
@@ -12,8 +12,6 @@ import { actionStatus, actionTypes, hearthstonePlayerClasses } from '../../const
 
 class HearthstoneMatchesComponent implements OnInit, OnDestroy {
   @Input() type: string
-  @ViewChild('headerTemplate') headerTemplate: TemplateRef<any>
-  @ViewChild('cellTemplate') cellTemplate: TemplateRef<any>
 
   matches: HearthstoneMatch[]
   decks: HearthstoneDeck[]
@@ -45,8 +43,8 @@ class HearthstoneMatchesComponent implements OnInit, OnDestroy {
     const totalWin = matches.filter(match => match.result === 1).length
     const totalLose = matches.filter(match => match.result === -1).length
     let stats = {
-      total: `${totalWin} - ${totalLose}`,
-      pct: totalWin / matches.length,
+      total: [totalWin, totalLose],
+      PCT: totalWin / matches.length,
     }
 
     hearthstonePlayerClasses.forEach(item => {
@@ -54,24 +52,10 @@ class HearthstoneMatchesComponent implements OnInit, OnDestroy {
       const classWin = classMatches.filter(match => match.result === 1).length
       const classLose = classMatches.filter(match => match.result === -1).length
 
-      stats[item.name.toLowerCase()] = `${classWin} - ${classLose}`
+      stats[item.name] = [classWin, classLose]
     })
 
     return stats
-  }
-
-  private getColumns(): any {
-    let columns = hearthstonePlayerClasses.map(item => ({ name: item.name }))
-    columns.unshift({ name: this.type === 'season' ? 'Season' : 'Deck' })
-    columns.push({ name: 'Total' })
-    columns.push({ name: 'PCT' })
-    columns = columns.map(column => {
-      column['headerTemplate'] = this.headerTemplate
-      column['cellTemplate'] = this.cellTemplate
-      return column
-    })
-
-    return columns
   }
 
   private getRows(): any {
@@ -106,7 +90,7 @@ class HearthstoneMatchesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.columns = this.getColumns()
+    this.columns = hearthstonePlayerClasses.map(item => item.name).concat(['total', 'PCT'])
     this.rows = this.getRows()
   }
 

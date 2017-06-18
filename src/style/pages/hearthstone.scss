@@ -209,15 +209,60 @@
 }
 .app-hearthstone-matches {
   padding-bottom: 20px;
+  @media #{$screenTablet} {
+    margin: 0 auto;
+    width: 60%;
+  }
 }
-.app-hearthstone-matches-header {
-  display: block;
-  text-align: center;
-  font-size: $fontSizeBig;
-  font-weight: bold;
-}
-.app-hearthstone-matches-cell {
-  text-align: center;
+.app-hearthstone-matches-table {
+  width: 100%;
+  line-height: $lineHeightMedium;
+  text-align: left;
+  td {
+    padding: 5px 0;
+  }
+  .table-column-number {
+    width: 85px;
+    text-align: center;
+    @media #{$screenLaptop} {
+      width: 70px;
+    }
+    @media #{$screenTabletBelow} {
+      display: none;
+      &.table-column-total, &.table-column-pct {
+        display: table-cell;
+      }
+    }
+    @media #{$screenTablet} {
+      width: 100px;
+    }
+    @media #{$screenMobile} {
+      width: 90px;
+    }
+  }
+  .table-column-number-rate {
+    position: relative;
+    > i {
+      position: absolute;
+      font-style: normal;
+      &:first-child {
+        right: 100%;
+        margin-right: 6px;
+      }
+      &:last-child {
+        left: 100%;
+        margin-left: 6px;
+      }
+    }
+  }
+  th, .table-column-total > td {
+    padding: 14px 0;
+    font-weight: bold;
+    font-size: $fontSizeBig;
+    @media #{$screenLaptop} {
+      font-size: $fontSizeMedium;
+    }
+  }
 }
 .app-hearthstone-status {
   .app-page-loading .mat-spinner > svg > path {

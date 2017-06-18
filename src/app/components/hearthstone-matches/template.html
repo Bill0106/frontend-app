@@ -1,20 +1,37 @@
 <section class="app-hearthstone-matches">
-  <ngx-datatable
-    [columns]="columns"
-    [columnMode]="'force'"
-    [rows]="rows"
-    [headerHeight]="40"
-  >
-  </ngx-datatable>
-  <ng-template #headerTemplate let-column="column">
-    <span class="app-hearthstone-matches-header">{{ column.name }}</span>
-  </ng-template>
-  <ng-template #cellTemplate let-column="column" let-row="row" let-value="value">
-    <div [ngSwitch]="column.name" class="app-hearthstone-matches-cell">
-      <span *ngSwitchCase="'PCT'">{{ value | percent: '1.2-2' }}</span>
-      <span *ngSwitchCase="'Deck'" (click)="goDeck(value._id)" class="app-hearthstone-matches-link">{{ value.name }}</span>
-      <span *ngSwitchCase="'Season'" (click)="goSeason(value.url)" class="app-hearthstone-matches-link">{{ value.title }}</span>
-      <span *ngSwitchDefault>{{ value }}</span>
-    </div>
-  </ng-template>
+  <table class="app-hearthstone-matches-table">
+    <thead>
+    <tr>
+      <th>{{ type | capitalize }}</th>
+      <th *ngFor="let column of columns" class="table-column-number" [ngClass]="{'table-column-pct': column === 'PCT', 'table-column-total': column === 'total'}">
+        {{ column | capitalize }}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows.slice(0, -1)">
+        <td *ngIf="type === 'season'" class="table-column-text">{{ row.season.title }}</td>
+        <td *ngIf="type === 'deck'" class="table-column-text">{{ row.deck.name }}</td>
+        <td *ngFor="let column of columns" class="table-column-number" [ngClass]="{'table-column-pct': column === 'PCT', 'table-column-total': column === 'total'}">
+          <span *ngIf="column === 'PCT'">{{ row[column] | percent: '1.2-2' }}</span>
+          <span *ngIf="column !== 'PCT'" class="table-column-number-rate">
+            <i>{{ row[column][0] }}</i>
+            -
+            <i>{{ row[column][1] }}</i>
+          </span>
+        </td>
+      </tr>
+      <tr class="table-column-total">
+        <td>Total</td>
+        <td *ngFor="let column of columns" class="table-column-number" [ngClass]="{'table-column-pct': column === 'PCT', 'table-column-total': column === 'total'}">
+          <span *ngIf="column === 'PCT'">{{ rows.slice(-1)[0][column] | percent: '1.2-2' }}</span>
+          <span *ngIf="column !== 'PCT'" class="table-column-number-rate">
+            <i>{{ rows.slice(-1)[0][column][0] }}</i>
+            -
+            <i>{{ rows.slice(-1)[0][column][1] }}</i>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>

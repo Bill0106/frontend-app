@@ -1,39 +1,39 @@
 const playerClasses = [
   {
       value: 0,
-      name: 'Druid',
+      name: 'druid',
   },
   {
       value: 1,
-      name: 'Hunter',
+      name: 'hunter',
   },
   {
       value: 2,
-      name: 'Mage',
+      name: 'mage',
   },
   {
       value: 3,
-      name: 'Paladin',
+      name: 'paladin',
   },
   {
       value: 4,
-      name: 'Priest',
+      name: 'priest',
   },
   {
       value: 5,
-      name: 'Rogue',
+      name: 'rogue',
   },
   {
       value: 6,
-      name: 'Shaman',
+      name: 'shaman',
   },
   {
       value: 7,
-      name: 'Warlock',
+      name: 'warlock',
   },
   {
       value: 8,
-      name: 'Warrior',
+      name: 'warrior',
   },
 ]
 
