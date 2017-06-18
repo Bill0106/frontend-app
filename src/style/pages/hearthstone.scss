@@ -130,6 +130,12 @@
   width: 25%;
   line-height: $lineHeightLarge;
   box-sizing: border-box;
+  @media #{$screenTablet} {
+    width: percentage(1 / 3)
+  }
+  @media #{$screenMobile} {
+    width: 100%;
+  }
   .count, .cost {
     position: relative;
     width: $lineHeightBig;
@@ -201,6 +207,10 @@
 .app-hearthstone-deck-tips {
   @extend .app-list;
   margin-bottom: 20px;
+  line-height: $lineHeightMedium;
+  @media #{$screenMobile} {
+    padding: 0;
+  }
   > a {
     display: inline-block;
     margin: 0 5px;
@@ -220,6 +230,10 @@
   text-align: left;
   td {
     padding: 5px 0;
+  }
+  .table-column-text > span {
+    color: $tussock;
+    cursor: pointer;
   }
   .table-column-number {
     width: 85px;

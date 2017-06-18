@@ -103,12 +103,12 @@ class HearthstoneMatchesComponent implements OnInit, OnDestroy {
     })
   }
 
-  goDeck(id: string): void {
-    this.router.navigate(['/hearthstone/decks', id])
+  goDeck(deck: HearthstoneDeck): void {
+    this.router.navigate(['/hearthstone/decks', deck._id])
   }
 
-  goSeason(url: string): void {
-    this.router.navigate(['/hearthstone/seasons', url])
+  goSeason(season: HearthstoneSeason): void {
+    this.router.navigate(['/hearthstone/seasons', season.url])
   }
 }
 

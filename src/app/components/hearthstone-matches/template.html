@@ -10,8 +10,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of rows.slice(0, -1)">
-        <td *ngIf="type === 'season'" class="table-column-text">{{ row.season.title }}</td>
-        <td *ngIf="type === 'deck'" class="table-column-text">{{ row.deck.name }}</td>
+        <td class="table-column-text">
+          <span *ngIf="type === 'season'" (click)="goSeason(row.season)">{{ row.season.title }}</span>
+          <span *ngIf="type === 'deck'" (click)="goDeck(row.deck)">{{ row.deck.name }}</span>
+        </td>
         <td *ngFor="let column of columns" class="table-column-number" [ngClass]="{'table-column-pct': column === 'PCT', 'table-column-total': column === 'total'}">
           <span *ngIf="column === 'PCT'">{{ row[column] | percent: '1.2-2' }}</span>
           <span *ngIf="column !== 'PCT'" class="table-column-number-rate">
