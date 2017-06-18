@@ -3,7 +3,7 @@ const path = require('path')
 const config = {
   context: path.join(__dirname, '../', 'src'),
   entry: {
-    admin: [
+    app: [
       './main.ts'
     ]
   },
