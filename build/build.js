@@ -30,13 +30,15 @@ const build = () => {
   })
 }
 
-const uploadFile = (key, localFile) => {
+const uploadFile = (file) => {
+  const versions = JSON.parse(fs.readFileSync(dist + 'manifest.json').toString())
+  const fileName = versions[file]
   const bucket = 'website'
-  const putPolicy = new qiniu.rs.PutPolicy(bucket + ':' + key)
+  const putPolicy = new qiniu.rs.PutPolicy(bucket + ':' + fileName)
   const extra = new qiniu.io.PutExtra()
 
   return new Promise((resolve, reject) => {
-    qiniu.io.putFile(putPolicy.token(), key, localFile, extra, (error, ret) => {
+    qiniu.io.putFile(putPolicy.token(), fileName, dist + fileName, extra, (error, ret) => {
       if (error) reject(error)
       resolve(ret)
     })
@@ -51,15 +53,8 @@ const upload = () => {
   qiniu.conf.ACCESS_KEY = QINIU.AK
   qiniu.conf.SECRET_KEY = QINIU.SK
 
-  const versions = JSON.parse(fs.readFileSync(dist + 'manifest.json').toString())
-  const vendor = uploadFile(versions['app-vendor.js'], dist + versions['app-vendor.js'])
-  const meta = uploadFile(versions['app-meta.js'], dist + versions['app-meta.js'])
-
-  Promise.all([vendor, meta])
-    .then(values => {
-      console.log(values)
-      console.log('All Finish!')
-    })
+  Promise.all([uploadFile('app.js'), uploadFile('app-vendor.js'), uploadFile('app-meta.js')])
+    .then(values => console.log(values))
     .catch(error => {
       throw error
     })
@@ -68,9 +63,8 @@ const upload = () => {
 
 rimraf(dist, err => {
   if (err) throw err
-  build()
-    .then(() => upload())
-    .catch(err => {
-      throw err
-    })
+  build().then(() => {
+    upload()
+    console.log('All Finish!')
+  })
 })
