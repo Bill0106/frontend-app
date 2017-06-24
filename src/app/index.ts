@@ -14,20 +14,26 @@ import MainComponents from './main'
 import AppRoutingModule from './router'
 import Pipes from './pipes'
 
+const imports = [
+  BrowserModule,
+  HttpModule,
+  StoreModule.provideStore(Reducers),
+  EffectsModule.run(Effects),
+  MaterialModule,
+  LazyLoadImageModule,
+  InfiniteScrollModule,
+  AppRoutingModule,
+]
+
+if (process.env.NODE_ENV !== 'production') {
+  const devtools = StoreDevtoolsModule.instrumentOnlyWithExtension({
+    maxAge: 5,
+  })
+  imports.push(devtools)
+}
+
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpModule,
-    StoreModule.provideStore(Reducers),
-    EffectsModule.run(Effects),
-    StoreDevtoolsModule.instrumentOnlyWithExtension({
-      maxAge: 5,
-    }),
-    MaterialModule,
-    LazyLoadImageModule,
-    InfiniteScrollModule,
-    AppRoutingModule,
-  ],
+  imports,
   declarations: [
     MainComponents,
     ...ViewComponents,

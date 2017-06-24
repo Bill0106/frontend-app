@@ -34,7 +34,16 @@ const config = {
       },
       {
         test: /\.html$/,
-        use: ['html-loader']
+        use: [{
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+            removeAttributeQuotes: false,
+            caseSensitive: true,
+            customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
+            customAttrAssign: [ /\)?\]?=/ ] 
+          }
+        }],
       },
       {
         test: /\.(scss|sass|css)$/,

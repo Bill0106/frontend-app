@@ -5,7 +5,7 @@ const config = require('./webpack.base')
 
 const hots = ['webpack-hot-middleware/client?noInfo=true&reload=true']
 
-config.entry.admin = hots.concat(config.entry.admin)
+config.entry.app = hots.concat(config.entry.app)
 config.output.filename = 'bundle.js'
 config.output.publicPath = '/'
 
