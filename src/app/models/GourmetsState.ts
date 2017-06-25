@@ -1,4 +1,4 @@
-import Gourmet from './gourmet'
+import Gourmet from './Gourmet'
 
 class GourmetsState {
   items: Gourmet[]
