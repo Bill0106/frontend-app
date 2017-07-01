@@ -111,6 +111,7 @@
 .app-games-detail-header {
   margin: 10px 0 20px;
   padding-bottom: 20px;
+  width: 100%;
   border-bottom: 1px solid $white;
   @media #{$screenTabletAbove} {
     display: flex;
@@ -233,7 +234,7 @@
   > svg {
     position: absolute;
     top: 0;
-    left: 26px;
+    left: 18px;
     width: 70px;
     height: 70px;
     @include rotate(-90deg);
@@ -313,7 +314,7 @@
   }
 }
 .app-games-trophies {
-  @extend .app-container;
+  @extend .app-list;
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 20px;
