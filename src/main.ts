@@ -1,6 +1,7 @@
 import 'core-js'
 import 'reflect-metadata'
 import 'zone.js'
+import 'hammerjs'
 import 'normalize.css'
 import './style'
 

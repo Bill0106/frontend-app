@@ -1,4 +1,4 @@
-<section class="app-home">
+<section class="app-home" (swipeleft)="carouselSection('next')" (swiperight)="carouselSection('prev')">
   <div class="app-home-list" [ngStyle]="{ left: left + '%' }">
     <div
       class="app-home-item"

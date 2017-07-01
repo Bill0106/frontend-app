@@ -65,7 +65,7 @@ class HomeComponent {
 
   constructor(private router: Router) { }
 
-  carouselSection(direction: string) {
+  carouselSection(direction: string): void {
     if (!this.isSliding) {
       if (direction === 'next' && this.left !== (this.sections.length - 1) * -100) {
         this.left -= 100
@@ -80,7 +80,7 @@ class HomeComponent {
     }
   }
 
-  goSection(link: string) {
+  goSection(link: string): void {
     this.router.navigate([link])
   }
 }

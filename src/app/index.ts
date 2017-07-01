@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
 import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@angular/material'
 import { StoreModule } from '@ngrx/store'
@@ -32,6 +32,12 @@ if (process.env.NODE_ENV !== 'production') {
   imports.push(devtools)
 }
 
+export class HammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    'swipe': { velocity: 0.4, threshold: 20 }
+  }
+}
+
 @NgModule({
   imports,
   declarations: [
@@ -40,7 +46,13 @@ if (process.env.NODE_ENV !== 'production') {
     ...Components,
     ...Pipes,
   ],
-  providers: [ Services ],
+  providers: [
+    Services,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: HammerConfig
+    }
+  ],
   bootstrap: [ MainComponents ],
 })
 
