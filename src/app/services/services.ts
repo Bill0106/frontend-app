@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Http, Headers } from '@angular/http'
 import { Observable } from 'rxjs'
-import { actionTypes, actionStatus, keys } from '../constants'
+import { actionTypes, actionStatus } from '../constants'
 
 @Injectable()
 class Services {
-  private headers = new Headers({ 'auth': keys.GET })
+  private headers = new Headers()
   private mapping = {
     'games': 'games',
     'gourmets': 'gourmets',

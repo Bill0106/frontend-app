@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
 import { HttpModule } from '@angular/http'
-import { MaterialModule } from '@angular/material'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
+import { MatSidenavModule } from '@angular/material'
 import { LazyLoadImageModule } from 'ng-lazyload-image'
 import { InfiniteScrollModule } from 'angular2-infinite-scroll'
 import { Reducers, Services, Effects } from './services'
@@ -19,7 +19,7 @@ const imports = [
   HttpModule,
   StoreModule.provideStore(Reducers),
   EffectsModule.run(Effects),
-  MaterialModule,
+  MatSidenavModule,
   LazyLoadImageModule,
   InfiniteScrollModule,
   AppRoutingModule,

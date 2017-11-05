@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+var FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const config = require('./webpack.base')
 
 const hots = ['webpack-hot-middleware/client?noInfo=true&reload=true']
@@ -14,6 +15,10 @@ config.module.rules[0].use.push({ loader: '@angularclass/hmr-loader' })
 config.plugins = [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
+  new webpack.EnvironmentPlugin({
+    NODE_ENV: 'development'
+  }),
+  new FriendlyErrorsWebpackPlugin(),
   new HtmlWebpackPlugin({
     template: 'index.html',
     inject: true

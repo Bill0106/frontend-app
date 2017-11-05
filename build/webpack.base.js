@@ -18,18 +18,9 @@ const config = {
       {
         test: /\.ts$/,
         use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['es2015']
-            }
-          },
-          {
-            loader: 'awesome-typescript-loader'
-          },
-          {
-            loader: 'angular2-template-loader'
-          }
+          'babel-loader',
+          'awesome-typescript-loader',
+          'angular2-template-loader'
         ]
       },
       {
@@ -41,7 +32,7 @@ const config = {
             removeAttributeQuotes: false,
             caseSensitive: true,
             customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
-            customAttrAssign: [ /\)?\]?=/ ] 
+            customAttrAssign: [ /\)?\]?=/ ]
           }
         }],
       },
