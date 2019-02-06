@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
+    "jsx": "react",
+    "strict": true,
+    "noEmit": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "awesomeTypescriptLoaderOptions": {
-    "silent": true,
-    "useBabel": true,
-    "useCache": true
-  }
+  "exclude": ["node_modules"],
 }
