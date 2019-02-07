@@ -1,9 +1,0 @@
-{
-  "extends": ["tslint:latest", "tslint-react"],
-  "linterOptions": {
-    "exclude": ["node_modules/**/*.ts"]
-  },
-  "rules": {
-    "quotemark": [true, "single", "jsx-double"]
-  }
-}
