@@ -9,7 +9,7 @@ const App: React.SFC = () => (
   <Router>
     <Layout default>
       <Home path="/" />
-      <Games path="/games" />
+      <Games path="/games/*" />
     </Layout>
   </Router>
 );

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 import navigations from '@/constants/navigations';
 import { Container, Content, Title, Sections, Section, Mask } from './style';
 
@@ -31,14 +31,18 @@ const Home: React.SFC<RouteComponentProps> = () => {
 
   const handleTitleMouseEnter = () => setBackground(defaultImage);
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleEvent = (e: React.MouseEvent<HTMLDivElement>) => {
     const text = e.currentTarget.innerHTML;
     const section = navigations.find(item => item.title.toLowerCase() === text);
     if (!section) {
       return false;
     }
 
-    setBackground(section.image);
+    if (e.type === 'click') {
+      navigate(section.path);
+    } else if (e.type === 'mouseenter') {
+      setBackground(section.image);
+    }
   };
 
   useEffect(() => {
@@ -54,7 +58,9 @@ const Home: React.SFC<RouteComponentProps> = () => {
         <Sections>
           {['games', 'gourmets', 'hearthstone'].map(item => (
             <Section key={item}>
-              <div onMouseEnter={handleMouseEnter}>{item}</div>
+              <div onClick={handleEvent} onMouseEnter={handleEvent}>
+                {item}
+              </div>
             </Section>
           ))}
         </Sections>
