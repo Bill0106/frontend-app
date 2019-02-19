@@ -7,8 +7,8 @@ import Games from '@/pages/Games';
 
 const App: React.SFC = () => (
   <Router>
+    <Home path="/" />
     <Layout default>
-      <Home path="/" />
       <Games path="/games/*" />
     </Layout>
   </Router>

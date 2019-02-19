@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { Layout } from './style';
+import Nav from '@/components/Nav';
+import { Layout, Content } from './style';
 
-export default class AppLayout extends React.Component<RouteComponentProps> {
-  render() {
-    const { children } = this.props;
+const AppLayout: React.SFC<RouteComponentProps> = ({ children }) => {
+  return (
+    <Layout>
+      <Nav />
+      <Content>{children}</Content>
+    </Layout>
+  );
+};
 
-    return <Layout>{children}</Layout>;
-  }
-}
+export default AppLayout;
