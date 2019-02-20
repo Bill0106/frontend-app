@@ -6,7 +6,8 @@ export const Navbar = styled.div`
   left: 0;
   right: 0;
   height: 50px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 `;
 
 export const Home = styled.div`

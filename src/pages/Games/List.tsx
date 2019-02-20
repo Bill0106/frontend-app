@@ -1,35 +1,44 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import CDN_URL from '@/constants/cdn';
-import services, { Game } from '@/services';
+import { GameList } from '@/models';
+import services from '@/services';
+import GameCard from '@/components/GameCard';
 import { List } from './style';
 
 const { useState, useEffect } = React;
 
 const Games: React.SFC<RouteComponentProps> = () => {
-  const [list, setList] = useState([] as Game[]);
-  const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
+  const [games, setGames] = useState({ list: [], total: 0 } as GameList);
+  const [page, setPage] = useState(0);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const fetch = async () => {
+  const fetch = async (page: number) => {
+    setPage(page);
+    setIsFetching(true);
+
     try {
-      const limit = 24;
-      const offset = (page - 1) * limit;
-      const res = await services.fetchGames(limit, offset);
-      setList(res.data.list);
+      const res = await services.fetchGames(page);
+      setGames({
+        list: [...games.list, ...res.list],
+        total: res.total,
+      });
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setIsFetching(false);
     }
   };
 
   useEffect(() => {
-    fetch();
-  }, []);
+    if (page === 0) {
+      fetch(1);
+    }
+  });
 
   return (
     <List>
-      {list.map(item => (
-        <img key={item.image} src={CDN_URL + item.image} />
+      {games.list.map(item => (
+        <GameCard key={item._id} game={item} />
       ))}
     </List>
   );

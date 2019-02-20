@@ -1,29 +1,20 @@
-import axios from 'axios';
-
-export interface Game {
-  image: string;
-}
-
-const request = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'production'
-      ? 'http://api.zhuhaolin.com/'
-      : 'http://localhost:9999/',
-});
-
-request.interceptors.response.use(
-  response => response,
-  error => {
-    const { response } = error;
-    return Promise.reject(new Error(response.data));
-  }
-);
+import { stringify } from 'query-string';
+import request from '@/utils/request';
+import { GameList } from '@/models';
 
 class Services {
-  fetchGames(limit: number, offset: number) {
-    return request.request<{ list: Game[]; total: number }>({
-      url: `/games?limit=${limit}&offset=${offset}`,
-    });
+  async fetchGames(page = 1, pageSize = 24): Promise<GameList> {
+    try {
+      const query = stringify({
+        limit: pageSize,
+        offset: (page - 1) * pageSize,
+      });
+      const res = await request.get(`/games?${query}`);
+
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
