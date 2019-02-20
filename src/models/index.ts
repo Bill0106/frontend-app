@@ -5,6 +5,8 @@ export interface Game {
   genre: string;
   platform: string;
   rate: number;
+  developer: string;
+  publisher: string;
   image: string;
 }
 

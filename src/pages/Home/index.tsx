@@ -1,19 +1,10 @@
 import * as React from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import navigations from '@/constants/navigations';
+import loadImage from '@/utils/loadImage';
 import { Container, Content, Title, Sections, Section, Mask } from './style';
 
 const { useState, useEffect } = React;
-
-const loadImage = (url: string) => {
-  return new Promise(resolve => {
-    const image = new Image();
-    image.onload = () => {
-      resolve();
-    };
-    image.src = url;
-  });
-};
 
 const Home: React.SFC<RouteComponentProps> = () => {
   const defaultImage = navigations[0].image;

@@ -1,19 +1,23 @@
 import * as React from 'react';
 import { navigate } from '@reach/router';
 import navigations from '@/constants/navigations';
-import { Navbar, Home, Menu, MenuItem } from './style';
+import { Navbar, Menu, MenuItem } from './style';
 
 const Nav: React.SFC = () => {
-  const handleHome = () => navigate('/');
+  const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
+    const title = e.currentTarget.innerHTML.toLowerCase();
+    const page = navigations.find(item => item.title.toLowerCase() === title);
+    if (!page) {
+      return false;
+    }
 
-  const handleClick = (e: React.MouseEvent<HTMLLIElement>) =>
-    navigate(`/${e.currentTarget.innerHTML.toLowerCase()}`);
+    navigate(page.path);
+  };
 
   return (
     <Navbar>
-      <Home onClick={handleHome}>Bill's Hobby</Home>
       <Menu>
-        {navigations.slice(1).map(item => (
+        {navigations.map(item => (
           <MenuItem key={item.title} onClick={handleClick}>
             {item.title.toLowerCase()}
           </MenuItem>

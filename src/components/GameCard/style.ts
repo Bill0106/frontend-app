@@ -3,11 +3,7 @@ import styled from '@/utils/styled';
 export const Card = styled.div`
   position: relative;
   padding-bottom: 75px;
-`;
-
-export const Img = styled.img`
-  display: block;
-  width: 100%;
+  cursor: pointer;
 `;
 
 export const Text = styled.div`

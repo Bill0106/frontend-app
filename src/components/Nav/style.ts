@@ -10,18 +10,6 @@ export const Navbar = styled.div`
   z-index: 9999;
 `;
 
-export const Home = styled.div`
-  float: left;
-  margin: 15px 0 0 15px;
-  font-size: 20px;
-  font-family: Brush Script MT, cursive;
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  &:hover {
-    color: rgba(255, 255, 255, 1);
-  }
-`;
-
 export const Menu = styled.ul`
   margin: 0;
   padding: 15px 0;
