@@ -3,6 +3,7 @@ import { RouteComponentProps } from '@reach/router';
 import { GameList } from '@/models';
 import services from '@/services';
 import GameCard from '@/components/GameCard';
+import InfiniteScroll from '@/components/InfiniteScroll';
 import { List } from './style';
 
 const { useState, useEffect } = React;
@@ -29,6 +30,14 @@ const Games: React.SFC<RouteComponentProps> = () => {
     }
   };
 
+  const handleLoadMore = () => {
+    if (games.list.length >= games.total || isFetching) {
+      return false;
+    }
+
+    fetch(page + 1);
+  };
+
   useEffect(() => {
     if (page === 0) {
       fetch(1);
@@ -36,11 +45,17 @@ const Games: React.SFC<RouteComponentProps> = () => {
   });
 
   return (
-    <List>
-      {games.list.map(item => (
-        <GameCard key={item._id} game={item} />
-      ))}
-    </List>
+    <InfiniteScroll
+      hasMore={games.list.length < games.total}
+      isBusy={isFetching}
+      onLoadMore={handleLoadMore}
+    >
+      <List>
+        {games.list.map(item => (
+          <GameCard key={item._id} game={item} />
+        ))}
+      </List>
+    </InfiniteScroll>
   );
 };
 
