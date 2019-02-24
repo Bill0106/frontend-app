@@ -6,7 +6,7 @@ import { Card, Text, Title, Info, Rate } from './style';
 const GameCard: React.SFC<{ game: Game }> = ({ game }) => {
   const rates = Array(game.rate)
     .fill(null)
-    .map((_, index) => <i key={index} className="fas fa-star" />);
+    .map((_, index) => <i key={index} className="fab fa-playstation" />);
 
   return (
     <Card>

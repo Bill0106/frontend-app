@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CDN_URL from '@/constants/cdn';
 import loadImage from '@/utils/loadImage';
-import { ImageContainer, Placeholder, Img } from './style';
+import { ImageContainer, Placeholder, Img, Icon } from './style';
 
 const placeholder =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=';
@@ -26,6 +26,7 @@ const Image: React.SFC<Props> = ({ imageKey }) => {
     <ImageContainer>
       <Placeholder src={placeholder} />
       <Img src={src} show={show} />
+      <Icon className="fas fa-gamepad" show={!show} />
     </ImageContainer>
   );
 };
