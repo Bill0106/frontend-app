@@ -2,7 +2,17 @@ import * as React from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import navigations from '@/constants/navigations';
 import loadImage from '@/utils/loadImage';
-import { Container, Content, Title, Sections, Section, Mask } from './style';
+import {
+  HomePage,
+  Loading,
+  Text,
+  Container,
+  Content,
+  Title,
+  Sections,
+  Section,
+  Mask,
+} from './style';
 
 const { useState, useEffect } = React;
 
@@ -43,21 +53,26 @@ const Home: React.SFC<RouteComponentProps> = () => {
   });
 
   return (
-    <Container background={background} show={show}>
-      <Content>
-        <Title onMouseEnter={handleTitleMouseEnter}>Bill's Hobby</Title>
-        <Sections>
-          {['games', 'gourmets', 'hearthstone'].map(item => (
-            <Section key={item}>
-              <div onClick={handleEvent} onMouseEnter={handleEvent}>
-                {item}
-              </div>
-            </Section>
-          ))}
-        </Sections>
-      </Content>
-      <Mask />
-    </Container>
+    <HomePage>
+      <Container background={background} show={show}>
+        <Content>
+          <Title onMouseEnter={handleTitleMouseEnter}>Bill's Hobby</Title>
+          <Sections>
+            {['games', 'gourmets', 'hearthstone'].map(item => (
+              <Section key={item}>
+                <div onClick={handleEvent} onMouseEnter={handleEvent}>
+                  {item}
+                </div>
+              </Section>
+            ))}
+          </Sections>
+        </Content>
+        <Mask />
+      </Container>
+      <Loading show={!show}>
+        <Text>Loading...</Text>
+      </Loading>
+    </HomePage>
   );
 };
 

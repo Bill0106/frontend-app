@@ -1,4 +1,4 @@
-import styled, { css } from '@/utils/styled';
+import styled, { css, keyframes } from '@/utils/styled';
 
 const fullpage = css`
   position: fixed;
@@ -6,6 +6,43 @@ const fullpage = css`
   left: 0;
   right: 0;
   bottom: 0;
+`;
+
+const loading = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+export const HomePage = styled.div`
+  ${fullpage};
+`;
+
+export const Loading = styled.div<{ show: boolean }>`
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  background: #000;
+  transform: ${props => (props.show ? 0 : 'translateY(-100%)')};
+  transition: transform 0.5s ease-in-out;
+  z-index: 9999;
+`;
+
+export const Text = styled.div`
+  text-align: center;
+  font-size: 50px;
+  font-family: Papyrus, fantasy;
+  color: #fff;
+  letter-spacing: 5px;
+  animation: ${loading} 2s linear infinite;
 `;
 
 export const Container = styled.div<{ background: string; show: boolean }>`
