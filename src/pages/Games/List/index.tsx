@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
+import PAGE_TITLE from '@/constants/pageTitle';
 import { GameList } from '@/models';
 import services from '@/services';
-import GameCard from '@/components/GameCard';
 import InfiniteScroll from '@/components/InfiniteScroll';
+import GameCard from './GameCard';
 import { List } from './style';
 
 const { useState, useEffect } = React;
@@ -39,6 +40,8 @@ const Games: React.SFC<RouteComponentProps> = () => {
   };
 
   useEffect(() => {
+    document.title = `Games - ${PAGE_TITLE}`;
+
     if (page === 0) {
       fetch(1);
     }

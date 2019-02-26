@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import navigations from '@/constants/navigations';
+import PAGE_TITLE from '@/constants/pageTitle';
 import loadImage from '@/utils/loadImage';
 import {
   HomePage,
@@ -47,6 +48,8 @@ const Home: React.SFC<RouteComponentProps> = () => {
   };
 
   useEffect(() => {
+    document.title = PAGE_TITLE;
+
     if (!show) {
       preloadBackground();
     }

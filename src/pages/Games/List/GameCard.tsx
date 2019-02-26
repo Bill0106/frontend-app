@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { navigate } from '@reach/router';
 import { Game } from '@/models';
 import Image from '@/components/Image';
 import { Card, Text, Title, Info, Rate } from './style';
@@ -8,9 +9,11 @@ const GameCard: React.SFC<{ game: Game }> = ({ game }) => {
     .fill(null)
     .map((_, index) => <i key={index} className="fab fa-playstation" />);
 
+  const handleClick = () => navigate(`/games/${game.url}`);
+
   return (
-    <Card>
-      <Image imageKey={game.image} />
+    <Card onClick={handleClick}>
+      <Image imageKey={game.image} icon="gamepad" />
       <Text>
         <Title>{game.name}</Title>
         <Info>

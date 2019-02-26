@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Loading } from './style';
+import Loading from '@/components/Loading';
 
 const { useEffect } = React;
 
@@ -39,9 +39,9 @@ const InfiniteScroll: React.SFC<Props> = ({
     <div>
       {children}
       {hasMore && (
-        <Loading ref={el => (container = el)}>
-          <i className="fas fa-circle-notch fa-spin" />
-        </Loading>
+        <div ref={el => (container = el)}>
+          <Loading />
+        </div>
       )}
     </div>
   );
