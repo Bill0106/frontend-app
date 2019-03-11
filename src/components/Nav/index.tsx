@@ -8,16 +8,6 @@ const { useState } = React;
 const Nav: React.SFC = () => {
   const [showNav, setShowNav] = useState(false);
 
-  const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
-    const title = e.currentTarget.innerHTML.toLowerCase();
-    const page = navigations.find(item => item.title.toLowerCase() === title);
-    if (!page) {
-      return false;
-    }
-
-    navigate(page.path);
-  };
-
   const handleOpen = () => {
     setShowNav(true);
     document.body.classList.add('nav-open');
@@ -26,6 +16,17 @@ const Nav: React.SFC = () => {
   const handleClose = () => {
     setShowNav(false);
     document.body.classList.remove('nav-open');
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
+    const title = e.currentTarget.innerHTML.toLowerCase();
+    const page = navigations.find(item => item.title.toLowerCase() === title);
+    if (!page) {
+      return false;
+    }
+
+    navigate(page.path);
+    showNav && handleClose();
   };
 
   return (
