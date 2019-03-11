@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from '@/utils/styled';
+import MEDIA_QUERIES from '@/constants/mediaQueries';
 
 const fullpage = css`
   position: fixed;
@@ -59,7 +60,7 @@ export const Content = styled.div`
   position: relative;
   margin: 0 auto;
   padding-top: 100px;
-  width: 1000px;
+  max-width: 1000px;
   text-align: center;
   color: #fff;
   z-index: 2;
@@ -70,16 +71,28 @@ export const Title = styled.h1`
   font-size: 100px;
   font-family: Brush Script MT, cursive;
   font-weight: normal;
+  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
+    margin: 50px 0 70px;
+    font-size: 70px;
+  }
 `;
 
 export const Sections = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  padding: 0 20px;
+  text-align: center;
+  box-sizing: border-box;
 `;
 
 export const Section = styled.div`
+  display: inline-block;
+  width: ${100 / 3}%;
   font-size: 45px;
   font-family: Copperplate, Copperplate Gothic Light, fantasy;
+  @media (max-width: ${MEDIA_QUERIES.TABLET_MAX}) {
+    display: block;
+    margin: 20px 0;
+    width: 100%;
+  }
   > div {
     display: inline-block;
     cursor: pointer;
