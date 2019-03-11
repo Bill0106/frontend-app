@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "rm -rf dist && parcel src/index.html --no-cache",
-    "build": "rm -rf dist && parcel build src/index.html --out-file index.js --no-cache --no-source-maps"
+    "build": "rm -rf dist && parcel build src/index.html --no-cache --no-source-maps"
   },
   "repository": {
     "type": "git",

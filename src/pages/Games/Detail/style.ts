@@ -175,12 +175,11 @@ export const TrophyImg = styled.div<{ earned: boolean }>`
 
 export const TrophyText = styled.div`
   margin-left: 80px;
-  width: 225px;
-  @media (max-width: ${MEDIA_QUERIES.LAPTOP_MAX}) {
-    width: 200px;
+  @media (min-width: ${MEDIA_QUERIES.TABLET}) {
+    width: 260px;
   }
-  @media (max-width: ${MEDIA_QUERIES.TABLET_MAX}) {
-    width: 255px;
+  @media (min-width: ${MEDIA_QUERIES.LAPTOP}) {
+    width: 215px;
   }
   > p {
     margin: 0 0 5px;
