@@ -1,10 +1,11 @@
 import styled from '@/utils/styled';
 
-export const Layout = styled.div`
+export const Layout = styled.div<{ background: string }>`
   min-height: 100vh;
   font-family: arial, sans-serif;
   font-size: 14px;
-  background: #303030;
+  background: ${props => props.background};
+  transition: background 0.5s ease-in-out;
 `;
 
 export const Content = styled.div`

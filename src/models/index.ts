@@ -27,3 +27,17 @@ export interface GameTrophy {
   rarity: string;
   earnedAt: string | null;
 }
+
+export interface Gourmet {
+  _id: string;
+  food: string;
+  restaurant: string;
+  image: string;
+  date: string;
+  url: string;
+}
+
+export interface GourmetList {
+  list: Array<Gourmet>;
+  total: number;
+}

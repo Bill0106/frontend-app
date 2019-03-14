@@ -13,8 +13,10 @@ export const Container = styled.div`
 `;
 
 export const Side = styled.div`
-  margin: 0 auto;
-  max-width: 270px;
+  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
+    margin: 0 auto;
+    max-width: 270px;
+  }
 `;
 
 export const Info = styled.div`
