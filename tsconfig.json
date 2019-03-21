@@ -1,17 +1,25 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "lib": ["es2017", "dom"],
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
+    "jsx": "react",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
+    "strict": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
   },
-  "awesomeTypescriptLoaderOptions": {
-    "silent": true,
-    "useBabel": true,
-    "useCache": true
-  }
+  "exclude": ["node_modules"],
+  "include": ["src"]
 }

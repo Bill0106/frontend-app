@@ -1,9 +1,0 @@
-<div class="app-lazy-image" [ngStyle]="{'background-color': (image | imageHelper:'color')}">
-  <img
-    [src]="size === 'rectangle' ? rectangle : square"
-    [lazyLoad]="(image | imageHelper:'url')"
-    [alt]="text"
-    [title]="text"
-    (click)="clicked()"
-  >
-</div>

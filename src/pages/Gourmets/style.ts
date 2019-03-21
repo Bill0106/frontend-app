@@ -1,0 +1,55 @@
+import MEDIA_QUERIES from '@/constants/mediaQueries';
+import styled from '@/utils/styled';
+
+export const List = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+export const Card = styled.div`
+  background: #fff;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+`;
+
+export const Header = styled.div`
+  padding: 16px;
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  > .fas {
+    margin-right: 5px;
+    color: #ccc;
+  }
+`;
+
+export const Dot = styled.i`
+  display: inline-block;
+  margin: 0 5px;
+  width: 3px;
+  height: 3px;
+  vertical-align: middle;
+  font-style: normal;
+  border-radius: 100%;
+  background: #000;
+`;
+
+export const Content = styled.div`
+  padding: 16px;
+`;
+
+export const Title = styled.p`
+  margin: 0 0 5px;
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+export const Date = styled.span`
+  color: #999;
+  font-size: 12px;
+`;
