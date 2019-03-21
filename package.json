@@ -4,8 +4,8 @@
   "description": "zhuhaolin.com frontend app",
   "main": "index.js",
   "scripts": {
-    "start": "rm -rf dist && parcel src/index.html --no-cache",
-    "build": "rm -rf dist && parcel build src/index.html --no-cache --no-source-maps"
+    "start": "parcel src/index.html --no-cache",
+    "build": "parcel build src/index.html --no-cache --no-source-maps --public-url //d30jecx7p602b2.cloudfront.net/"
   },
   "repository": {
     "type": "git",
