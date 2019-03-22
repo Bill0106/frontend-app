@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { navigate } from '@reach/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import navigations from '@/constants/navigations';
 import { Navbar, Button, Menu, MenuItem, MenuClose } from './style';
 
@@ -32,7 +33,7 @@ const Nav: React.SFC = () => {
   return (
     <Navbar>
       <Button onClick={handleOpen}>
-        <i className="fas fa-bars" />
+        <FontAwesomeIcon icon={['fas', 'bars']} />
       </Button>
       <Menu show={showNav}>
         {navigations.map(item => (
