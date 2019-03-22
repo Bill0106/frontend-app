@@ -6,6 +6,8 @@ import Home from '@/pages/Home';
 import Games from '@/pages/Games';
 import Gourmets from '@/pages/Gourmets';
 
+import '@/utils/icons';
+
 const App: React.SFC = () => (
   <Router>
     <Home path="/" />

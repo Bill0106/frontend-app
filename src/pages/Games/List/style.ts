@@ -58,7 +58,7 @@ export const Info = styled.div`
 `;
 
 export const Rate = styled.div`
-  > i + i {
-    margin-left: 3px;
-  }
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-column-gap: 3px;
 `;

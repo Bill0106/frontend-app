@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 import CDN_URL from '@/constants/cdn';
 import loadImage from '@/utils/loadImage';
 import { ImageContainer, Placeholder, Img, Icon } from './style';
@@ -37,7 +39,9 @@ const Image: React.SFC<Props> = ({ imageKey, imageUrl, icon }) => {
     <ImageContainer>
       <Placeholder src={placeholder} />
       <Img src={src} show={show} />
-      <Icon className={`fas fa-${icon}`} show={!show} />
+      <Icon show={!show}>
+        <FontAwesomeIcon icon={['fas', icon as IconName]} />
+      </Icon>
     </ImageContainer>
   );
 };

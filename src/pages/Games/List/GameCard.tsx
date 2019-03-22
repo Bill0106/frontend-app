@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { navigate } from '@reach/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Game } from '@/models';
 import Image from '@/components/Image';
 import { Card, Text, Title, Info, Rate } from './style';
@@ -7,7 +8,9 @@ import { Card, Text, Title, Info, Rate } from './style';
 const GameCard: React.SFC<{ game: Game }> = ({ game }) => {
   const rates = Array(game.rate)
     .fill(null)
-    .map((_, index) => <i key={index} className="fab fa-playstation" />);
+    .map((_, index) => (
+      <FontAwesomeIcon key={index} icon={['fab', 'playstation']} />
+    ));
 
   const handleClick = () => navigate(`/games/${game.url}`);
 

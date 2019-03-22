@@ -17,15 +17,11 @@ export const Card = styled.div`
 `;
 
 export const Header = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 5px;
+  align-items: center;
   padding: 16px;
-  > * {
-    display: inline-block;
-    vertical-align: middle;
-  }
-  > .fas {
-    margin-right: 5px;
-    color: #ccc;
-  }
 `;
 
 export const Dot = styled.i`

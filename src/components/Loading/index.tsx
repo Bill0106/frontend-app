@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LoadingContainer } from './style';
 
 const Loading: React.SFC = () => (
   <LoadingContainer>
-    <i className="fas fa-spinner fa-pulse" />
+    <FontAwesomeIcon icon={['fas', 'spinner']} pulse />
   </LoadingContainer>
 );
 
