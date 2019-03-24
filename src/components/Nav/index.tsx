@@ -1,22 +1,32 @@
 import * as React from 'react';
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock';
 import navigations from '@/constants/navigations';
 import { Navbar, Button, Menu, MenuItem, MenuClose } from './style';
 
-const { useState } = React;
+const { useState, useEffect } = React;
 
 const Nav: React.SFC = () => {
+  let menu: HTMLUListElement | null;
   const [showNav, setShowNav] = useState(false);
 
   const handleOpen = () => {
     setShowNav(true);
-    document.body.classList.add('nav-open');
+    if (menu) {
+      disableBodyScroll(menu);
+    }
   };
 
   const handleClose = () => {
     setShowNav(false);
-    document.body.classList.remove('nav-open');
+    if (menu) {
+      enableBodyScroll(menu);
+    }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
@@ -30,12 +40,16 @@ const Nav: React.SFC = () => {
     showNav && handleClose();
   };
 
+  useEffect(() => {
+    return () => clearAllBodyScrollLocks();
+  }, []);
+
   return (
     <Navbar>
       <Button onClick={handleOpen}>
         <FontAwesomeIcon icon={['fas', 'bars']} />
       </Button>
-      <Menu show={showNav}>
+      <Menu ref={el => (menu = el)} show={showNav}>
         {navigations.map(item => (
           <MenuItem key={item.title} onClick={handleClick}>
             {item.title.toLowerCase()}
