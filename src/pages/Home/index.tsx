@@ -3,6 +3,7 @@ import { RouteComponentProps, navigate } from '@reach/router';
 import navigations from '@/constants/navigations';
 import PAGE_TITLE from '@/constants/pageTitle';
 import loadImage from '@/utils/loadImage';
+import message from '@/utils/message';
 import {
   HomePage,
   Loading,
@@ -27,7 +28,7 @@ const Home: React.SFC<RouteComponentProps> = () => {
       await Promise.all(navigations.map(item => loadImage(item.image)));
       setShow(true);
     } catch (error) {
-      console.log(error.message);
+      message.error(error.message);
     }
   };
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import PAGE_TITLE from '@/constants/pageTitle';
+import message from '@/utils/message';
 import { GameList } from '@/models';
 import services from '@/services';
 import InfiniteScroll from '@/components/InfiniteScroll';
@@ -25,7 +26,7 @@ const Games: React.SFC<RouteComponentProps> = () => {
         total: res.total,
       });
     } catch (error) {
-      console.log(error.message);
+      message.error(error.message);
     } finally {
       setIsFetching(false);
     }

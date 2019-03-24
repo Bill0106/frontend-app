@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import Nav from '@/components/Nav';
+import Nav from './Nav';
+import ErrorMsg from './ErrorMsg';
 import { Layout, Content } from './style';
 
 const AppLayout: React.SFC<RouteComponentProps> = ({ children, location }) => {
@@ -12,9 +13,10 @@ const AppLayout: React.SFC<RouteComponentProps> = ({ children, location }) => {
   const path = location && location.pathname.split('/').filter(item => item)[0];
 
   return (
-    <Layout background={backgrounds[path || '']}>
+    <Layout background={backgrounds[path || 'games']}>
       <Nav />
       <Content>{children}</Content>
+      <ErrorMsg />
     </Layout>
   );
 };

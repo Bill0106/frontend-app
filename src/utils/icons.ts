@@ -6,6 +6,7 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt
 import { faGamepad } from '@fortawesome/free-solid-svg-icons/faGamepad';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons/faTrophy';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons/faUtensils';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 
 library.add(
   faPlaystation,
@@ -14,5 +15,6 @@ library.add(
   faMapMarkerAlt,
   faGamepad,
   faTrophy,
-  faUtensils
+  faUtensils,
+  faExclamationCircle
 );
