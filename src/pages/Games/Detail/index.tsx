@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import PAGE_TITLE from '@/constants/pageTitle';
+import message from '@/utils/message';
 import { Game, GameTrophy } from '@/models';
 import services from '@/services';
 import Loading from '@/components/Loading';
@@ -36,7 +37,7 @@ const Detail: React.SFC<Props> = ({ url }) => {
       setTrophies(trophiesRes);
       document.title = `${gameRes.name} - Games | ${PAGE_TITLE}`;
     } catch (error) {
-      console.log(error.message);
+      message.error(error.message);
     } finally {
       setIsFetching(false);
     }
