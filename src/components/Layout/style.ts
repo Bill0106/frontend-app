@@ -105,9 +105,6 @@ export const Message = styled.div<{ show: boolean }>`
   text-align: center;
   transition: top 0.3s ease-in-out;
   z-index: 9999;
-  > * {
-    vertical-align: middle;
-  }
 `;
 
 export const MessageContent = styled.div`
@@ -119,7 +116,6 @@ export const MessageContent = styled.div`
 `;
 
 export const Text = styled.p`
-  display: inline-block;
   margin: 0 0 0 5px;
   line-height: 20px;
 `;

@@ -19,6 +19,7 @@ import {
 const { useState, useEffect } = React;
 
 const Home: React.SFC<RouteComponentProps> = () => {
+  const isMobile = document.body.clientWidth < 768;
   const defaultImage = navigations[0].image;
   const [background, setBackground] = useState(defaultImage);
   const [show, setShow] = useState(false);
@@ -43,7 +44,7 @@ const Home: React.SFC<RouteComponentProps> = () => {
 
     if (e.type === 'click') {
       navigate(section.path);
-    } else if (e.type === 'mouseenter') {
+    } else if (e.type === 'mouseenter' && !isMobile) {
       setBackground(section.image);
     }
   };
