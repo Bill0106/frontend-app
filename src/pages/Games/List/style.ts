@@ -9,7 +9,8 @@ export const List = styled.div`
     grid-template-columns: repeat(3, 1fr);
   }
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 270px;
+    justify-content: center;
   }
   > img {
     width: 100%;
@@ -20,6 +21,9 @@ export const Card = styled.div`
   position: relative;
   padding-bottom: 75px;
   cursor: pointer;
+  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
+    padding-bottom: 74px;
+  }
 `;
 
 export const Text = styled.div`
@@ -42,6 +46,9 @@ export const Title = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
+    line-height: 25px;
+  }
 `;
 
 export const Info = styled.div`
