@@ -6,7 +6,8 @@ export const List = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 345px;
+    justify-content: center;
   }
 `;
 

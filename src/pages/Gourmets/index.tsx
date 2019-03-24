@@ -46,14 +46,15 @@ const Gourmets: React.SFC<RouteComponentProps> = () => {
   useEffect(() => {
     document.title = `Gourmets - ${PAGE_TITLE}`;
 
-    if (page === 0) {
-      fetch(1);
-    }
+    fetch(1);
   }, []);
+
+  const hasMore =
+    gourmets.list.length === 0 || gourmets.list.length < gourmets.total;
 
   return (
     <InfiniteScroll
-      hasMore={gourmets.list.length < gourmets.total}
+      hasMore={hasMore}
       isBusy={isFetching}
       onLoadMore={handleLoadMore}
     >

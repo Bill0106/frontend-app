@@ -64,6 +64,9 @@ export const Content = styled.div`
   text-align: center;
   color: #fff;
   z-index: 2;
+  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
+    padding-top: 0;
+  }
 `;
 
 export const Title = styled.h1`
@@ -97,6 +100,7 @@ export const Section = styled.div`
     display: inline-block;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     &:hover {
       transform: scale(1.25);
     }
