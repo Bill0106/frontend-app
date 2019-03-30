@@ -2,7 +2,8 @@ import * as React from 'react';
 import { format } from 'date-fns';
 import { Game } from '@/models';
 import CircleInfo from './CircleInfo';
-import { Main, Header, Title, Subtitle, Infos, Description } from './style';
+import InfoList from './InfoList';
+import { Header, Title, Subtitle, Rate, Earned } from './style';
 
 interface Props {
   game: Game;
@@ -10,40 +11,33 @@ interface Props {
 }
 
 const DetailMain: React.SFC<Props> = ({ game, trophyRate }) => {
-  const renderDescription = (item: string, index: number) => (
-    <Description key={index}>{item}</Description>
+  const infos = [game.platform, game.genre, format(game.buyAt, 'YYYY-MM-DD')];
+  const companies = [game.developer, game.publisher].filter(
+    (item, index, arr) => arr.indexOf(item) === index
   );
 
   return (
-    <Main>
+    <div>
       <Header>
         <div>
           <Title>{game.title}</Title>
           <Subtitle>{game.name}</Subtitle>
-          <Infos>
-            <span>{game.platform}</span>
-            <i>|</i>
-            <span>{game.genre}</span>
-            <i>|</i>
-            <span>Buy at : {format(game.buyAt, 'YYYY-MM-DD')}</span>
-          </Infos>
         </div>
         <CircleInfo
           title="Rate"
-          text={game.rate}
           percent={(game.rate / 5) * 100}
           color="#e03800"
-        />
-        <CircleInfo
-          title="Trophy"
-          text={`${trophyRate}%`}
-          percent={trophyRate}
-          color="#075fff"
-        />
+        >
+          <Rate>{game.rate}</Rate>
+        </CircleInfo>
+        <CircleInfo title="Trophy" percent={trophyRate} color="#075fff">
+          <Earned>{`${trophyRate}%`}</Earned>
+        </CircleInfo>
       </Header>
       <hr />
-      {game.description.split('\n').map(renderDescription)}
-    </Main>
+      <InfoList infos={infos} />
+      <InfoList infos={companies} />
+    </div>
   );
 };
 
