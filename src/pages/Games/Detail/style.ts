@@ -1,11 +1,21 @@
 import MEDIA_QUERIES from '@/constants/mediaQueries';
-import styled from '@/utils/styled';
+import styled, { css } from '@/utils/styled';
+
+const circelText = css`
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  line-height: 100px;
+  text-align: center;
+  font-weight: bold;
+`;
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 270px 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 10px;
+  grid-gap: 20px;
   color: #fff;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     display: block;
@@ -19,49 +29,12 @@ export const Side = styled.div`
   }
 `;
 
-export const Info = styled.div`
-  margin-top: 15px;
-  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    display: none;
-  }
-`;
-
-export const InfoTitle = styled.p`
-  margin: 0 0 15px;
-  padding-bottom: 15px;
-  line-height: 20px;
-  font-size: 20px;
-  border-bottom: 1px solid #666;
-`;
-
-export const InfoList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`;
-
-export const InfoItem = styled.li`
-  & + li {
-    margin-top: 20px;
-  }
-  > p {
-    margin: 0 0 5px;
-    font-size: 18px;
-  }
-  > span {
-    font-size: 16px;
-    color: #999;
-  }
-`;
-
-export const Main = styled.div``;
-
 export const Header = styled.div`
   display: grid;
   grid-template-columns: 1fr repeat(2, 100px);
   grid-column-gap: 15px;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     display: block;
     text-align: center;
@@ -70,7 +43,7 @@ export const Header = styled.div`
 
 export const Title = styled.h1`
   margin: 20px 0 15px;
-  line-height: 60px;
+  line-height: 55px;
   font-size: 40px;
   font-weight: normal;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
@@ -80,7 +53,7 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.h2`
-  margin: 0 0 5px;
+  margin: 0;
   line-height: 30px;
   font-size: 20px;
   font-weight: normal;
@@ -97,6 +70,9 @@ export const Infos = styled.p`
   color: #999;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     font-size: 16px;
+    &:last-of-type {
+      display: none;
+    }
   }
   > * {
     display: inline-block;
@@ -115,17 +91,6 @@ export const Circle = styled.div`
     display: inline-block;
     margin: 10px 15px 0;
   }
-  > span {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
-    line-height: 100px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-  }
   > p {
     margin: 0;
     line-height: 20px;
@@ -134,9 +99,16 @@ export const Circle = styled.div`
   }
 `;
 
-export const Description = styled.p`
-  line-height: 24px;
-  font-size: 16px;
+export const Rate = styled.span`
+  ${circelText};
+  font-size: 30px;
+  color: #e03800;
+`;
+
+export const Earned = styled.span`
+  ${circelText};
+  font-size: 24px;
+  color: #075fff;
 `;
 
 export const Trophies = styled.div`
@@ -150,6 +122,7 @@ export const Trophies = styled.div`
   }
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     display: block;
+    margin: 20px 0;
   }
 `;
 
@@ -167,10 +140,10 @@ export const Trophy = styled.div`
   }
 `;
 
-export const TrophyImg = styled.div<{ earned: boolean }>`
+export const TrophyImg = styled.div<{ earned: boolean; color: string }>`
   float: left;
   width: 66px;
-  border: 5px solid #61bf19;
+  border: 5px solid ${props => props.color};
   opacity: ${props => (props.earned ? 1 : 0.5)};
   box-sizing: border-box;
 `;
