@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseURL =
   process.env.NODE_ENV === 'production'
-    ? 'http://api.zhuhaolin.com/'
+    ? '//api.zhuhaolin.com/'
     : 'http://localhost:9999/';
 
 const request = axios.create({ baseURL });
