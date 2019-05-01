@@ -28,7 +28,7 @@ class Services {
       throw error;
     }
   }
-  async fetchGameTrophies(url: string): Promise<GameTrophy[]> {
+  async fetchGameTrophies(url: string): Promise<Array<GameTrophy>> {
     try {
       const res = await request.get(`/games/${url}/trophies`);
 

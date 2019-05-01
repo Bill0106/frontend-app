@@ -17,7 +17,7 @@ export interface Props {
 const { useState, useEffect } = React;
 
 const Image: React.SFC<Props> = ({ imageKey, imageUrl, icon }) => {
-  let isMounted: boolean = true;
+  let isMounted = true;
   const src = imageKey ? CDN_URL + imageKey : imageUrl || '';
   const [show, setShow] = useState(false);
 
