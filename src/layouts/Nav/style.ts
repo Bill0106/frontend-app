@@ -1,21 +1,6 @@
 import MEDIA_QUERIES from '@/constants/mediaQueries';
 import styled from '@/utils/styled';
 
-export const Layout = styled.div<{ background: string }>`
-  min-height: 100vh;
-  font-family: arial, sans-serif;
-  font-size: 14px;
-  background: ${props => props.background};
-  transition: background 0.5s ease-in-out;
-`;
-
-export const Content = styled.div`
-  margin: 0 auto;
-  padding: 65px 15px 15px;
-  max-width: 1000px;
-  box-sizing: border-box;
-`;
-
 export const Navbar = styled.div`
   position: fixed;
   top: 0;
@@ -94,28 +79,4 @@ export const MenuClose = styled.li`
   @media (min-width: ${MEDIA_QUERIES.TABLET}) {
     display: none;
   }
-`;
-
-export const Message = styled.div<{ show: boolean }>`
-  position: fixed;
-  top: ${props => (props.show ? '20px' : '-100%')};
-  left: 0;
-  right: 0;
-  padding: 8px;
-  text-align: center;
-  transition: top 0.3s ease-in-out;
-  z-index: 9999;
-`;
-
-export const MessageContent = styled.div`
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 3px;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-`;
-
-export const Text = styled.p`
-  margin: 0 0 0 5px;
-  line-height: 20px;
 `;
