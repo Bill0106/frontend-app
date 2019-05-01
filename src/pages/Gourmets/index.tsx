@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import PAGE_TITLE from '@/constants/pageTitle';
-import message from '@/utils/message';
 import { GourmetList } from '@/models';
 import services from '@/services';
+import MessageContext from '@/contexts/MessageContext';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import GourmetCard from './GourmetCard';
 import { List } from './style';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useContext } = React;
 
 const Gourmets: React.SFC<RouteComponentProps> = () => {
   const [gourmets, setGourmets] = useState({
@@ -17,6 +17,7 @@ const Gourmets: React.SFC<RouteComponentProps> = () => {
   } as GourmetList);
   const [page, setPage] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
+  const { setError } = useContext(MessageContext);
 
   const fetch = async (page: number) => {
     setPage(page);
@@ -29,7 +30,7 @@ const Gourmets: React.SFC<RouteComponentProps> = () => {
         total: res.total,
       });
     } catch (error) {
-      message.error(error.message);
+      setError(error.message);
     } finally {
       setIsFetching(false);
     }

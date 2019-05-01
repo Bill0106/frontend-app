@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import PAGE_TITLE from '@/constants/pageTitle';
-import message from '@/utils/message';
 import { Game, GameTrophy } from '@/models';
 import services from '@/services';
+import MessageContext from '@/contexts/MessageContext';
 import Loading from '@/components/Loading';
 import Image from '@/components/Image';
 import Main from './DetailMain';
@@ -14,12 +14,13 @@ interface Props extends RouteComponentProps {
   url?: string;
 }
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useContext } = React;
 
 const Detail: React.SFC<Props> = ({ url }) => {
   const [game, setGame] = useState({} as Game);
   const [trophies, setTrophies] = useState([] as Array<GameTrophy>);
   const [isFetching, setIsFetching] = useState(false);
+  const { setError } = useContext(MessageContext);
 
   const fetch = async () => {
     if (!url) {
@@ -37,7 +38,7 @@ const Detail: React.SFC<Props> = ({ url }) => {
       setTrophies(trophiesRes);
       document.title = `${gameRes.name} - Games | ${PAGE_TITLE}`;
     } catch (error) {
-      message.error(error.message);
+      setError(error.message);
     } finally {
       setIsFetching(false);
     }

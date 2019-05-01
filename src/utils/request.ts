@@ -1,11 +1,7 @@
 import axios from 'axios';
+import API_URL from '@/configs/apiUrl';
 
-const baseURL =
-  process.env.NODE_ENV === 'production'
-    ? '//api.zhuhaolin.com/'
-    : 'http://localhost:9999/';
-
-const request = axios.create({ baseURL });
+const request = axios.create({ baseURL: API_URL });
 request.interceptors.response.use(
   response => response,
   error => {
