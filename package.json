@@ -4,8 +4,9 @@
   "description": "zhuhaolin.com frontend app",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html --no-cache",
-    "build": "parcel build src/index.html --no-cache --no-source-maps --public-url //d30jecx7p602b2.cloudfront.net/"
+    "start": "webpack-dev-server --config build/webpack.dev.js",
+    "build": "webpack --config build/webpack.prod.js",
+    "analyse": "webpack --config build/webpack.prod.js --analyse"
   },
   "repository": {
     "type": "git",
@@ -14,24 +15,39 @@
   "author": "Bill",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.1.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/runtime": "^7.4.4",
     "@types/body-scroll-lock": "^2.6.0",
     "@types/query-string": "^6.2.0",
     "@types/reach__router": "^1.2.3",
-    "@types/react": "^16.8.3",
-    "@types/react-dom": "^16.8.2",
+    "@types/react": "^16.8.15",
+    "@types/react-dom": "^16.8.4",
     "@types/styled-components": "^4.1.10",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "babel-loader": "^8.0.5",
     "babel-plugin-date-fns": "^0.2.1",
+    "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-styled-components": "^1.10.0",
-    "parcel-bundler": "^1.11.0",
-    "tslint": "^5.12.1",
-    "tslint-react": "^3.6.0",
+    "clean-webpack-plugin": "^2.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-react": "^7.12.4",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.8.4",
     "typescript": "^3.3.3",
-    "typescript-styled-plugin": "^0.13.0"
+    "typescript-styled-plugin": "^0.13.0",
+    "webpack": "^4.30.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
@@ -43,16 +59,8 @@
     "body-scroll-lock": "^2.6.1",
     "date-fns": "^1.30.1",
     "query-string": "^6.2.0",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "styled-components": "^4.1.3"
-  },
-  "alias": {
-    "@/pages": "./src/pages",
-    "@/constants": "./src/constants",
-    "@/utils": "./src/utils",
-    "@/components": "./src/components",
-    "@/services": "./src/services",
-    "@/models": "./src/models"
   }
 }

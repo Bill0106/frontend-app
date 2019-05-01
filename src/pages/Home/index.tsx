@@ -61,7 +61,7 @@ const Home: React.SFC<RouteComponentProps> = () => {
     <HomePage>
       <Container background={background} show={show}>
         <Content>
-          <Title onMouseEnter={handleTitleMouseEnter}>Bill's Hobby</Title>
+          <Title onMouseEnter={handleTitleMouseEnter}>{`Bill's Hobby`}</Title>
           <Sections>
             {['games', 'gourmets', 'hearthstone'].map(item => (
               <Section key={item}>
