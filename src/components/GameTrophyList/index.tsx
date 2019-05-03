@@ -8,18 +8,18 @@ interface Props {
   trophies: Array<GameTrophy>;
 }
 
-const TrophyList: React.SFC<Props> = ({ trophies }) => {
-  const colors: { [key: string]: string } = {
-    Gold: '#FFD700',
-    Silver: '#C0C0C0',
-    Bronze: '#CD7F32',
-    Platinum: '#E5E4E2',
-  };
+const colors: { [key: string]: string } = {
+  Gold: '#FFD700',
+  Silver: '#C0C0C0',
+  Bronze: '#CD7F32',
+  Platinum: '#E5E4E2',
+};
 
+const TrophyList: React.SFC<Props> = ({ trophies }) => {
   const renderTrophy = (item: GameTrophy) => (
     <Trophy key={item._id}>
       <TrophyImg color={colors[item.rarity]} earned={Boolean(item.earnedAt)}>
-        <Image imageUrl={item.image} icon="trophy" />
+        <Image icon="trophy" imageUrl={item.image} iconSize={24} />
       </TrophyImg>
       <TrophyText>
         <p>{item.title}</p>

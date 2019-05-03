@@ -9,6 +9,10 @@ const prodConfig = {
     publicPath: '//d30jecx7p602b2.cloudfront.net/',
     filename: '[name].[contentHash:8].js',
   },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
   optimization: {
     splitChunks: {
       chunks: 'all',

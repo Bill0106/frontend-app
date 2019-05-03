@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-import CDN_URL from '@/constants/cdn';
+import CDN_URL from '@/configs/cdn';
 import loadImage from '@/utils/loadImage';
 import { ImageContainer, Placeholder, Img, Icon } from './style';
 
@@ -11,12 +11,13 @@ const placeholder =
 export interface Props {
   imageKey?: string;
   imageUrl?: string;
-  icon: string;
+  icon: IconName;
+  iconSize?: number;
 }
 
 const { useState, useEffect } = React;
 
-const Image: React.SFC<Props> = ({ imageKey, imageUrl, icon }) => {
+const Image: React.SFC<Props> = ({ imageKey, imageUrl, icon, iconSize }) => {
   let isMounted = true;
   const src = imageKey ? CDN_URL + imageKey : imageUrl || '';
   const [show, setShow] = useState(false);
@@ -39,8 +40,8 @@ const Image: React.SFC<Props> = ({ imageKey, imageUrl, icon }) => {
     <ImageContainer>
       <Placeholder src={placeholder} />
       <Img src={src} show={show} />
-      <Icon show={!show}>
-        <FontAwesomeIcon icon={['fas', icon as IconName]} />
+      <Icon show={!show} size={iconSize || 50}>
+        <FontAwesomeIcon icon={['fas', icon]} />
       </Icon>
     </ImageContainer>
   );

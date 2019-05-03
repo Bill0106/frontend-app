@@ -7,8 +7,12 @@ const InfoList: React.SFC<{ infos: Array<string> }> = ({ infos }) => {
     .reduce((res, item) => [...res, slash, item], [] as Array<string>)
     .splice(1);
 
-  const renderList = (item: string) =>
-    item === slash ? <i>{item}</i> : <span>{item}</span>;
+  const renderList = (item: string, index: number) =>
+    item === slash ? (
+      <i key={index}>{item}</i>
+    ) : (
+      <span key={index}>{item}</span>
+    );
 
   return <Infos>{list.map(renderList)}</Infos>;
 };

@@ -6,7 +6,7 @@ import {
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
-import navigations from '@/constants/navigations';
+import navigations from '@/configs/navigation';
 import { Navbar, Button, Menu, MenuItem, MenuClose } from './style';
 
 const { useState, useEffect } = React;

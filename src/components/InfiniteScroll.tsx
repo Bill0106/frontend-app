@@ -33,7 +33,7 @@ const InfiniteScroll: React.SFC<Props> = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, []);
 
   return (
     <div>

@@ -1,16 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import API_URL from '@/configs/apiUrl';
 
-const baseURL =
-  process.env.NODE_ENV === 'production'
-    ? '//api.zhuhaolin.com/'
-    : 'http://localhost:9999/';
-
-const request = axios.create({ baseURL });
+const request = axios.create({ baseURL: API_URL });
 request.interceptors.response.use(
   response => response,
-  error => {
+  (error: AxiosError) => {
     const { response } = error;
-    return Promise.reject(new Error(response.data));
+    return Promise.reject(new Error(response && response.data));
   }
 );
 
