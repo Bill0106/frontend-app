@@ -32,12 +32,12 @@ export const Img = styled.img<{ show: boolean }>`
   transition: opacity 0.3s ease-in-out;
 `;
 
-export const Icon = styled.i<{ show: boolean }>`
+export const Icon = styled.i<{ show: boolean; size: number }>`
   display: ${props => (props.show ? 'inline-block' : 'none')};
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 50px;
+  font-size: ${props => props.size}px;
   color: #666;
   transform: translate(-50%, -50%);
   animation: ${loading} 1.5s ease-in-out infinite;

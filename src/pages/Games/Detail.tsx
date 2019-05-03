@@ -6,8 +6,8 @@ import services from '@/services';
 import MessageContext from '@/contexts/MessageContext';
 import Loading from '@/components/Loading';
 import Image from '@/components/Image';
-import Main from './DetailMain';
-import TrophyList from './TrophyList';
+import GameDetail from '@/components/GameDetail';
+import GameTrophyList from '@/components/GameTrophyList';
 import { Container, Side } from './style';
 
 interface Props extends RouteComponentProps {
@@ -60,8 +60,8 @@ const Detail: React.SFC<Props> = ({ url }) => {
       <Side>
         <Image imageKey={game.image || ''} icon="gamepad" />
       </Side>
-      <Main game={game} trophyRate={Math.round(trophiesEarned)} />
-      <TrophyList trophies={trophies} />
+      <GameDetail game={game} trophyRate={Math.round(trophiesEarned)} />
+      <GameTrophyList trophies={trophies} />
     </Container>
   );
 };

@@ -5,13 +5,13 @@ import { GameList } from '@/models';
 import services from '@/services';
 import MessageContext from '@/contexts/MessageContext';
 import InfiniteScroll from '@/components/InfiniteScroll';
-import GameCard from './GameCard';
+import GameCard from '@/components/GameCard';
 import { List } from './style';
 
 const { useState, useEffect, useContext } = React;
 
 const Games: React.SFC<RouteComponentProps> = () => {
-  const [games, setGames] = useState({ list: [], total: 0 } as GameList);
+  const [games, setGames] = useState<GameList>({ list: [], total: 0 });
   const [page, setPage] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
   const { setError } = useContext(MessageContext);

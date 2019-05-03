@@ -1,22 +1,6 @@
 import MEDIA_QUERIES from '@/constants/mediaQueries';
 import styled from '@/utils/styled';
 
-export const List = styled.div`
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(4, 1fr);
-  @media (max-width: ${MEDIA_QUERIES.TABLET_MAX}) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    grid-template-columns: 270px;
-    justify-content: center;
-  }
-  > img {
-    width: 100%;
-  }
-`;
-
 export const Card = styled.div`
   position: relative;
   padding-bottom: 75px;

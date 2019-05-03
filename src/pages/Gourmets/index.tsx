@@ -5,16 +5,16 @@ import { GourmetList } from '@/models';
 import services from '@/services';
 import MessageContext from '@/contexts/MessageContext';
 import InfiniteScroll from '@/components/InfiniteScroll';
-import GourmetCard from './GourmetCard';
+import GourmetCard from '@/components/GourmetCard';
 import { List } from './style';
 
 const { useState, useEffect, useContext } = React;
 
 const Gourmets: React.SFC<RouteComponentProps> = () => {
-  const [gourmets, setGourmets] = useState({
+  const [gourmets, setGourmets] = useState<GourmetList>({
     list: [],
     total: 0,
-  } as GourmetList);
+  });
   const [page, setPage] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
   const { setError } = useContext(MessageContext);

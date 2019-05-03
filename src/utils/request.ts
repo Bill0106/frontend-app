@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import API_URL from '@/configs/apiUrl';
 
 const request = axios.create({ baseURL: API_URL });
 request.interceptors.response.use(
   response => response,
-  error => {
+  (error: AxiosError) => {
     const { response } = error;
-    return Promise.reject(new Error(response.data));
+    return Promise.reject(new Error(response && response.data));
   }
 );
 
