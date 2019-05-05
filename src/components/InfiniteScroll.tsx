@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Loading from '@/components/Loading';
 
-const { useEffect } = React;
-
-export interface Props {
+interface Props {
   isBusy: boolean;
   hasMore: boolean;
   onLoadMore: () => void;
 }
+
+const { useEffect } = React;
 
 const InfiniteScroll: React.SFC<Props> = ({
   children,
@@ -15,7 +15,7 @@ const InfiniteScroll: React.SFC<Props> = ({
   hasMore,
   onLoadMore,
 }) => {
-  let container: HTMLElement | null;
+  let container: HTMLDivElement | null;
 
   const handleScroll = () => {
     if (!container) {
@@ -33,7 +33,7 @@ const InfiniteScroll: React.SFC<Props> = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   return (
     <div>

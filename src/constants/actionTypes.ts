@@ -1,0 +1,7 @@
+const ACTION_TYPES = {
+  PENDING: 'PENDING',
+  FETCHED: 'FETCHED',
+  ERROR: 'ERROR',
+};
+
+export default ACTION_TYPES;
