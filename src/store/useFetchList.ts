@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ACTION_TYPES from '@/constants/actionTypes';
 import MessageContext from '@/contexts/MessageContext';
-import service, { List } from './service';
+import service, { List } from '@/store/service';
 
 export interface ListState<T> extends List<T> {
   isFetching: boolean;
@@ -14,15 +14,14 @@ export interface ListAction<T> {
 
 const reducer = <T>(state: ListState<T>, action: ListAction<T>) => {
   const { type, payload } = action;
+  if (!payload) {
+    return state;
+  }
 
   switch (type) {
     case ACTION_TYPES.PENDING:
-      return { ...state, error: '', isFetching: true };
+      return { ...state, isFetching: true };
     case ACTION_TYPES.FETCHED:
-      if (!payload) {
-        return state;
-      }
-
       return {
         ...state,
         list: [...state.list, ...payload.list],
