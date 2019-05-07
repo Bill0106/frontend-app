@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { format } from 'date-fns';
-import { Game } from '@/models';
+import { Game } from '@/store/model';
 import CircleInfo from './CircleInfo';
 import InfoList from './InfoList';
 import { Header, Title, Subtitle, Rate, Earned } from './style';

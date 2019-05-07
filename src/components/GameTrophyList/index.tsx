@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { format } from 'date-fns';
-import { GameTrophy } from '@/models';
+import { GameTrophy } from '@/store/model';
 import Image from '@/components/Image';
 import { Trophies, Trophy, TrophyImg, TrophyText, TrophyEarned } from './style';
 

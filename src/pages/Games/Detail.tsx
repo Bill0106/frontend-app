@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import PAGE_TITLE from '@/constants/pageTitle';
-import { Game, GameTrophy } from '@/models';
-import services from '@/services';
-import MessageContext from '@/contexts/MessageContext';
+import useFetchGameDetail from '@/store/useFetchGameDetail';
 import Loading from '@/components/Loading';
 import Image from '@/components/Image';
 import GameDetail from '@/components/GameDetail';
@@ -14,43 +12,28 @@ interface Props extends RouteComponentProps {
   url?: string;
 }
 
-const { useState, useEffect, useContext } = React;
+const { useEffect } = React;
 
 const Detail: React.SFC<Props> = ({ url }) => {
-  const [game, setGame] = useState({} as Game);
-  const [trophies, setTrophies] = useState([] as Array<GameTrophy>);
-  const [isFetching, setIsFetching] = useState(false);
-  const { setError } = useContext(MessageContext);
-
-  const fetch = async () => {
-    if (!url) {
-      return false;
-    }
-
-    setIsFetching(true);
-    try {
-      const [gameRes, trophiesRes] = await Promise.all([
-        services.fetchGame(url),
-        services.fetchGameTrophies(url),
-      ]);
-
-      setGame(gameRes);
-      setTrophies(trophiesRes);
-      document.title = `${gameRes.name} - Games | ${PAGE_TITLE}`;
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsFetching(false);
-    }
-  };
+  const [state, fetchGameDetail] = useFetchGameDetail();
+  const { game, trophies, isFetching } = state;
 
   useEffect(() => {
-    fetch();
-  }, []);
+    if (game) {
+      document.title = `${game.name} - Games | ${PAGE_TITLE}`;
+    }
+  });
 
-  if (isFetching || !game._id) {
+  useEffect(() => {
+    if (url) {
+      fetchGameDetail(url);
+    }
+  }, [url]);
+
+  if (isFetching || !game) {
     return <Loading />;
   }
+
   const trophiesEarned =
     trophies.length &&
     (trophies.filter(item => item.earnedAt).length / trophies.length) * 100;

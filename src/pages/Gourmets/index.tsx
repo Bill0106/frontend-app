@@ -1,66 +1,38 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import PAGE_TITLE from '@/constants/pageTitle';
-import { GourmetList } from '@/models';
-import services from '@/services';
-import MessageContext from '@/contexts/MessageContext';
+import { Gourmet } from '@/store/model';
+import useFetchList from '@/store/useFetchList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import GourmetCard from '@/components/GourmetCard';
 import { List } from './style';
 
-const { useState, useEffect, useContext } = React;
+const { useEffect } = React;
 
 const Gourmets: React.SFC<RouteComponentProps> = () => {
-  const [gourmets, setGourmets] = useState<GourmetList>({
-    list: [],
-    total: 0,
-  });
-  const [page, setPage] = useState(0);
-  const [isFetching, setIsFetching] = useState(false);
-  const { setError } = useContext(MessageContext);
-
-  const fetch = async (page: number) => {
-    setPage(page);
-    setIsFetching(true);
-
-    try {
-      const res = await services.fetchGourmets(page);
-      setGourmets({
-        list: [...gourmets.list, ...res.list],
-        total: res.total,
-      });
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsFetching(false);
-    }
-  };
+  const [state, fetchList] = useFetchList<Gourmet>('gourmets');
+  const { list, total, isFetching } = state;
 
   const handleLoadMore = () => {
-    if (gourmets.list.length >= gourmets.total || isFetching) {
+    if (list.length >= total || isFetching) {
       return false;
     }
 
-    fetch(page + 1);
+    fetchList();
   };
 
   useEffect(() => {
     document.title = `Gourmets - ${PAGE_TITLE}`;
-
-    fetch(1);
   }, []);
-
-  const hasMore =
-    gourmets.list.length === 0 || gourmets.list.length < gourmets.total;
 
   return (
     <InfiniteScroll
-      hasMore={hasMore}
+      hasMore={list.length === 0 || list.length < total}
       isBusy={isFetching}
       onLoadMore={handleLoadMore}
     >
       <List>
-        {gourmets.list.map(item => (
+        {list.map(item => (
           <GourmetCard key={item._id} gourmet={item} />
         ))}
       </List>

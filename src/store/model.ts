@@ -8,15 +8,8 @@ export interface Game {
   developer: string;
   publisher: string;
   buyAt: string;
-  releaseAt: string;
   image: string;
   url: string;
-  description: string;
-}
-
-export interface GameList {
-  list: Array<Game>;
-  total: number;
 }
 
 export interface GameTrophy {
@@ -35,9 +28,4 @@ export interface Gourmet {
   image: string;
   date: string;
   url: string;
-}
-
-export interface GourmetList {
-  list: Array<Gourmet>;
-  total: number;
 }

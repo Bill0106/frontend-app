@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Game } from '@/models';
+import { Game } from '@/store/model';
 import Image from '@/components/Image';
 import { Card, Text, Title, Info, Rate } from './style';
 
