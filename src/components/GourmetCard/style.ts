@@ -35,7 +35,7 @@ export const Title = styled.p`
   font-weight: bold;
 `;
 
-export const Date = styled.span`
+export const EatAt = styled.span`
   color: #999;
   font-size: 12px;
 `;

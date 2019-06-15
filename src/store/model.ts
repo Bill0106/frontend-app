@@ -1,5 +1,5 @@
 export interface Game {
-  _id: string;
+  id: string;
   title: string;
   name: string;
   genre: string;
@@ -13,19 +13,19 @@ export interface Game {
 }
 
 export interface GameTrophy {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   image: string;
   rarity: string;
-  earnedAt: string | null;
+  earnAt: string | null;
 }
 
 export interface Gourmet {
-  _id: string;
+  id: string;
   food: string;
   restaurant: string;
   image: string;
-  date: string;
+  eatAt: string;
   url: string;
 }

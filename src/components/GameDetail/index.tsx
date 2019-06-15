@@ -11,7 +11,11 @@ interface Props {
 }
 
 const DetailMain: React.SFC<Props> = ({ game, trophyRate }) => {
-  const infos = [game.platform, game.genre, format(game.buyAt, 'YYYY-MM-DD')];
+  const infos = [
+    game.platform,
+    game.genre,
+    format(new Date(game.buyAt), 'YYYY-MM-DD'),
+  ];
   const companies = [game.developer, game.publisher].filter(
     (item, index, arr) => arr.indexOf(item) === index
   );

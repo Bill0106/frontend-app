@@ -17,17 +17,17 @@ const colors: { [key: string]: string } = {
 
 const TrophyList: React.SFC<Props> = ({ trophies }) => {
   const renderTrophy = (item: GameTrophy) => (
-    <Trophy key={item._id}>
-      <TrophyImg color={colors[item.rarity]} earned={Boolean(item.earnedAt)}>
+    <Trophy key={item.id}>
+      <TrophyImg color={colors[item.rarity]} earned={Boolean(item.earnAt)}>
         <Image icon="trophy" imageUrl={item.image} iconSize={24} />
       </TrophyImg>
       <TrophyText>
         <p>{item.title}</p>
         <span>{item.description}</span>
       </TrophyText>
-      {item.earnedAt && (
+      {item.earnAt && (
         <TrophyEarned>
-          Earned at: {format(item.earnedAt, 'Do MMM YYYY')}
+          Earn at: {format(new Date(item.earnAt), 'Do MMM YYYY')}
         </TrophyEarned>
       )}
     </Trophy>

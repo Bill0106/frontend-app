@@ -36,7 +36,7 @@ const Detail: React.SFC<Props> = ({ url }) => {
 
   const trophiesEarned =
     trophies.length &&
-    (trophies.filter(item => item.earnedAt).length / trophies.length) * 100;
+    (trophies.filter(item => item.earnAt).length / trophies.length) * 100;
 
   return (
     <Container>

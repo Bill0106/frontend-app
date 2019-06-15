@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Gourmet } from '@/store/model';
 import Image from '@/components/Image';
-import { Card, Header, Content, Title, Date } from './style';
+import { Card, Header, Content, Title, EatAt } from './style';
 
 const GourmetCard: React.SFC<{ gourmet: Gourmet }> = ({ gourmet }) => (
   <Card>
@@ -14,7 +14,7 @@ const GourmetCard: React.SFC<{ gourmet: Gourmet }> = ({ gourmet }) => (
     <Image imageKey={gourmet.image} icon="utensils" />
     <Content>
       <Title>{gourmet.food}</Title>
-      <Date>{format(gourmet.date, 'YYYY-MM-DD')}</Date>
+      <EatAt>{format(new Date(gourmet.eatAt), 'YYYY-MM-DD')}</EatAt>
     </Content>
   </Card>
 );

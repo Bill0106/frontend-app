@@ -33,7 +33,7 @@ const Gourmets: React.SFC<RouteComponentProps> = () => {
     >
       <List>
         {list.map(item => (
-          <GourmetCard key={item._id} gourmet={item} />
+          <GourmetCard key={item.id} gourmet={item} />
         ))}
       </List>
     </InfiniteScroll>

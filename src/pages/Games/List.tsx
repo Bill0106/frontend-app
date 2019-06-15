@@ -25,7 +25,7 @@ const Games: React.SFC<RouteComponentProps> = () => {
     >
       <List>
         {list.map(item => (
-          <GameCard key={item._id} game={item} />
+          <GameCard key={item.id} game={item} />
         ))}
       </List>
     </InfiniteScroll>
