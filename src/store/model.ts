@@ -29,3 +29,11 @@ export interface Gourmet {
   eatAt: string;
   url: string;
 }
+
+export interface Movie {
+  id: string;
+  poster: string;
+  rate: number;
+  title: string;
+  watchAt: string;
+}

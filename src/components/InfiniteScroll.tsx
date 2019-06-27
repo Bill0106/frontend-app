@@ -15,25 +15,25 @@ const InfiniteScroll: React.SFC<Props> = ({
   hasMore,
   onLoadMore,
 }) => {
-  let container: HTMLDivElement | null;
-
-  const handleScroll = () => {
-    if (!container) {
-      return false;
-    }
-
-    const { top } = container.getBoundingClientRect();
-    if (top - window.innerHeight < 100 && !isBusy) {
-      onLoadMore();
-    }
-  };
+  let container: HTMLDivElement | null = null;
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (!container) {
+        return false;
+      }
+
+      const { top } = container.getBoundingClientRect();
+      if (top - window.innerHeight < 100 && !isBusy) {
+        onLoadMore();
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]);
+  }, [container, isBusy, onLoadMore]);
 
   return (
     <div>

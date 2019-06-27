@@ -50,7 +50,7 @@ const drawCircle = (
 };
 
 const CircleCanvas: React.SFC<Props> = ({ percent, color }) => {
-  let canvas: HTMLCanvasElement | null;
+  let canvas: HTMLCanvasElement | null = null;
 
   const [isDrawed, setIsDrawed] = useState(false);
 
@@ -59,7 +59,7 @@ const CircleCanvas: React.SFC<Props> = ({ percent, color }) => {
       drawCircle(canvas, percent, color);
       setIsDrawed(true);
     }
-  });
+  }, [canvas, percent, isDrawed, color]);
 
   return <canvas ref={ele => (canvas = ele)} width="100" height="100" />;
 };
