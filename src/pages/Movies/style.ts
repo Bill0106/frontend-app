@@ -5,6 +5,7 @@ export const Year = styled.p`
   font-size: 24px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-weight: bolder;
+  color: #ffe400;
   @media (min-width: ${MEDIA_QUERIES.TABLET}) {
     font-size: 30px;
     text-align: center;
@@ -28,7 +29,7 @@ export const Line = styled.span`
   left: 50%;
   margin-left: -5px;
   width: 10px;
-  background: #000;
+  background: #ffe400;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     left: 24px;
   }

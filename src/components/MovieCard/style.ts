@@ -6,7 +6,9 @@ export const Poster = styled.div`
   width: 100px;
 `;
 
-export const Text = styled.div``;
+export const Text = styled.div`
+  color: #14a76c;
+`;
 
 export const Card = styled.div<{ days: number; isLeft: boolean }>`
   display: grid;
@@ -39,7 +41,7 @@ export const Line = styled.span<{ isLeft: boolean }>`
   margin-top: -1px;
   width: 26px;
   height: 2px;
-  background: #000;
+  background: #ffe400;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     left: -26px;
   }
@@ -48,6 +50,7 @@ export const Line = styled.span<{ isLeft: boolean }>`
 export const Date = styled.span`
   font-size: 40px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #ffe400;
   @media (max-width: ${MEDIA_QUERIES.LAPTOP}) {
     font-size: 30px;
   }
