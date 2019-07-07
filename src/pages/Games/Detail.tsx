@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import PAGE_TITLE from '@/constants/pageTitle';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import useFetchGameDetail from '@/store/useFetchGameDetail';
 import Loading from '@/components/Loading';
 import Image from '@/components/Image';
@@ -17,18 +17,13 @@ const { useEffect } = React;
 const Detail: React.SFC<Props> = ({ url }) => {
   const [state, fetchGameDetail] = useFetchGameDetail();
   const { game, trophies, isFetching } = state;
-
-  useEffect(() => {
-    if (game) {
-      document.title = `${game.name} - Games | ${PAGE_TITLE}`;
-    }
-  });
+  useDocumentTitle([game ? game.name : '', 'Games']);
 
   useEffect(() => {
     if (url) {
       fetchGameDetail(url);
     }
-  }, [url]);
+  }, [fetchGameDetail, url]);
 
   if (isFetching || !game) {
     return <Loading />;

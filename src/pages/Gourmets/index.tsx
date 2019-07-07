@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import PAGE_TITLE from '@/constants/pageTitle';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { Gourmet } from '@/store/model';
 import useFetchList from '@/store/useFetchList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import GourmetCard from '@/components/GourmetCard';
 import { List } from './style';
 
-const { useEffect } = React;
-
 const Gourmets: React.SFC<RouteComponentProps> = () => {
   const [state, fetchList] = useFetchList<Gourmet>('gourmets');
   const { list, total, isFetching } = state;
+
+  useDocumentTitle('Gourmets');
 
   const handleLoadMore = () => {
     if (list.length >= total || isFetching) {
@@ -20,10 +20,6 @@ const Gourmets: React.SFC<RouteComponentProps> = () => {
 
     fetchList();
   };
-
-  useEffect(() => {
-    document.title = `Gourmets - ${PAGE_TITLE}`;
-  }, []);
 
   return (
     <InfiniteScroll

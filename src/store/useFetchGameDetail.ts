@@ -1,8 +1,8 @@
 import * as React from 'react';
 import ACTION_TYPES from '@/constants/actionTypes';
-import MessageContext from '@/contexts/MessageContext';
+import useMessage from '@/hooks/useMessage';
 import { Game, GameTrophy } from './model';
-import service from '@/store/service';
+import service from './service';
 
 export interface GameDetail {
   game: Game | null;
@@ -46,35 +46,39 @@ const reducer = (state: GameState, action: GameAction) => {
   }
 };
 
-const { useState, useEffect, useReducer, useContext } = React;
+const { useState, useEffect, useReducer, useCallback } = React;
 
 const useFetchGameDetail = (): [GameState, (url: string) => void] => {
   const [url, setUrl] = useState('');
-  const { setError } = useContext(MessageContext);
+  const [error, setError] = useState('');
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    const fetch = async () => {
-      dispatch({ type: ACTION_TYPES.PENDING });
-      try {
-        const [game, trophies] = await Promise.all([
-          service.fetchGame(url),
-          service.fetchGameTrophies(url),
-        ]);
-        dispatch({
-          type: ACTION_TYPES.FETCHED,
-          payload: { game, trophies },
-        });
-      } catch (error) {
-        setError(error.message);
-        dispatch({ type: ACTION_TYPES.ERROR });
-      }
-    };
+  useMessage(error);
 
-    if (url) {
-      fetch();
+  const fetch = useCallback(async () => {
+    dispatch({ type: ACTION_TYPES.PENDING });
+    try {
+      if (!url) {
+        throw new Error('No URL');
+      }
+
+      const [game, trophies] = await Promise.all([
+        service.fetchGame(url),
+        service.fetchGameTrophies(url),
+      ]);
+      dispatch({
+        type: ACTION_TYPES.FETCHED,
+        payload: { game, trophies },
+      });
+    } catch (error) {
+      setError(error.message);
+      dispatch({ type: ACTION_TYPES.ERROR });
     }
   }, [url]);
+
+  useEffect(() => {
+    fetch();
+  }, [fetch]);
 
   const fetchGameDetail = (url: string) => setUrl(url);
 

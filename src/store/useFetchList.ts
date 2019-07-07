@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ACTION_TYPES from '@/constants/actionTypes';
-import MessageContext from '@/contexts/MessageContext';
+import useMessage from '@/hooks/useMessage';
 import service, { List } from '@/store/service';
 
 export interface ListState<T> extends List<T> {
@@ -35,7 +35,7 @@ const reducer = <T>(state: ListState<T>, action: ListAction<T>) => {
   }
 };
 
-const { useReducer, useState, useEffect, useContext } = React;
+const { useReducer, useState, useEffect, useCallback } = React;
 
 const useFetchList = <T>(type: string): [ListState<T>, () => void] => {
   const initialState: ListState<T> = {
@@ -45,26 +45,28 @@ const useFetchList = <T>(type: string): [ListState<T>, () => void] => {
   };
 
   const [page, setPage] = useState(1);
-  const { setError } = useContext(MessageContext);
+  const [error, setError] = useState('');
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    const fetch = async (): Promise<void> => {
-      dispatch({ type: ACTION_TYPES.PENDING });
-      try {
-        const data = await service.fetchList<T>(type, page);
-        dispatch({
-          type: ACTION_TYPES.FETCHED,
-          payload: data,
-        });
-      } catch (error) {
-        setError(error.message);
-        dispatch({ type: ACTION_TYPES.ERROR });
-      }
-    };
+  useMessage(error);
 
+  const fetch = useCallback(async () => {
+    dispatch({ type: ACTION_TYPES.PENDING });
+    try {
+      const data = await service.fetchList<T>(type, page);
+      dispatch({
+        type: ACTION_TYPES.FETCHED,
+        payload: data,
+      });
+    } catch (error) {
+      setError(error.message);
+      dispatch({ type: ACTION_TYPES.ERROR });
+    }
+  }, [page, type]);
+
+  useEffect(() => {
     fetch();
-  }, [page]);
+  }, [fetch]);
 
   const fetchList = () => {
     if (state.list.length >= state.total || state.isFetching) {

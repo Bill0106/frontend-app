@@ -7,6 +7,8 @@ import { faGamepad } from '@fortawesome/free-solid-svg-icons/faGamepad';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons/faTrophy';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons/faUtensils';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
+import { faFilm } from '@fortawesome/free-solid-svg-icons/faFilm';
+import { faTicketAlt } from '@fortawesome/free-solid-svg-icons/faTicketAlt';
 
 library.add(
   faPlaystation,
@@ -16,5 +18,7 @@ library.add(
   faGamepad,
   faTrophy,
   faUtensils,
-  faExclamationCircle
+  faExclamationCircle,
+  faFilm,
+  faTicketAlt
 );

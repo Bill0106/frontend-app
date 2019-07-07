@@ -6,6 +6,7 @@ import { Layout, Content } from './style';
 const backgrounds: { [key: string]: string } = {
   games: '#303030',
   gourmets: '#F7F2EB',
+  movies: '#272727',
 };
 
 const AppLayout: React.SFC<RouteComponentProps> = ({ children, location }) => {

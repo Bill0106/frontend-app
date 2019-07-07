@@ -6,21 +6,22 @@ import ErrorMessage from '@/components/ErrorMessage';
 import Home from '@/pages/Home';
 import Games from '@/pages/Games';
 import Gourmets from '@/pages/Gourmets';
+import Movies from '@/pages/Movies';
 
-const { useState } = React;
+const { useState, useCallback } = React;
 
 const App: React.SFC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errorVisible, setErrorVisible] = useState(false);
 
-  const handleError = (text: string) => {
+  const handleError = useCallback((text: string) => {
     setErrorMessage(text);
     setErrorVisible(true);
 
     setTimeout(() => {
       setErrorVisible(false);
     }, 3000);
-  };
+  }, []);
 
   return (
     <MessageContext.Provider value={{ setError: handleError }}>
@@ -29,6 +30,7 @@ const App: React.SFC = () => {
         <Layout default>
           <Games path="/games/*" />
           <Gourmets path="/gourmets" />
+          <Movies path="movies" />
         </Layout>
       </Router>
       <ErrorMessage visible={errorVisible} text={errorMessage} />

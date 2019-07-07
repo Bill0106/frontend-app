@@ -2,9 +2,9 @@ import * as React from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import navigation from '@/configs/navigation';
 import CDN_URL from '@/configs/cdn';
-import PAGE_TITLE from '@/constants/pageTitle';
 import loadImage from '@/utils/loadImage';
-import MessageContext from '@/contexts/MessageContext';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
+import useMessage from '@/hooks/useMessage';
 import {
   HomePage,
   Loading,
@@ -17,15 +17,18 @@ import {
   Mask,
 } from './style';
 
-const { useState, useEffect, useContext } = React;
+const { useState, useEffect, useCallback } = React;
 const defaultImage = navigation[0].image;
 
 const Home: React.SFC<RouteComponentProps> = () => {
   const [background, setBackground] = useState(defaultImage);
+  const [error, setError] = useState('');
   const [show, setShow] = useState(false);
-  const { setError } = useContext(MessageContext);
 
-  const preloadBackground = async () => {
+  useDocumentTitle('');
+  useMessage(error);
+
+  const handlePreload = useCallback(async () => {
     try {
       await Promise.all(
         navigation.map(item => loadImage(CDN_URL + item.image))
@@ -34,13 +37,13 @@ const Home: React.SFC<RouteComponentProps> = () => {
     } catch (error) {
       setError(error.message);
     }
-  };
+  }, []);
 
   const handleTitleMouseEnter = () => setBackground(defaultImage);
 
   const handleEvent = (e: React.MouseEvent<HTMLDivElement>) => {
     const text = e.currentTarget.innerHTML;
-    const section = navigation.find(item => item.title.toLowerCase() === text);
+    const section = navigation.find(item => item.title === text);
     if (!section) {
       return false;
     }
@@ -53,12 +56,8 @@ const Home: React.SFC<RouteComponentProps> = () => {
   };
 
   useEffect(() => {
-    document.title = PAGE_TITLE;
-
-    if (!show) {
-      preloadBackground();
-    }
-  }, []);
+    handlePreload();
+  }, [handlePreload]);
 
   return (
     <HomePage>
@@ -66,13 +65,15 @@ const Home: React.SFC<RouteComponentProps> = () => {
         <Content>
           <Title onMouseEnter={handleTitleMouseEnter}>{`Bill's Hobby`}</Title>
           <Sections>
-            {['games', 'gourmets'].map(item => (
-              <Section key={item}>
-                <div onClick={handleEvent} onMouseEnter={handleEvent}>
-                  {item}
-                </div>
-              </Section>
-            ))}
+            {navigation
+              .filter(item => item.title !== 'Home')
+              .map(item => (
+                <Section key={item.title}>
+                  <div onClick={handleEvent} onMouseEnter={handleEvent}>
+                    {item.title}
+                  </div>
+                </Section>
+              ))}
           </Sections>
         </Content>
         <Mask />

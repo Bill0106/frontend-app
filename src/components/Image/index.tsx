@@ -13,14 +13,21 @@ export interface Props {
   imageUrl?: string;
   icon: IconName;
   iconSize?: number;
+  height?: number;
 }
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
-const Image: React.SFC<Props> = ({ imageKey, imageUrl, icon, iconSize }) => {
-  let isMounted = true;
+const Image: React.SFC<Props> = ({
+  imageKey,
+  imageUrl,
+  icon,
+  iconSize,
+  height,
+}) => {
   const src = imageKey ? CDN_URL + imageKey : imageUrl || '';
   const [show, setShow] = useState(false);
+  const isMounted = useRef(true);
 
   useEffect(() => {
     if (!show && src) {
@@ -32,12 +39,12 @@ const Image: React.SFC<Props> = ({ imageKey, imageUrl, icon, iconSize }) => {
     }
 
     return () => {
-      isMounted = false;
+      isMounted.current = false;
     };
   });
 
   return (
-    <ImageContainer>
+    <ImageContainer height={height}>
       <Placeholder src={placeholder} />
       <Img src={src} show={show} />
       <Icon show={!show} size={iconSize || 50}>

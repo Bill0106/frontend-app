@@ -12,8 +12,9 @@ const loading = keyframes`
   }
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled.div<{ height: number | undefined }>`
   position: relative;
+  ${props => props.height && `height: ${props.height}px`};
   background: #e0e0e0;
 `;
 
