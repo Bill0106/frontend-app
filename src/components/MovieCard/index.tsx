@@ -34,7 +34,7 @@ const MovieCard: React.SFC<Props> = ({ movie, dayDiff }) => {
   ];
 
   return (
-    <Card days={dayDiff} isReverse={movie.isLeft}>
+    <Card days={dayDiff} isLeft={movie.isLeft}>
       {movie.isLeft ? contentArr.reverse() : contentArr}
     </Card>
   );

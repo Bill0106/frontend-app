@@ -6,7 +6,7 @@ import { Movie } from '@/store/model';
 import useFetchList from '@/store/useFetchList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import MovieCard, { MovieCardData } from '@/components/MovieCard';
-import { Timeline, Content, Year, Item, Line, Spacer } from './style';
+import { Year, Item, Line, Spacer } from './style';
 
 const Movies: React.SFC<RouteComponentProps> = () => {
   const [state, fetchList] = useFetchList<Movie>('movies');
@@ -43,9 +43,9 @@ const Movies: React.SFC<RouteComponentProps> = () => {
 
   return (
     <InfiniteScroll {...scrollProps}>
-      <Timeline>
+      <div>
         {years.map(item => (
-          <Content key={item}>
+          <div key={item}>
             <Year>{item}</Year>
             {movies
               .filter(v => getYear(v.watchAt) === item)
@@ -64,9 +64,9 @@ const Movies: React.SFC<RouteComponentProps> = () => {
                   </Item>
                 );
               })}
-          </Content>
+          </div>
         ))}
-      </Timeline>
+      </div>
     </InfiniteScroll>
   );
 };
