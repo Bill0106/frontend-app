@@ -3,7 +3,9 @@ import ACTION_TYPES from '@/constants/actionTypes';
 import useMessage from '@/hooks/useMessage';
 import service, { List } from '@/store/service';
 
-export interface ListState<T> extends List<T> {
+export interface ListState<T> {
+  list: Array<T>;
+  total: number;
   isFetching: boolean;
 }
 
@@ -24,7 +26,7 @@ const reducer = <T>(state: ListState<T>, action: ListAction<T>) => {
     case ACTION_TYPES.FETCHED:
       return {
         ...state,
-        list: [...state.list, ...payload.list],
+        list: [...state.list, ...(payload.list || [])],
         total: payload.total,
         isFetching: false,
       };
@@ -69,6 +71,7 @@ const useFetchList = <T>(type: string): [ListState<T>, () => void] => {
   }, [fetch]);
 
   const fetchList = () => {
+    console.log(state.list.length, state.total);
     if (state.list.length >= state.total || state.isFetching) {
       return false;
     }
