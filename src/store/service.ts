@@ -3,7 +3,7 @@ import request from '@/utils/request';
 import { Game, GameTrophy } from '@/store/model';
 
 export interface List<T> {
-  list: Array<T>;
+  list: Array<T> | null;
   total: number;
 }
 
