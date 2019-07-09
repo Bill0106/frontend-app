@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Movie } from '@/store/model';
 import Image from '@/components/Image';
-import { Card, Poster, Line, Text, Date, Title, Rate } from './style';
+import { Card, Poster, Line, Text, Date, Title, Rate, Ticket } from './style';
 
 export interface MovieCardData extends Movie {
   isLeft: boolean;
@@ -15,27 +15,25 @@ interface Props {
 }
 
 const MovieCard: React.SFC<Props> = ({ movie, dayDiff }) => {
-  const contentArr = [
-    <Poster key="poster">
-      <Image imageKey={movie.poster} icon="film" height={148} />
-      <Line isLeft={movie.isLeft} />
-    </Poster>,
-    <Text key="text">
-      <Date>{format(movie.watchAt, 'MM-DD')}</Date>
-      <Title>{movie.title}</Title>
-      <Rate>
-        {Array(movie.rate)
-          .fill(null)
-          .map((_, index) => (
-            <FontAwesomeIcon key={index} icon={['fas', 'ticket-alt']} />
-          ))}
-      </Rate>
-    </Text>,
-  ];
-
   return (
     <Card days={dayDiff} isLeft={movie.isLeft}>
-      {movie.isLeft ? contentArr.reverse() : contentArr}
+      <Poster>
+        <Image imageKey={movie.poster} icon="film" height={148} />
+        <Line />
+      </Poster>
+      <Text>
+        <Date>{format(movie.watchAt, 'MM-DD')}</Date>
+        <Title>{movie.title}</Title>
+        <Rate>
+          {Array(5)
+            .fill(null)
+            .map((_, index) => (
+              <Ticket key={index} active={index < movie.rate}>
+                <FontAwesomeIcon icon={['fas', 'ticket-alt']} />
+              </Ticket>
+            ))}
+        </Rate>
+      </Text>
     </Card>
   );
 };
