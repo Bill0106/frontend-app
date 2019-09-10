@@ -32,4 +32,4 @@ RUN npm install -g serve
 
 COPY --from=build /app/dist/index.html ./
 
-CMD [ "serve", "-l", "80" ]
+CMD [ "serve", "-s", "-l", "80" ]
