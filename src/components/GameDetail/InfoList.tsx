@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Infos } from './style';
 
-const InfoList: React.SFC<{ infos: Array<string> }> = ({ infos }) => {
+const InfoList: React.SFC<{ infos: string[] }> = ({ infos }) => {
   const slash = '|';
   const list = infos
-    .reduce((res, item) => [...res, slash, item], [] as Array<string>)
+    .reduce((res, item) => [...res, slash, item], [] as string[])
     .splice(1);
 
   const renderList = (item: string, index: number) =>

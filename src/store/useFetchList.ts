@@ -4,7 +4,7 @@ import useMessage from '@/hooks/useMessage';
 import service, { List } from '@/store/service';
 
 export interface ListState<T> {
-  list: Array<T>;
+  list: T[];
   total: number;
   isFetching: boolean;
 }

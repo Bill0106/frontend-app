@@ -6,7 +6,7 @@ import service from './service';
 
 export interface GameDetail {
   game: Game | null;
-  trophies: Array<GameTrophy>;
+  trophies: GameTrophy[];
 }
 
 export interface GameState extends GameDetail {
@@ -58,17 +58,13 @@ const useFetchGameDetail = (): [GameState, (url: string) => void] => {
   const fetch = useCallback(async () => {
     dispatch({ type: ACTION_TYPES.PENDING });
     try {
-      if (!url) {
-        throw new Error('No URL');
-      }
-
       const [game, trophies] = await Promise.all([
         service.fetchGame(url),
         service.fetchGameTrophies(url),
       ]);
       dispatch({
         type: ACTION_TYPES.FETCHED,
-        payload: { game, trophies },
+        payload: { game, trophies: trophies.gameTrophies },
       });
     } catch (error) {
       setError(error.message);
@@ -77,8 +73,10 @@ const useFetchGameDetail = (): [GameState, (url: string) => void] => {
   }, [url]);
 
   useEffect(() => {
-    fetch();
-  }, [fetch]);
+    if (url) {
+      fetch();
+    }
+  }, [fetch, url]);
 
   const fetchGameDetail = (url: string) => setUrl(url);
 

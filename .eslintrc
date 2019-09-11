@@ -11,7 +11,6 @@
     "prettier/@typescript-eslint"
   ],
   "rules": {
-    "@typescript-eslint/array-type": ["error", "generic"],
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-object-literal-type-assertion": 0,
