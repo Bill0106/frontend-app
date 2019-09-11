@@ -3,7 +3,7 @@ import request from '@/utils/request';
 import { Game, GameTrophy } from '@/store/model';
 
 export interface List<T> {
-  list: Array<T> | null;
+  list: T[] | null;
   total: number;
 }
 
@@ -30,7 +30,9 @@ class Service {
       throw error;
     }
   }
-  async fetchGameTrophies(url: string): Promise<Array<GameTrophy>> {
+  async fetchGameTrophies(
+    url: string
+  ): Promise<{ gameTrophies: GameTrophy[] }> {
     try {
       const res = await request.get(`/games/${url}/trophies`);
 

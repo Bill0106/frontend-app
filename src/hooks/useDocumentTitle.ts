@@ -4,7 +4,7 @@ const PAGE_TITLE = `Bill's Hoddy`;
 
 const { useEffect } = React;
 
-const useDocumentTitle = (title: string | Array<string>) => {
+const useDocumentTitle = (title: string | string[]) => {
   useEffect(() => {
     const documentTitle = Array.isArray(title) ? title.join(' - ') : title;
     document.title = documentTitle + (documentTitle && ' | ') + PAGE_TITLE;

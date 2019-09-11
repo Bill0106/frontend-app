@@ -5,7 +5,7 @@ import Image from '@/components/Image';
 import { Trophies, Trophy, TrophyImg, TrophyText, TrophyEarned } from './style';
 
 interface Props {
-  trophies: Array<GameTrophy>;
+  trophies: GameTrophy[];
 }
 
 const colors: { [key: string]: string } = {

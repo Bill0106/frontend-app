@@ -17,7 +17,7 @@ const Movies: React.SFC<RouteComponentProps> = () => {
     .map(item => getYear(item.watchAt))
     .filter((item, index, arr) => index === arr.indexOf(item));
 
-  const movies = state.list.reduce((res: Array<MovieCardData>, item, index) => {
+  const movies = state.list.reduce((res: MovieCardData[], item, index) => {
     if (index === 0) {
       return [...res, { ...item, isLeft: true }];
     }
