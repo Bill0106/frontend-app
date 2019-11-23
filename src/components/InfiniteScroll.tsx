@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Loading from '@/components/Loading';
 
-interface Props {
+export interface InfiniteScrollProps {
   isBusy: boolean;
   hasMore: boolean;
   onLoadMore: () => void;
@@ -9,7 +9,7 @@ interface Props {
 
 const { useEffect } = React;
 
-const InfiniteScroll: React.SFC<Props> = ({
+const InfiniteScroll: React.SFC<InfiniteScrollProps> = ({
   children,
   isBusy,
   hasMore,

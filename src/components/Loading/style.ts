@@ -1,4 +1,4 @@
-import styled from '@/utils/styled';
+import styled from 'styled-components';
 
 export const LoadingContainer = styled.div`
   margin-top: 15px;

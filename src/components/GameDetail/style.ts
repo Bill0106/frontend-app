@@ -1,5 +1,5 @@
 import MEDIA_QUERIES from '@/constants/mediaQueries';
-import styled, { css } from '@/utils/styled';
+import styled, { css } from 'styled-components';
 
 const circelText = css`
   display: block;

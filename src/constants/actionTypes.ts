@@ -4,4 +4,10 @@ const ACTION_TYPES = {
   ERROR: 'ERROR',
 };
 
+export enum ActionType {
+  Pending = 'PENDING',
+  Fetched = 'FETCHED',
+  Error = 'ERROR',
+}
+
 export default ACTION_TYPES;

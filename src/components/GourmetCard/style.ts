@@ -1,4 +1,4 @@
-import styled from '@/utils/styled';
+import styled from 'styled-components';
 
 export const Card = styled.div`
   background: #fff;

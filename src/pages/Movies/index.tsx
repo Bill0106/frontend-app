@@ -1,23 +1,20 @@
 import * as React from 'react';
 import { getMonth, getYear, differenceInDays } from 'date-fns';
 import { RouteComponentProps } from '@reach/router';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { Movie } from '@/store/model';
-import useFetchList from '@/store/useFetchList';
+import useList, { ListType } from '@/hooks/useList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import MovieCard, { MovieCardData } from '@/components/MovieCard';
 import { Year, Item, Line, Spacer } from './style';
 
 const Movies: React.SFC<RouteComponentProps> = () => {
-  const [state, fetchList] = useFetchList<Movie>('movies');
-  const { list, total, isFetching } = state;
-  useDocumentTitle('Movies');
+  const { list, infiniteScrollProps } = useList<Movie>(ListType.Movie);
 
-  const years = state.list
-    .map(item => getYear(item.watchAt))
+  const years = list
+    .map(item => getYear(new Date(item.watchAt)))
     .filter((item, index, arr) => index === arr.indexOf(item));
 
-  const movies = state.list.reduce((res: MovieCardData[], item, index) => {
+  const movies = list.reduce((res: MovieCardData[], item, index) => {
     if (index === 0) {
       return [...res, { ...item, isLeft: true }];
     }
@@ -28,30 +25,28 @@ const Movies: React.SFC<RouteComponentProps> = () => {
       {
         ...item,
         isLeft:
-          getMonth(item.watchAt) === getMonth(prev.watchAt)
+          getMonth(new Date(item.watchAt)) === getMonth(new Date(prev.watchAt))
             ? prev.isLeft
             : !prev.isLeft,
       },
     ];
   }, []);
 
-  const scrollProps = {
-    hasMore: list.length === 0 || list.length < total,
-    isBusy: isFetching,
-    onLoadMore: fetchList,
-  };
-
   return (
-    <InfiniteScroll {...scrollProps}>
+    <InfiniteScroll {...infiniteScrollProps}>
       <div>
         {years.map(item => (
           <div key={item}>
             <Year>{item}</Year>
             {movies
-              .filter(v => getYear(v.watchAt) === item)
+              .filter(v => getYear(new Date(v.watchAt)) === item)
               .map((v, i, a) => {
                 const dayDiff =
-                  i && differenceInDays(a[i - 1].watchAt, v.watchAt);
+                  i &&
+                  differenceInDays(
+                    new Date(a[i - 1].watchAt),
+                    new Date(v.watchAt)
+                  );
                 const doms = [
                   <MovieCard key="card" movie={v} dayDiff={dayDiff} />,
                   <Spacer key="spacer" />,

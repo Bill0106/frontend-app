@@ -14,7 +14,7 @@ const GourmetCard: React.SFC<{ gourmet: Gourmet }> = ({ gourmet }) => (
     <Image imageKey={gourmet.image} icon="utensils" />
     <Content>
       <Title>{gourmet.food}</Title>
-      <EatAt>{format(new Date(gourmet.eatAt), 'YYYY-MM-DD')}</EatAt>
+      <EatAt>{format(new Date(gourmet.eatAt), 'yyyy-MM-dd')}</EatAt>
     </Content>
   </Card>
 );
