@@ -19,11 +19,6 @@ const navigations = [
     path: '/movies',
     image: '15ce347c02775f796d80012bd5ccc593.jpg',
   },
-  // {
-  //   title: 'Hearthstone',
-  //   path: '/hearthstone',
-  //   image: '34bb10ad54a1f320a5dba304dc0fc44c.jpg',
-  // },
 ];
 
 export default navigations;

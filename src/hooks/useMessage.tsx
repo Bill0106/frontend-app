@@ -4,11 +4,12 @@ export interface MessageContextValue {
   setError: (text: string) => void;
 }
 
-const { createContext, useContext, useRef, useEffect } = React;
+const { createContext, useContext, useRef, useEffect, useState } = React;
 
 const MessageContext = createContext({} as MessageContextValue);
 
-const useMessage = (message: string) => {
+const useMessage = () => {
+  const [message, setMessage] = useState('');
   const { setError } = useContext(MessageContext);
   const error = useRef('');
 
@@ -18,6 +19,8 @@ const useMessage = (message: string) => {
       error.current = message;
     }
   }, [setError, message]);
+
+  return { setError: setMessage };
 };
 
 const Provider: React.SFC<MessageContextValue> = ({ children, setError }) => (

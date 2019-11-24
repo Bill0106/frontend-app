@@ -4,41 +4,36 @@ import request from '@/utils/request';
 import useMessage from '@/hooks/useMessage';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 
-interface ViewData {
-  game: Game | null;
-  trophies: GameTrophy[];
-  earned: number;
-  isFetching: boolean;
-}
-
-const useViewData = (url?: string): ViewData => {
+const useViewData = (url?: string) => {
   const [game, setGame] = useState<Game | null>(null);
   const [trophies, setTrophies] = useState<GameTrophy[]>([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState('');
+  const { setError } = useMessage();
 
-  useMessage(error);
   useDocumentTitle([game ? game.name : '', 'Games']);
 
-  const fetch = useCallback(async (param: string) => {
-    setIsFetching(true);
-    try {
-      const res = await request.get<Game>(`/games/${param}`);
+  const fetch = useCallback(
+    async (param: string) => {
+      setIsFetching(true);
+      try {
+        const res = await request.get<Game>(`/games/${param}`);
 
-      if (res.platform !== GamePlatform.NS) {
-        const trophyRes = await request.get<{ gameTrophies: GameTrophy[] }>(
-          `/games/${param}/trophies`
-        );
-        setTrophies(trophyRes.gameTrophies);
+        if (res.platform !== GamePlatform.NS) {
+          const trophyRes = await request.get<{ gameTrophies: GameTrophy[] }>(
+            `/games/${param}/trophies`
+          );
+          setTrophies(trophyRes.gameTrophies);
+        }
+
+        setGame(res);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsFetching(false);
       }
-
-      setGame(res);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsFetching(false);
-    }
-  }, []);
+    },
+    [setError]
+  );
 
   useEffect(() => {
     if (url) {

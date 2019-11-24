@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { Gourmet } from '@/constants/models';
-import useList, { ListType } from '@/hooks/useList';
+import Type from '@/constants/type';
+import useList from '@/hooks/useList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import GourmetCard from '@/components/GourmetCard';
 import { List } from './style';
 
 const Gourmets: React.SFC<RouteComponentProps> = () => {
-  const { list, infiniteScrollProps } = useList<Gourmet>(ListType.Gourmet);
+  const { list, infiniteScrollProps } = useList<Gourmet>(Type.Gourmet);
 
   return (
     <InfiniteScroll {...infiniteScrollProps}>

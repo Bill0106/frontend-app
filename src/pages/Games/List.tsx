@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { Game } from '@/constants/models';
-import useList, { ListType } from '@/hooks/useList';
+import Type from '@/constants/type';
+import useList from '@/hooks/useList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import GameCard from '@/components/GameCard';
 import { List } from './style';
 
 const Games: React.SFC<RouteComponentProps> = () => {
-  const { list, infiniteScrollProps } = useList<Game>(ListType.Game);
+  const { list, infiniteScrollProps } = useList<Game>(Type.Game);
 
   return (
     <InfiniteScroll {...infiniteScrollProps}>

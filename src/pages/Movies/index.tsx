@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { getMonth, getYear, differenceInDays } from 'date-fns';
+import { getMonth, getYear, differenceInDays, parseISO } from 'date-fns';
 import { RouteComponentProps } from '@reach/router';
 import { Movie } from '@/constants/models';
-import useList, { ListType } from '@/hooks/useList';
+import Type from '@/constants/type';
+import useList from '@/hooks/useList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import MovieCard, { MovieCardData } from '@/components/MovieCard';
 import { Year, Item, Line, Spacer } from './style';
 
 const Movies: React.SFC<RouteComponentProps> = () => {
-  const { list, infiniteScrollProps } = useList<Movie>(ListType.Movie);
+  const { list, infiniteScrollProps } = useList<Movie>(Type.Movie);
 
   const years = list
-    .map(item => getYear(new Date(item.watchAt)))
+    .map(item => getYear(parseISO(item.watchAt)))
     .filter((item, index, arr) => index === arr.indexOf(item));
 
   const movies = list.reduce((res: MovieCardData[], item, index) => {
@@ -25,7 +26,7 @@ const Movies: React.SFC<RouteComponentProps> = () => {
       {
         ...item,
         isLeft:
-          getMonth(new Date(item.watchAt)) === getMonth(new Date(prev.watchAt))
+          getMonth(parseISO(item.watchAt)) === getMonth(parseISO(prev.watchAt))
             ? prev.isLeft
             : !prev.isLeft,
       },
@@ -39,13 +40,13 @@ const Movies: React.SFC<RouteComponentProps> = () => {
           <div key={item}>
             <Year>{item}</Year>
             {movies
-              .filter(v => getYear(new Date(v.watchAt)) === item)
+              .filter(v => getYear(parseISO(v.watchAt)) === item)
               .map((v, i, a) => {
                 const dayDiff =
                   i &&
                   differenceInDays(
-                    new Date(a[i - 1].watchAt),
-                    new Date(v.watchAt)
+                    parseISO(a[i - 1].watchAt),
+                    parseISO(v.watchAt)
                   );
                 const doms = [
                   <MovieCard key="card" movie={v} dayDiff={dayDiff} />,

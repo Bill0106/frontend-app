@@ -1,18 +1,13 @@
 import { useReducer, useCallback, useState, useEffect } from 'react';
 import { stringify } from 'query-string';
 import ActionType from '@/constants/actionType';
+import Type, { TitleMap } from '@/constants/type';
 import request from '@/utils/request';
 import createReducers, { CustomReducers } from '@/utils/createReducers';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { InfiniteScrollProps } from '@/components/InfiniteScroll';
 
 const PAGE_SIZE = 24;
-
-export enum ListType {
-  Game = 'games',
-  Gourmet = 'gourmets',
-  Movie = 'movies',
-}
 
 interface ListState<T> {
   list: T[];
@@ -30,18 +25,7 @@ interface ListResponse<T> {
   total: number;
 }
 
-interface ListData<T> {
-  list: T[];
-  infiniteScrollProps: InfiniteScrollProps;
-}
-
-const listTitleMap = new Map([
-  [ListType.Game, 'Games'],
-  [ListType.Gourmet, 'Gourmets'],
-  [ListType.Movie, 'Movies'],
-]);
-
-const useList = <T>(type: ListType, pageSize?: number): ListData<T> => {
+const useList = <T>(type: Type, pageSize?: number) => {
   const initialState: ListState<T> = {
     list: [],
     total: 0,
@@ -71,7 +55,7 @@ const useList = <T>(type: ListType, pageSize?: number): ListData<T> => {
     initialState
   );
 
-  useDocumentTitle(listTitleMap.get(type) || '');
+  useDocumentTitle(TitleMap.get(type) || '');
 
   const fetch = useCallback(async () => {
     dispatch({ type: ActionType.Pending });

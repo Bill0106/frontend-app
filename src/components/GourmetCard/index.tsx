@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Gourmet } from '@/constants/models';
 import Image from '@/components/Image';
@@ -14,7 +14,7 @@ const GourmetCard: React.SFC<{ gourmet: Gourmet }> = ({ gourmet }) => (
     <Image imageKey={gourmet.image} icon="utensils" />
     <Content>
       <Title>{gourmet.food}</Title>
-      <EatAt>{format(new Date(gourmet.eatAt), 'yyyy-MM-dd')}</EatAt>
+      <EatAt>{format(parseISO(gourmet.eatAt), 'yyyy-MM-dd')}</EatAt>
     </Content>
   </Card>
 );
