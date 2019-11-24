@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Movie } from '@/store/model';
+import { Movie } from '@/constants/models';
 import Image from '@/components/Image';
 import { Card, Poster, Line, Text, Date, Title, Rate, Ticket } from './style';
 

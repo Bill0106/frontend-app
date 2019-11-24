@@ -1,9 +1,16 @@
+export enum GamePlatform {
+  PSV = 'PlayStation Vita',
+  PS3 = 'PlayStation 3',
+  PS4 = 'PlayStation 4',
+  NS = 'Nintendo Switch',
+}
+
 export interface Game {
   id: string;
   title: string;
   name: string;
   genre: string;
-  platform: string;
+  platform: GamePlatform;
   rate: number;
   developer: string;
   publisher: string;
@@ -18,7 +25,7 @@ export interface GameTrophy {
   description: string;
   image: string;
   rarity: string;
-  earnAt: string | null;
+  earnAt?: string;
 }
 
 export interface Gourmet {
@@ -27,7 +34,6 @@ export interface Gourmet {
   restaurant: string;
   image: string;
   eatAt: string;
-  url: string;
 }
 
 export interface Movie {

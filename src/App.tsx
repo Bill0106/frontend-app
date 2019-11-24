@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Router } from '@reach/router';
-import MessageContext from '@/contexts/MessageContext';
+import { MessageProvider } from '@/hooks/useMessage';
 import Layout from '@/layouts/AppLayout';
 import ErrorMessage from '@/components/ErrorMessage';
 import Home from '@/pages/Home';
@@ -24,7 +24,7 @@ const App: React.SFC = () => {
   }, []);
 
   return (
-    <MessageContext.Provider value={{ setError: handleError }}>
+    <MessageProvider setError={handleError}>
       <Router>
         <Home path="/" />
         <Layout default>
@@ -34,7 +34,7 @@ const App: React.SFC = () => {
         </Layout>
       </Router>
       <ErrorMessage visible={errorVisible} text={errorMessage} />
-    </MessageContext.Provider>
+    </MessageProvider>
   );
 };
 

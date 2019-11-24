@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Gourmet } from '@/store/model';
+import { Gourmet } from '@/constants/models';
 import Image from '@/components/Image';
 import { Card, Header, Content, Title, EatAt } from './style';
 

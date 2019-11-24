@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { Gourmet } from '@/store/model';
+import { Gourmet } from '@/constants/models';
 import useList, { ListType } from '@/hooks/useList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import GourmetCard from '@/components/GourmetCard';

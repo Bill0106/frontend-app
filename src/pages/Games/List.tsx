@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { Game } from '@/store/model';
+import { Game } from '@/constants/models';
 import useList, { ListType } from '@/hooks/useList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import GameCard from '@/components/GameCard';

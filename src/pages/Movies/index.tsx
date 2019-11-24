@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getMonth, getYear, differenceInDays } from 'date-fns';
 import { RouteComponentProps } from '@reach/router';
-import { Movie } from '@/store/model';
+import { Movie } from '@/constants/models';
 import useList, { ListType } from '@/hooks/useList';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import MovieCard, { MovieCardData } from '@/components/MovieCard';
