@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { format } from 'date-fns';
-import { Game } from '@/store/model';
+import { format, parseISO } from 'date-fns';
+import { Game } from '@/constants/models';
 import CircleInfo from './CircleInfo';
 import InfoList from './InfoList';
 import { Header, Title, Subtitle, Rate, Earned } from './style';
@@ -14,7 +14,7 @@ const DetailMain: React.SFC<Props> = ({ game, trophyRate }) => {
   const infos = [
     game.platform,
     game.genre,
-    format(new Date(game.buyAt), 'YYYY-MM-DD'),
+    format(parseISO(game.buyAt), 'yyyy-MM-dd'),
   ];
   const companies = [game.developer, game.publisher].filter(
     (item, index, arr) => arr.indexOf(item) === index

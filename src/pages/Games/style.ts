@@ -1,5 +1,5 @@
+import styled from 'styled-components';
 import MEDIA_QUERIES from '@/constants/mediaQueries';
-import styled from '@/utils/styled';
 
 export const List = styled.div`
   display: grid;

@@ -1,4 +1,4 @@
-import styled from '@/utils/styled';
+import styled from 'styled-components';
 import MEDIA_QUERIES from '@/constants/mediaQueries';
 
 export const Year = styled.p`

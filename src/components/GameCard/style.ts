@@ -1,5 +1,5 @@
+import styled from 'styled-components';
 import MEDIA_QUERIES from '@/constants/mediaQueries';
-import styled from '@/utils/styled';
 
 export const Card = styled.div`
   position: relative;
@@ -24,9 +24,9 @@ export const Text = styled.div`
 `;
 
 export const Title = styled.p`
-  margin: 0 0 5px;
+  margin: 0 0 12px;
   width: 100%;
-  font-size: 16px;
+  font-size: 18px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -35,21 +35,10 @@ export const Title = styled.p`
   }
 `;
 
-export const Info = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-column-gap: 5px;
-  justify-content: space-between;
-  align-items: center;
-  > span {
-    @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-      display: none;
-    }
-  }
-`;
-
 export const Rate = styled.div`
   display: grid;
   grid-template-columns: repeat(5, auto);
-  grid-column-gap: 3px;
+  grid-column-gap: 8px;
+  justify-content: left;
+  font-size: 16px;
 `;

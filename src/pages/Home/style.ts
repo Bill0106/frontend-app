@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from '@/utils/styled';
+import styled, { css, keyframes } from 'styled-components';
 import MEDIA_QUERIES from '@/constants/mediaQueries';
 
 const fullpage = css`

@@ -9,23 +9,23 @@ import {
 import navigations from '@/configs/navigation';
 import { Navbar, Button, Menu, MenuItem, MenuClose } from './style';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 const Nav: React.SFC = () => {
-  let menu: HTMLUListElement | null;
   const [showNav, setShowNav] = useState(false);
+  const menu = useRef<HTMLUListElement | null>(null);
 
   const handleOpen = () => {
     setShowNav(true);
-    if (menu) {
-      disableBodyScroll(menu);
+    if (menu.current) {
+      disableBodyScroll(menu.current);
     }
   };
 
   const handleClose = () => {
     setShowNav(false);
-    if (menu) {
-      enableBodyScroll(menu);
+    if (menu.current) {
+      enableBodyScroll(menu.current);
     }
   };
 
@@ -49,7 +49,7 @@ const Nav: React.SFC = () => {
       <Button onClick={handleOpen}>
         <FontAwesomeIcon icon={['fas', 'bars']} />
       </Button>
-      <Menu ref={el => (menu = el)} show={showNav}>
+      <Menu ref={menu} show={showNav}>
         {navigations.map(item => (
           <MenuItem key={item.title} onClick={handleClick}>
             {item.title.toLowerCase()}

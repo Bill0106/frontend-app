@@ -1,5 +1,5 @@
 import MEDIA_QUERIES from '@/constants/mediaQueries';
-import styled from '@/utils/styled';
+import styled from 'styled-components';
 
 export const Poster = styled.div`
   position: relative;

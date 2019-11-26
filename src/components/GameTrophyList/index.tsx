@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { format } from 'date-fns';
-import { GameTrophy } from '@/store/model';
+import { format, parseISO } from 'date-fns';
+import { GameTrophy } from '@/constants/models';
 import Image from '@/components/Image';
 import { Trophies, Trophy, TrophyImg, TrophyText, TrophyEarned } from './style';
 
@@ -27,7 +27,7 @@ const TrophyList: React.SFC<Props> = ({ trophies }) => {
       </TrophyText>
       {item.earnAt && (
         <TrophyEarned>
-          Earn at: {format(new Date(item.earnAt), 'Do MMM YYYY')}
+          Earn at: {format(parseISO(item.earnAt), 'Do MMM yyyy')}
         </TrophyEarned>
       )}
     </Trophy>
