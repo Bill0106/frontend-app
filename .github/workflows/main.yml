@@ -8,11 +8,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    container:
-      image: node
     steps:
       - uses: actions/checkout@v2
       - name: Install & Build
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
         run: |
           yarn install
           yarn build
