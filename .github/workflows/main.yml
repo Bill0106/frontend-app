@@ -26,14 +26,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'us-west-1'
           SOURCE_DIR: 'dist'
-      - name: Login Aliyun
-        run: docker login --username=${{ secrets.ALIYUN_USERNAME }} --password=${{ secrets.ALIYUN_PASSWORD }} ${{ secrets.ALIYUN_REGISTRY_URL }}
       - name: Build & Push image to Aliyun
         env:
-          REGISTRY: ${{ secrets.ALIYUN_REGISTRY_URL }}
-          NAMESPACE: ${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}
+          REGISTRY: registry.eu-west-1.aliyuncs.com
+          NAMESPACE: zhuhaolin
           REPOSITORY: frontend-app
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          docker login --username=bill_lord --password=${{ secrets.ALIYUN_PASSWORD }} $REGISTRY
           docker build -t $REGISTRY/$NAMESPACE/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$NAMESPACE/$REPOSITORY:$IMAGE_TAG
