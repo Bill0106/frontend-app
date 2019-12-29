@@ -25,15 +25,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'us-west-1'
           SOURCE_DIR: 'dist'
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Build & Push image
+        uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          repository: Bill0106/docker-action
-          token: ${{ secrets.GITHUB_PAT }}
-      - uses: ./
-      - name: Build & Push image to Aliyun
-        uses: Bill0106/docker-action@v1
-        with:
-          name: frontend-app:${{ github.sha }}
+          name: zhuhaolin/frontend-app:${{ github.sha }}
+          username: bill_lord
           password: ${{ secrets.ALIYUN_PASSWORD }}
-          type: frontend
+          registry: registry.eu-west-1.aliyuncs.com
