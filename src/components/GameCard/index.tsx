@@ -12,7 +12,7 @@ const GameCard: React.SFC<{ game: Game }> = ({ game }) => {
       <FontAwesomeIcon key={index} icon={['fas', 'gamepad']} />
     ));
 
-  const handleClick = () => navigate(`/games/${game.url}`);
+  const handleClick = () => navigate(`/games/${game.id}`);
 
   return (
     <Card onClick={handleClick}>

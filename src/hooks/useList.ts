@@ -15,7 +15,7 @@ interface ListState<T> {
   isFetching: boolean;
 }
 
-interface ListPayliad<T> {
+interface ListPayload<T> {
   list: T[];
   total: number;
 }
@@ -32,7 +32,7 @@ const useList = <T>(type: Type, pageSize?: number) => {
     isFetching: false,
   };
 
-  const customReducers: CustomReducers<ListState<T>, ListPayliad<T>> = (
+  const customReducers: CustomReducers<ListState<T>, ListPayload<T>> = (
     state,
     { payload }
   ) => {
@@ -51,7 +51,7 @@ const useList = <T>(type: Type, pageSize?: number) => {
 
   const [page, setPage] = useState(1);
   const [{ list, total, isFetching }, dispatch] = useReducer(
-    createReducers<ListState<T>, ListPayliad<T>>(customReducers),
+    createReducers<ListState<T>, ListPayload<T>>(customReducers),
     initialState
   );
 

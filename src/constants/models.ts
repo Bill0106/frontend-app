@@ -16,7 +16,6 @@ export interface Game {
   publisher: string;
   buyAt: string;
   image: string;
-  url: string;
 }
 
 export interface GameTrophy {

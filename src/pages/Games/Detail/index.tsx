@@ -8,11 +8,11 @@ import { Container, Side } from '../style';
 import useViewData from './viewData';
 
 interface Props extends RouteComponentProps {
-  url?: string;
+  id?: string;
 }
 
-const Detail: React.SFC<Props> = ({ url }) => {
-  const { game, trophies, earned, isFetching } = useViewData(url);
+const Detail: React.SFC<Props> = ({ id }) => {
+  const { game, trophies, earned, isFetching } = useViewData(id);
 
   if (isFetching || !game) {
     return <Loading />;
