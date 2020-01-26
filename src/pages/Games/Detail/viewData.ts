@@ -4,7 +4,7 @@ import request from '@/utils/request';
 import useMessage from '@/hooks/useMessage';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 
-const useViewData = (url?: string) => {
+const useViewData = (id?: string) => {
   const [game, setGame] = useState<Game | null>(null);
   const [trophies, setTrophies] = useState<GameTrophy[]>([]);
   const [isFetching, setIsFetching] = useState(false);
@@ -12,34 +12,33 @@ const useViewData = (url?: string) => {
 
   useDocumentTitle([game ? game.name : '', 'Games']);
 
-  const fetch = useCallback(
-    async (param: string) => {
-      setIsFetching(true);
-      try {
-        const res = await request.get<Game>(`/games/${param}`);
+  const fetch = useCallback(async () => {
+    if (!id) {
+      return false;
+    }
 
-        if (res.platform !== GamePlatform.NS) {
-          const trophyRes = await request.get<{ gameTrophies: GameTrophy[] }>(
-            `/games/${param}/trophies`
-          );
-          setTrophies(trophyRes.gameTrophies);
-        }
+    setIsFetching(true);
+    try {
+      const res = await request.get<Game>(`/games/${id}`);
 
-        setGame(res);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsFetching(false);
+      if (res.platform !== GamePlatform.NS) {
+        const trophyRes = await request.get<{ gameTrophies: GameTrophy[] }>(
+          `/games/${id}/trophies`
+        );
+        setTrophies(trophyRes.gameTrophies);
       }
-    },
-    [setError]
-  );
+
+      setGame(res);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsFetching(false);
+    }
+  }, [setError, id]);
 
   useEffect(() => {
-    if (url) {
-      fetch(url);
-    }
-  }, [fetch, url]);
+    fetch();
+  }, [fetch]);
 
   const earned =
     trophies.length &&

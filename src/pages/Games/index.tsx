@@ -6,7 +6,7 @@ import Detail from './Detail';
 const Games: React.SFC<RouteComponentProps> = () => (
   <Router>
     <List path="/" />
-    <Detail path="/:url" />
+    <Detail path="/:id" />
   </Router>
 );
 
