@@ -10,10 +10,22 @@ interface Props {
   trophyRate: number;
 }
 
+const formatGenre = (str: string) => {
+  if (!str.includes('_')) {
+    return str;
+  }
+
+  if (str === 'Role_Playing') {
+    return 'Role-playing';
+  }
+
+  return str.replace(/_S/, ' S').replace(/_/g, '-');
+};
+
 const DetailMain: React.SFC<Props> = ({ game, trophyRate }) => {
   const infos = [
-    game.platform,
-    game.genre,
+    game.platform.replace('_', ' '),
+    formatGenre(game.genre),
     format(parseISO(game.buyAt), 'yyyy-MM-dd'),
   ];
   const companies = [game.developer, game.publisher].filter(
