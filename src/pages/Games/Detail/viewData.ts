@@ -25,7 +25,7 @@ const useViewData = (id?: string) => {
         const trophyRes = await request.get<{ gameTrophies: GameTrophy[] }>(
           `/games/${id}/trophies`
         );
-        setTrophies(trophyRes.gameTrophies);
+        setTrophies(trophyRes.gameTrophies || []);
       }
 
       setGame(res);
