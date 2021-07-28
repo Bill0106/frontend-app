@@ -1,6 +1,7 @@
 import { CDN_URI } from '@/constants/env'
 import pages from '@/constants/pages'
 import loadImage from '@/utils/loadImage'
+import useDocumentTitle from '@/utils/useDocumentTitle'
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -8,6 +9,8 @@ const useViewData = () => {
   const history = useHistory()
   const [background, setBackground] = useState(pages[0].image)
   const [show, setShow] = useState(false)
+
+  useDocumentTitle('')
 
   const preload = useCallback(async () => {
     await Promise.all(pages.map(v => loadImage(`${CDN_URI}/${v.image}`)))
