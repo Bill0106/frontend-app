@@ -39,3 +39,24 @@ export const GenreMap = new Map([
   [Genre.Strategy, 'Strategy'],
   [Genre.Flight, 'Flight']
 ])
+
+export enum TrophyRarity {
+  Bronze = 1,
+  Silver,
+  Gold,
+  Platinum
+}
+
+export const TrophyRarityMap = new Map([
+  [TrophyRarity.Bronze, 'Bronze'],
+  [TrophyRarity.Silver, 'Silver'],
+  [TrophyRarity.Gold, 'Gold'],
+  [TrophyRarity.Platinum, 'Platinum']
+])
+
+export const TrophyRarityColors = new Map([
+  [TrophyRarity.Bronze, '#cd7f32'],
+  [TrophyRarity.Silver, '#c0c0c0'],
+  [TrophyRarity.Gold, '#ffd700'],
+  [TrophyRarity.Platinum, '#e5e43e2']
+])

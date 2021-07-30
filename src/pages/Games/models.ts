@@ -1,10 +1,10 @@
-import { GameConsole, Genre } from '@/constants/game'
+import { GameConsole, Genre, TrophyRarity } from '@/constants/game'
 
 export interface GameTrophy {
   id: number
   title: string
   description: string
-  rarity: number
+  rarity: TrophyRarity
   image: string
   earnedAt?: number
 }

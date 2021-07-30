@@ -1,5 +1,7 @@
 import GameDetail from '@/components/GameDetail'
 import Image from '@/components/Image'
+import Loading from '@/components/Loading'
+import TrophyList from '@/components/TrophyList'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
 import styled from '@emotion/styled'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
@@ -9,6 +11,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 270px 1fr;
   grid-gap: 20px;
+  padding-top: 40px;
   color: #fff;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     display: block;
@@ -17,13 +20,17 @@ const Container = styled.div`
 
 const Side = styled.div`
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    magin: 0 auto;
+    margin: 0 auto;
     max-width: 270px
   }
 `
 
 const Detail = () => {
-  const { game } = useViewData()
+  const { game, isFetching } = useViewData()
+
+  if (isFetching) {
+    return <Loading />
+  }
 
   return (
     <Container>
@@ -31,6 +38,7 @@ const Detail = () => {
         <Image url={game?.cover || ''} icon={faGamepad} />
       </Side>
       {game && <GameDetail game={game} />}
+      {game?.trophies && <TrophyList trophies={game.trophies} />}
     </Container>
   )
 }

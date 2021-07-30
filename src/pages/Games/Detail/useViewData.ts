@@ -10,11 +10,6 @@ const useViewData = () => {
   const [game, setGame] = useState<Game | null>(null)
   const [isFetching, setIsFetching] = useState(false)
 
-  const earned =
-    game?.trophies?.length &&
-    (game.trophies.filter(v => v.earnedAt).length / game.trophies.length) *
-      100
-
   const fetch = useCallback(async () => {
     setIsFetching(true)
     try {
@@ -41,7 +36,7 @@ const useViewData = () => {
     }
   }, [id, fetch])
 
-  return { game, earned, isFetching }
+  return { game, isFetching }
 }
 
 export default useViewData
