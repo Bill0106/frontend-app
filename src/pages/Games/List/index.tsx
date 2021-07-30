@@ -1,9 +1,11 @@
 import GameCard from '@/components/GameCard'
 import InfiniteScroll from '@/components/InfiniteScroll'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
+import useDocumentTitle from '@/utils/useDocumentTitle'
 import useList from '@/utils/useList'
 import styled from '@emotion/styled'
-import { GameItem } from '../game'
+import { useEffect } from 'react'
+import { GameItem } from '../models'
 
 const Container = styled.div`
   display: grid;
@@ -19,7 +21,12 @@ const Container = styled.div`
 `
 
 const List = () => {
+  const { setTitle } = useDocumentTitle()
   const { list, infiniteScrollProps } = useList<GameItem>('games')
+
+  useEffect(() => {
+    setTitle('Games')
+  }, [setTitle])
 
   return (
     <InfiniteScroll {...infiniteScrollProps}>

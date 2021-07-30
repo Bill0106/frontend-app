@@ -1,4 +1,6 @@
 import pages from '@/constants/pages'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Menu, MenuClose, MenuItem, Navbar } from './style'
 import useViewData from './useViewData'
 
@@ -7,7 +9,9 @@ const Nav = () => {
 
   return (
     <Navbar>
-      <Button onClick={handleOpen}>111</Button>
+      <Button onClick={handleOpen}>
+        <FontAwesomeIcon icon={faBars} />
+      </Button>
       <Menu ref={menu} show={show}>
         {pages.map(v => (
           <MenuItem key={v.title} onClick={handleClick}>

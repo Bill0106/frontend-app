@@ -71,6 +71,7 @@ const Image: FC<ImageProps> = ({ url, icon, iconSize, height }) => {
   }, [url])
 
   useEffect(() => {
+    isMounted.current = true
     if (!show) {
       load()
     }

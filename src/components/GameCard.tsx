@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
-import { GameItem } from '@/pages/Games/game'
+import { GameItem } from '@/pages/Games/models'
 import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
 import Image from './Image'
+import { useHistory } from 'react-router-dom'
 
 const Card = styled.div`
   position: relative;
@@ -49,12 +50,14 @@ const Rate = styled.div`
 `
 
 const GameCard: FC<{ item: GameItem }> = ({ item }) => {
+  const history = useHistory()
+
   const rates = Array(item.rate)
     .fill(null)
     .map((_, i) => <FontAwesomeIcon key={i} icon={faGamepad} />)
 
   const handleClick = () => {
-    console.log(item.id)
+    history.push(`/games/${item.id}`)
   }
 
   return (

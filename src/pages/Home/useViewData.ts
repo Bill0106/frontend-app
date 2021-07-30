@@ -7,10 +7,10 @@ import { useHistory } from 'react-router-dom'
 
 const useViewData = () => {
   const history = useHistory()
+  const { setTitle } = useDocumentTitle()
   const [background, setBackground] = useState(pages[0].image)
   const [show, setShow] = useState(false)
 
-  useDocumentTitle('')
 
   const preload = useCallback(async () => {
     await Promise.all(pages.map(v => loadImage(`${CDN_URI}/${v.image}`)))
@@ -33,6 +33,10 @@ const useViewData = () => {
       setBackground(section.image)
     }
   }
+
+  useEffect(() => {
+    setTitle('')
+  }, [setTitle])
 
   useEffect(() => {
     preload()

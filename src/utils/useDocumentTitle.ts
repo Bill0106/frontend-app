@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { useCallback } from 'react'
 
 const PAGE_TITLE = 'Bill\'s Hobby'
 
-const useDocumentTitle = (title: string | string[]) => {
-  useEffect(() => {
+const useDocumentTitle = () => {
+  const setTitle = useCallback((title: string | string[]) => {
     const documentTitle = Array.isArray(title) ? title.join(' - ') : title
 
     document.title = [
@@ -11,7 +11,9 @@ const useDocumentTitle = (title: string | string[]) => {
       documentTitle && ' | ',
       PAGE_TITLE
     ].join('')
-  }, [title])
+  }, [])
+
+  return { setTitle }
 }
 
 export default useDocumentTitle
