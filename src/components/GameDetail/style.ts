@@ -21,7 +21,7 @@ export const Side = styled.div`
 export const Header = styled.div`
   display: grid;
   grid-template-columns: 1fr repeat(2, 100px);
-  grid-column-gap: 15px;
+  grid-column-gap: 16px;
   align-items: center;
   margin-bottom: 20px;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
@@ -31,12 +31,12 @@ export const Header = styled.div`
 `
 
 export const Title = styled.h1`
-  margin: 20px 0 15px;
+  margin: 20px 0 16px;
   line-height: 55px;
   font-size: 40px;
   font-weight: normal;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    font-size: 25px;
+    font-size: 24px;
     line-height: 30px;
   }
 `
