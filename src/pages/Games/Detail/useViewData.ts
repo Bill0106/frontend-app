@@ -25,7 +25,7 @@ const useViewData = () => {
 
   useEffect(() => {
     if (game) {
-      setTitle([game.title, 'Games'])
+      setTitle([game.subtitle, 'Games'])
     }
   }, [game, setTitle])
 

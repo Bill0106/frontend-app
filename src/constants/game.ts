@@ -55,8 +55,8 @@ export const TrophyRarityMap = new Map([
 ])
 
 export const TrophyRarityColors = new Map([
-  [TrophyRarity.Bronze, '#cd7f32'],
-  [TrophyRarity.Silver, '#c0c0c0'],
-  [TrophyRarity.Gold, '#ffd700'],
-  [TrophyRarity.Platinum, '#e5e43e2']
+  [TrophyRarity.Bronze, '#c56636'],
+  [TrophyRarity.Silver, '#c8c8c8'],
+  [TrophyRarity.Gold, '#dbaf4f'],
+  [TrophyRarity.Platinum, '#00a2d1']
 ])
