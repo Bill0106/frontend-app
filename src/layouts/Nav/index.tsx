@@ -1,64 +1,27 @@
-import * as React from 'react';
-import { navigate } from '@reach/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from 'body-scroll-lock';
-import navigations from '@/configs/navigation';
-import { Navbar, Button, Menu, MenuItem, MenuClose } from './style';
+import pages from '@/constants/pages'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Button, Menu, MenuClose, MenuItem, Navbar } from './style'
+import useViewData from './useViewData'
 
-const { useState, useEffect, useRef } = React;
-
-const Nav: React.SFC = () => {
-  const [showNav, setShowNav] = useState(false);
-  const menu = useRef<HTMLUListElement | null>(null);
-
-  const handleOpen = () => {
-    setShowNav(true);
-    if (menu.current) {
-      disableBodyScroll(menu.current);
-    }
-  };
-
-  const handleClose = () => {
-    setShowNav(false);
-    if (menu.current) {
-      enableBodyScroll(menu.current);
-    }
-  };
-
-  const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
-    const title = e.currentTarget.innerHTML.toLowerCase();
-    const page = navigations.find(item => item.title.toLowerCase() === title);
-    if (!page) {
-      return false;
-    }
-
-    navigate(page.path);
-    showNav && handleClose();
-  };
-
-  useEffect(() => {
-    return () => clearAllBodyScrollLocks();
-  }, []);
+const Nav = () => {
+  const { menu, show, handleClick, handleClose, handleOpen } = useViewData()
 
   return (
     <Navbar>
       <Button onClick={handleOpen}>
-        <FontAwesomeIcon icon={['fas', 'bars']} />
+        <FontAwesomeIcon icon={faBars} />
       </Button>
-      <Menu ref={menu} show={showNav}>
-        {navigations.map(item => (
-          <MenuItem key={item.title} onClick={handleClick}>
-            {item.title.toLowerCase()}
+      <Menu ref={menu} show={show}>
+        {pages.map(v => (
+          <MenuItem key={v.title} onClick={handleClick}>
+            {v.title.toLowerCase()}
           </MenuItem>
         ))}
         <MenuClose onClick={handleClose}>&times;</MenuClose>
       </Menu>
     </Navbar>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

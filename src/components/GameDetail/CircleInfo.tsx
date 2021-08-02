@@ -1,19 +1,24 @@
-import * as React from 'react';
-import CircleCanvas from '@/components/CircleCanvas';
-import { Circle } from './style';
+import { FC } from 'react'
+import CircleCanvas from '../CircleCanvas'
+import { Circle } from './style'
 
-interface Props {
-  title: string;
-  percent: number;
-  color: string;
+export interface CircleInfoProps {
+  title: string
+  percent: number
+  color: string
 }
 
-const CircleInfo: React.SFC<Props> = ({ children, title, percent, color }) => (
+const CircleInfo: FC<CircleInfoProps> = ({
+  children,
+  title,
+  percent,
+  color
+}) => (
   <Circle>
     <CircleCanvas percent={percent} color={color} />
     {children}
     <p>{title}</p>
   </Circle>
-);
+)
 
-export default CircleInfo;
+export default CircleInfo

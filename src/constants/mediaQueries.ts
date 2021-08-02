@@ -1,14 +1,14 @@
-const screenDesktop = 1200;
-const screenLaptop = 992;
-const screenTablet = 768;
+const SCREEN_DESKTOP = 1200
+const SCREEN_LAPTOP = 992
+const SCREEN_TABLET = 768
 
 const MEDIA_QUERIES = {
-  DESKTOP: `${screenDesktop}px`,
-  LAPTOP_MAX: `${screenDesktop - 1}px`,
-  LAPTOP: `${screenLaptop}px`,
-  TABLET_MAX: `${screenLaptop - 1}px`,
-  TABLET: `${screenTablet}px`,
-  MOBILE: `${screenTablet - 1}px`,
-};
+  DESKTOP: `${SCREEN_DESKTOP}px`,
+  LAPTOP_MAX: `${SCREEN_DESKTOP - 1}px`,
+  LAPTOP: `${SCREEN_LAPTOP}px`,
+  TABLET_MAX: `${SCREEN_LAPTOP - 1}px`,
+  TABLET: `${SCREEN_TABLET}px`,
+  MOBILE: `${SCREEN_TABLET - 1}px`
+}
 
-export default MEDIA_QUERIES;
+export default MEDIA_QUERIES

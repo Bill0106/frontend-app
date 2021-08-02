@@ -1,40 +1,33 @@
-import * as React from 'react';
-import { RouteComponentProps } from '@reach/router';
-import navigation from '@/configs/navigation';
-import useViewData from './viewData';
+import pages from '@/constants/pages'
 import {
-  HomePage,
-  Loading,
-  Text,
   Container,
   Content,
-  Title,
-  Sections,
-  Section,
+  Item,
+  Loading,
   Mask,
-} from './style';
+  Page,
+  Sections,
+  Text,
+  Title
+} from './style'
+import useViewData from './useViewData'
 
-const Home: React.SFC<RouteComponentProps> = () => {
-  const [
-    { background, show },
-    { handleTitleMouseEnter, handleEvent },
-  ] = useViewData();
+const Home = () => {
+  const { background, show, handleEvent, handleTitleMouseEnter } = useViewData()
 
   return (
-    <HomePage>
+    <Page>
       <Container background={background} show={show}>
         <Content>
-          <Title onMouseEnter={handleTitleMouseEnter}>{`Bill's Hobby`}</Title>
+          <Title onMouseEnter={handleTitleMouseEnter}>{'Bill\'s Hobby'}</Title>
           <Sections>
-            {navigation
-              .filter(item => item.title !== 'Home')
-              .map(item => (
-                <Section key={item.title}>
-                  <div onClick={handleEvent} onMouseEnter={handleEvent}>
-                    {item.title}
-                  </div>
-                </Section>
-              ))}
+            {pages.slice(1).map(v => (
+              <Item key={v.title}>
+                <div onClick={handleEvent} onMouseEnter={handleEvent}>
+                  {v.title}
+                </div>
+              </Item>
+            ))}
           </Sections>
         </Content>
         <Mask />
@@ -42,8 +35,8 @@ const Home: React.SFC<RouteComponentProps> = () => {
       <Loading show={!show}>
         <Text>Loading...</Text>
       </Loading>
-    </HomePage>
-  );
-};
+    </Page>
+  )
+}
 
-export default Home;
+export default Home

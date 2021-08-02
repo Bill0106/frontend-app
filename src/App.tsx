@@ -1,41 +1,24 @@
-import * as React from 'react';
-import { Router } from '@reach/router';
-import { MessageProvider } from '@/hooks/useMessage';
-import Layout from '@/layouts/AppLayout';
-import ErrorMessage from '@/components/ErrorMessage';
-import Home from '@/pages/Home';
-import Games from '@/pages/Games';
-import Gourmets from '@/pages/Gourmets';
-import Movies from '@/pages/Movies';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import ErrorMessage from './components/ErrorMessage'
+import Layout from './layouts/Layout'
+import Games from './pages/Games'
+import Gourmets from './pages/Gourmets'
+import Home from './pages/Home'
+import Movies from './pages/Movies'
 
-const { useState, useCallback } = React;
-
-const App: React.SFC = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [errorVisible, setErrorVisible] = useState(false);
-
-  const handleError = useCallback((text: string) => {
-    setErrorMessage(text);
-    setErrorVisible(true);
-
-    setTimeout(() => {
-      setErrorVisible(false);
-    }, 3000);
-  }, []);
-
-  return (
-    <MessageProvider setError={handleError}>
-      <Router>
-        <Home path="/" />
-        <Layout default>
-          <Games path="/games/*" />
-          <Gourmets path="/gourmets" />
-          <Movies path="movies" />
+const App = () => (
+  <ErrorMessage>
+    <Router>
+      <Switch>
+        <Route path="/" exact  component={Home} />
+        <Layout>
+          <Route path="/games" component={Games} />
+          <Route path="/gourmets" component={Gourmets} />
+          <Route path="/movies" component={Movies} />
         </Layout>
-      </Router>
-      <ErrorMessage visible={errorVisible} text={errorMessage} />
-    </MessageProvider>
-  );
-};
+      </Switch>
+    </Router>
+  </ErrorMessage>
+)
 
-export default App;
+export default App

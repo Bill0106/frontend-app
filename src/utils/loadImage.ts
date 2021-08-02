@@ -1,11 +1,11 @@
 const loadImage = (url: string) => {
   return new Promise(resolve => {
-    const image = new Image();
-    image.onload = () => {
-      resolve();
-    };
-    image.src = url;
-  });
-};
+    const img = new Image()
+    img.onload = () => {
+      resolve(null)
+    }
+    img.src = url
+  })
+}
 
-export default loadImage;
+export default loadImage

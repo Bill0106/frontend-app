@@ -1,60 +1,55 @@
-import * as React from 'react';
-import { format, parseISO } from 'date-fns';
-import { Game } from '@/constants/models';
-import CircleInfo from './CircleInfo';
-import InfoList from './InfoList';
-import { Header, Title, Subtitle, Rate, Earned } from './style';
+import { GameConsoleMap, GenreMap } from '@/constants/game'
+import { Game } from '@/pages/Games/models'
+import dayjs from 'dayjs'
+import { FC } from 'react'
+import CircleInfo from './CircleInfo'
+import InfoList from './InfoList'
+import { Earned, Header, Rate, Subtitle, Title } from './style'
 
-interface Props {
-  game: Game;
-  trophyRate: number;
-}
+const GameDetail: FC<{ game: Game }> = ({ game }) => {
+  const { trophies } = game
 
-const formatGenre = (str: string) => {
-  if (!str.includes('_')) {
-    return str;
-  }
+  const earned = trophies?.length
+    ? Math.round(
+        trophies.filter(v => v.earnedAt).length / trophies.length * 100
+      )
+    : 0
 
-  if (str === 'Role_Playing') {
-    return 'Role-playing';
-  }
-
-  return str.replace(/_S/, ' S').replace(/_/g, '-');
-};
-
-const DetailMain: React.SFC<Props> = ({ game, trophyRate }) => {
   const infos = [
-    game.platform.replace('_', ' '),
-    formatGenre(game.genre),
-    format(parseISO(game.buyAt), 'yyyy-MM-dd'),
-  ];
-  const companies = [game.developer, game.publisher].filter(
-    (item, index, arr) => arr.indexOf(item) === index
-  );
+    GameConsoleMap.get(game.gameConsole) || '',
+    GenreMap.get(game.genre) || '',
+    dayjs.unix(game.buyAt).format('YYYY-MM-DD')
+  ]
+
+  const companies = [...new Set([game.developer, game.publisher])]
 
   return (
     <div>
       <Header>
         <div>
           <Title>{game.title}</Title>
-          <Subtitle>{game.name}</Subtitle>
+          <Subtitle>{game.subtitle}</Subtitle>
         </div>
         <CircleInfo
           title="Rate"
-          percent={(game.rate / 5) * 100}
+          percent={game.rate / 5 * 100}
           color="#e03800"
         >
           <Rate>{game.rate}</Rate>
         </CircleInfo>
-        <CircleInfo title="Trophy" percent={trophyRate} color="#075fff">
-          <Earned>{`${trophyRate}%`}</Earned>
+        <CircleInfo
+          title="Trophy"
+          percent={earned}
+          color="#075fff"
+        >
+          <Earned>{`${earned}%`}</Earned>
         </CircleInfo>
       </Header>
       <hr />
       <InfoList infos={infos} />
       <InfoList infos={companies} />
     </div>
-  );
-};
+  )
+}
 
-export default DetailMain;
+export default GameDetail

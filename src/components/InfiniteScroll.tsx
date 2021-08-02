@@ -1,50 +1,49 @@
-import * as React from 'react';
-import Loading from '@/components/Loading';
+import { FC, useCallback, useEffect, useRef } from 'react'
+import Loading from './Loading'
 
 export interface InfiniteScrollProps {
-  isBusy: boolean;
-  hasMore: boolean;
-  onLoadMore: () => void;
+  isBusy: boolean
+  hasMore: boolean
+  onLoadMore: () => void
 }
 
-const { useEffect } = React;
-
-const InfiniteScroll: React.SFC<InfiniteScrollProps> = ({
+const InfiniteScroll: FC<InfiniteScrollProps> = ({
   children,
   isBusy,
   hasMore,
-  onLoadMore,
+  onLoadMore
 }) => {
-  let container: HTMLDivElement | null = null;
+  const container = useRef<HTMLDivElement | null>(null)
+
+  const handleScroll = useCallback(() => {
+    if (!container.current) {
+      return false
+    }
+
+    const { top } = container.current.getBoundingClientRect()
+    if (top - window.innerHeight < 100 && !isBusy) {
+      onLoadMore()
+    }
+  }, [isBusy, onLoadMore])
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!container) {
-        return false;
-      }
+    window.addEventListener('scroll', handleScroll)
 
-      const { top } = container.getBoundingClientRect();
-      if (top - window.innerHeight < 100 && !isBusy) {
-        onLoadMore();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [container, isBusy, onLoadMore]);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
 
   return (
     <div>
       {children}
       {hasMore && (
-        <div ref={el => (container = el)}>
+        <div ref={container}>
           <Loading />
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default InfiniteScroll;
+export default InfiniteScroll
