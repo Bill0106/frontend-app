@@ -16,6 +16,9 @@ const Header = styled.div`
   grid-column-gap: 8px;
   align-items: center;
   padding: 16px;
+  > span {
+    font-size: 16px;
+  }
 `
 
 const Content = styled.div`
@@ -23,14 +26,13 @@ const Content = styled.div`
 `
 
 const Title = styled.p`
-  margin: 0 0 4px;
-  font-size: 16px;
+  margin: 0 0 8px;
+  font-size: 18px;
   font-weight: bold;
 `
 
 const EatAt = styled.span`
   color: #999;
-  font-size: 12px;
 `
 
 const GourmetCard: FC<{ item: Gourmet }> = ({ item }) => (

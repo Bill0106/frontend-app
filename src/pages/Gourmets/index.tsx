@@ -12,7 +12,7 @@ const Container = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    grid-template-columns: 345px;
+    grid-template-columns: minmax(0, 360px);
     justify-content: center;
   }
 `

@@ -36,11 +36,14 @@ export const Loading = styled.div<{ show: boolean }>`
 
 export const Text = styled.div`
   text-align: center;
-  font-size: 50px;
+  font-size: 48px;
   font-family: monospace;
   color: #fff;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
   animation: ${loading} 2s linear infinite;
+  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
+    font-size: 32px;
+  }
 `
 
 export const Container = styled(Page)<{ background: string; show: boolean }>`
@@ -71,8 +74,8 @@ export const Title = styled.h1`
   font-family: Brush Script MT, cursive;
   font-weight: normal;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    margin: 50px 0 70px;
-    font-size: 70px;
+    margin: 52px 0 68px;
+    font-size: 68px;
   }
 `
 
@@ -85,7 +88,7 @@ export const Sections = styled.div`
 export const Item = styled.div`
   display: inline-block;
   width: ${100 / 3}%;
-  font-size: 45px;
+  font-size: 48px;
   font-family: Copperplate, Copperplate Gothic Light, fantasy;
   @media (max-width: ${MEDIA_QUERIES.TABLET_MAX}) {
     display: block;
