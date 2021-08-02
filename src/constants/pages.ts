@@ -13,12 +13,12 @@ const pages = [
     title: 'Gourmets',
     path: '/gourmets',
     image: '1cba3a95dc2e72952e39d8659b93f4b4.jpg'
+  },
+  {
+    title: 'Movies',
+    path: '/movies',
+    image: '15ce347c02775f796d80012bd5ccc593.jpg'
   }
-  // {
-  //   title: 'Movies',
-  //   path: '/movies',
-  //   image: '15ce347c02775f796d80012bd5ccc593.jpg'
-  // }
 ]
 
 export default pages
