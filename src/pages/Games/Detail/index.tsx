@@ -27,11 +27,11 @@ const Side = styled.div`
 `
 
 const Empty = styled.div`
-  padding-top: 50px;
+  padding-top: 48px;
   grid-column-start: 1;
   grid-column-end: span 3;
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
   color: rgba(255, 255, 255, 0.25);
 `
 
@@ -40,8 +40,8 @@ const EpmtyIcon = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  width: 150px;
-  height: 150px;
+  width: 148px;
+  height: 148px;
   color: #303030;
   background: rgba(255, 255, 255, 0.25);
   border-radius: 100%;

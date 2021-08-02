@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Container = styled.div`
   margin-top: 16px;
   text-align: center;
-  font-size: 30px;
+  font-size: 32px;
   color: #fff;
 `
 

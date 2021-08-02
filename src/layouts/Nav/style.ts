@@ -6,7 +6,7 @@ export const Navbar = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: 50px;
+  height: 52px;
   background: rgba(0, 0, 0, 0.3);
   z-index: 9999;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
@@ -17,8 +17,8 @@ export const Navbar = styled.div`
 export const Button = styled.span`
   display: inline-block;
   position: relative;
-  margin: 9px 0 0 15px;
-  padding: 5px 10px;
+  margin: 12px 0 0 16px;
+  padding: 4px 8px;
   font-size: 18px;
   color: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -31,7 +31,7 @@ export const Button = styled.span`
 
 export const Menu = styled.ul<{ show: boolean }>`
   margin: 0;
-  padding: 15px 0;
+  padding: 16px 0;
   text-align: center;
   line-height: 20px;
   list-style: none;
@@ -50,7 +50,7 @@ export const Menu = styled.ul<{ show: boolean }>`
 
 export const MenuItem = styled.li`
   display: inline-block;
-  margin: 0 15px;
+  margin: 0 16px;
   font-size: 20px;
   font-family: Copperplate, Copperplate Gothic Light, fantasy;
   color: rgba(255, 255, 255, 0.8);
@@ -61,13 +61,13 @@ export const MenuItem = styled.li`
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     display: block;
     margin: 20px 0;
-    font-size: 30px;
+    font-size: 28px;
   }
 `
 
 export const MenuClose = styled.li`
   display: inline-block;
-  margin-top: 50px;
+  margin-top: 48px;
   width: 40px;
   height: 40px;
   line-height: 40px;

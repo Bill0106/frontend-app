@@ -9,7 +9,7 @@ import Image from './Image'
 
 const Trophies = styled.div`
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 12px;
   grid-template-columns: repeat(3, 1fr);
   grid-column-start: 1;
   grid-column-end: span 2;
@@ -23,37 +23,26 @@ const Trophies = styled.div`
 `
 
 const Trophy = styled.div`
-  padding: 10px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
   background: #262626;
   box-sizing: border-box;
-  &:after {
-    display: block;
-    content: '';
-    clear: both;
-  }
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 `
 
 const TrophyImg = styled.div<{ earned: boolean; color: string }>`
-  float: left;
-  width: 66px;
-  border: 5px solid ${props => props.color};
-  opacity: ${props => (props.earned ? 1 : 0.5)};
+  border: 4px solid ${props => props.color};
+  opacity: ${p => p.earned ? 1 : 0.5};
   box-sizing: border-box;
 `
 
 const TrophyText = styled.div`
-  margin-left: 80px;
-  @media (min-width: ${MEDIA_QUERIES.TABLET}) {
-    width: 260px;
-  }
-  @media (min-width: ${MEDIA_QUERIES.LAPTOP}) {
-    width: 215px;
-  }
   > p {
-    margin: 0 0 5px;
+    margin: 0 0 4px;
     font-weight: bold;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -68,7 +57,9 @@ const TrophyText = styled.div`
 `
 
 const TrophyEarned = styled.div`
-  margin-top: 15px;
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  height: 16px;
   font-weight: bold;
   color: #61bf19;
 `
@@ -85,11 +76,11 @@ const TrophyItem: FC<{ item: GameTrophy }> = ({ item }) => (
       <p>{item.title}</p>
       <span>{item.description}</span>
     </TrophyText>
-    {item.earnedAt && (
-      <TrophyEarned>
-        Earned at: {dayjs.unix(item.earnedAt).format('MMMM D, YYYY')}
-      </TrophyEarned>
-    )}
+    <TrophyEarned>
+      {item.earnedAt &&
+        `Earned at: ${dayjs.unix(item.earnedAt).format('MMMM D, YYYY')}`
+      }
+    </TrophyEarned>
   </Trophy>
 )
 

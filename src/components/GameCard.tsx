@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import MEDIA_QUERIES from '@/constants/mediaQueries'
 import { GameItem } from '@/pages/Games/models'
 import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,18 +8,15 @@ import { useHistory } from 'react-router-dom'
 
 const Card = styled.div`
   position: relative;
-  padding-bottom: 75px;
+  padding-bottom: 80px;
   cursor: pointer;
-  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    padding-bottom: 74px;
-  }
 `
 
 const Text = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 15px;
+  padding: 16px;
   width: 100%;
   line-height: 20px;
   color: #fff;
@@ -36,9 +32,6 @@ const Title = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    line-height: 25px;
-  }
 `
 
 const Rate = styled.div`
@@ -46,6 +39,7 @@ const Rate = styled.div`
   grid-template-columns: repeat(5, auto);
   grid-column-gap: 8px;
   justify-content: left;
+  height: 16px;
   font-size: 16px;
 `
 

@@ -32,18 +32,18 @@ export const Header = styled.div`
 
 export const Title = styled.h1`
   margin: 20px 0 16px;
-  line-height: 55px;
+  line-height: 56px;
   font-size: 40px;
   font-weight: normal;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     font-size: 24px;
-    line-height: 30px;
+    line-height: 28px;
   }
 `
 
 export const Subtitle = styled.h2`
   margin: 0;
-  line-height: 30px;
+  line-height: 28px;
   font-size: 20px;
   font-weight: normal;
   color: #999;
@@ -54,7 +54,7 @@ export const Subtitle = styled.h2`
 
 export const Infos = styled.p`
   margin: 0;
-  line-height: 30px;
+  line-height: 28px;
   font-size: 18px;
   color: #999;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
@@ -78,7 +78,7 @@ export const Circle = styled.div`
   height: 120px;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     display: inline-block;
-    margin: 10px 15px 0;
+    margin: 12px 16px 0;
   }
   > p {
     margin: 0;
@@ -96,7 +96,7 @@ export const Rate = styled.span`
   width: 100px;
   line-height: 100px;
   text-align: center;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
   color: #e03800;
 `
