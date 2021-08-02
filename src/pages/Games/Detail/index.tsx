@@ -6,6 +6,8 @@ import MEDIA_QUERIES from '@/constants/mediaQueries'
 import styled from '@emotion/styled'
 import { faGamepad, faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FC } from 'react'
+import { Game } from '../models'
 import useViewData from './useViewData'
 
 const Container = styled.div`
@@ -47,6 +49,25 @@ const EpmtyIcon = styled.div`
   border-radius: 100%;
 `
 
+const Trophies: FC<{ game: Game | null }> = ({ game }) => {
+  if (!game) {
+    return null
+  }
+
+  if (!game.trophies) {
+    return (
+      <Empty>
+        <EpmtyIcon>
+          <FontAwesomeIcon icon={faTrophy} size="3x" />
+        </EpmtyIcon>
+        <p>Oops! No Trophy</p>
+      </Empty>
+    )
+  }
+
+  return <TrophyList trophies={game.trophies} />
+}
+
 const Detail = () => {
   const { game, isFetching } = useViewData()
 
@@ -56,20 +77,13 @@ const Detail = () => {
 
   return (
     <Container>
-      <Side>
-        <Image url={game?.cover || ''} icon={faGamepad} />
-      </Side>
-      {game && <GameDetail game={game} />}
-      {game?.trophies ? (
-        <TrophyList trophies={game.trophies} />
-      ) : (
-        <Empty>
-          <EpmtyIcon>
-            <FontAwesomeIcon icon={faTrophy} size="3x" />
-          </EpmtyIcon>
-          <p>Oops! No Trophy</p>
-        </Empty>
+      {game && (
+        <Side>
+          <Image url={game?.cover || ''} icon={faGamepad} />
+        </Side>
       )}
+      {game && <GameDetail game={game} />}
+      <Trophies game={game} />
     </Container>
   )
 }

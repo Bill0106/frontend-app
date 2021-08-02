@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 import useDocumentTitle from '@/utils/useDocumentTitle'
+import useMessage from '@/utils/useMessage'
 import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Game } from '../models'
@@ -7,6 +8,7 @@ import { Game } from '../models'
 const useViewData = () => {
   const { id } = useParams<{ id: string }>()
   const { setTitle } = useDocumentTitle()
+  const { setMessage } = useMessage()
   const [game, setGame] = useState<Game | null>(null)
   const [isFetching, setIsFetching] = useState(false)
 
@@ -17,11 +19,11 @@ const useViewData = () => {
 
       setGame(res)
     } catch (error) {
-      //
+      setMessage(error.message)
     } finally {
       setIsFetching(false)
     }
-  }, [id])
+  }, [id, setMessage])
 
   useEffect(() => {
     if (game) {

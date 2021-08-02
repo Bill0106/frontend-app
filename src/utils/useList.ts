@@ -1,6 +1,7 @@
 import { InfiniteScrollProps } from '@/components/InfiniteScroll'
 import { useCallback, useEffect, useReducer, useState } from 'react'
 import request from './request'
+import useMessage from './useMessage'
 
 interface ListResponse<T> {
   list: T[]
@@ -43,6 +44,7 @@ const listReducer = <T>() => (state: ListState<T>, action: ListAction<T>) => {
 }
 
 const useList = <T>(path: string, pageSize = PAGE_SIZE) => {
+  const { setMessage } = useMessage()
   const [{ list, total, isFetching }, dispatch] = useReducer(listReducer<T>(), {
     list: [],
     total: 0,
@@ -58,9 +60,10 @@ const useList = <T>(path: string, pageSize = PAGE_SIZE) => {
 
       dispatch({ type: 'fulfilled', payload: res })
     } catch (error) {
+      setMessage(error.message)
       dispatch({ type: 'error' })
     }
-  }, [path, page, pageSize])
+  }, [setMessage, path, page, pageSize])
 
   const handleLoadMore = useCallback(() => {
     if (maxPage && maxPage === page) {

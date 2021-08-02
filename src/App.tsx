@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import ErrorMessage from './components/ErrorMessage'
 import Layout from './layouts/Layout'
 import Games from './pages/Games'
 import Gourmets from './pages/Gourmets'
 import Home from './pages/Home'
 import Movies from './pages/Movies'
 
-const App = () => {
-  return (
+const App = () => (
+  <ErrorMessage>
     <Router>
       <Switch>
         <Route path="/" exact  component={Home} />
@@ -17,7 +18,7 @@ const App = () => {
         </Layout>
       </Switch>
     </Router>
-  )
-}
+  </ErrorMessage>
+)
 
 export default App

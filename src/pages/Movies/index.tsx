@@ -75,8 +75,6 @@ const Movies = () => {
     const dayDiff = i &&
       dayjs.unix(a[i - 1].watchedAt).diff(dayjs.unix(v.watchedAt), 'day')
 
-    console.log(dayDiff)
-
     const doms = [
       <MovieCard key="card" data={v} dayDiff={dayDiff} />,
       <Spacer key="spacer" />
