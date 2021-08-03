@@ -13,7 +13,7 @@ const useViewData = () => {
 
 
   const preload = useCallback(async () => {
-    await Promise.all(pages.map(v => loadImage(`${CDN_URI}/${v.image}`)))
+    await Promise.all(pages.map(v => loadImage(`${CDN_URI}/images/${v.image}`)))
 
     setShow(true)
   }, [])
@@ -44,7 +44,7 @@ const useViewData = () => {
 
   return {
     show,
-    background: `${CDN_URI}/${background}`,
+    background: `${CDN_URI}/images/${background}`,
     handleEvent,
     handleTitleMouseEnter
   }
