@@ -1,3 +1,9 @@
-FROM nginx:latest
+FROM node:lts-alpine
 
-COPY dist/index.html /usr/share/nginx/html/index.html
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY dist/index.html ./
+
+CMD [ "serve", "-s", "-l", "80" ]
