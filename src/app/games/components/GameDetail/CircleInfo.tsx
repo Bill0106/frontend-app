@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import CircleCanvas from '../CircleCanvas'
+import CircleCanvas from '@/components/CircleCanvas'
 import { Circle } from './style'
 
 export interface CircleInfoProps {

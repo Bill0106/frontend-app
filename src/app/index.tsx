@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ErrorMessage from '@/components/ErrorMessage'
 import Layout from '@/layouts/Layout'
-import Games from '../pages/Games'
-import Gourmets from '../pages/Gourmets'
+import games from './games'
 import home from './home'
-import Movies from '../pages/Movies'
+
+const routes = [games]
 
 const App = () => (
   <ErrorMessage>
@@ -12,9 +12,7 @@ const App = () => (
       <Switch>
         <Route {...home} />
         <Layout>
-          <Route path="/games" component={Games} />
-          <Route path="/gourmets" component={Gourmets} />
-          <Route path="/movies" component={Movies} />
+          {routes.map((v, i) => <Route key={i} {...v} />)}
         </Layout>
       </Switch>
     </Router>

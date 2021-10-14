@@ -1,6 +1,7 @@
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import Detail from './Detail'
-import List from './List'
+import { RouteProps } from 'react-router'
+import Detail from './pages/Detail'
+import List from './pages/List'
 
 const Games = () => {
   const { path } = useRouteMatch()
@@ -13,4 +14,9 @@ const Games = () => {
   )
 }
 
-export default Games
+const games: RouteProps = {
+  path: '/games',
+  component: Games
+}
+
+export default games

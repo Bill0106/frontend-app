@@ -1,13 +1,13 @@
-import GameDetail from '@/components/GameDetail'
+import GameDetail from '../../components/GameDetail'
 import Image from '@/components/Image'
 import Loading from '@/components/Loading'
-import TrophyList from '@/components/TrophyList'
+import TrophyList from '../../components/TrophyList'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
 import styled from '@emotion/styled'
 import { faGamepad, faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FC } from 'react'
-import { Game } from '../models'
+import { Game } from '../../models/game'
 import useViewData from './useViewData'
 
 const Container = styled.div`

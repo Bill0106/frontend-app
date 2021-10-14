@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import { GameItem } from '@/pages/Games/models'
+import { GameItem } from '../models/game'
 import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
-import Image from './Image'
+import Image from '@/components/Image'
 import { useHistory } from 'react-router-dom'
 
 const Card = styled.div`

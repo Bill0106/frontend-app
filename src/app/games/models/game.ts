@@ -1,13 +1,5 @@
-import { GameConsole, Genre, TrophyRarity } from '@/constants/game'
-
-export interface GameTrophy {
-  id: number
-  title: string
-  description: string
-  rarity: TrophyRarity
-  image: string
-  earnedAt?: number
-}
+import { GameConsole, Genre } from '../constants'
+import { GameTrophy } from './gameTrophy'
 
 export interface Game {
   id: number

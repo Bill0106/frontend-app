@@ -1,5 +1,5 @@
-import { GameConsoleMap, GenreMap } from '@/constants/game'
-import { Game } from '@/pages/Games/models'
+import { GameConsoleMap, GenreMap } from '../../constants'
+import { Game } from '../../models/game'
 import dayjs from 'dayjs'
 import { FC } from 'react'
 import CircleInfo from './CircleInfo'

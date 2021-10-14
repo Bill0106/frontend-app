@@ -1,5 +1,5 @@
-import { FC } from 'react'
 import { Infos } from './style'
+import { FC } from 'react'
 
 const SLASH = '|'
 

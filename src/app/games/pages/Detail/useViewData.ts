@@ -3,7 +3,7 @@ import useDocumentTitle from '@/utils/useDocumentTitle'
 import useMessage from '@/utils/useMessage'
 import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Game } from '../models'
+import { Game } from '../../models/game'
 
 const useViewData = () => {
   const { id } = useParams<{ id: string }>()
@@ -19,7 +19,9 @@ const useViewData = () => {
 
       setGame(res)
     } catch (error) {
-      setMessage(error.message)
+      if (error instanceof Error) {
+        setMessage(error.message)
+      }
     } finally {
       setIsFetching(false)
     }

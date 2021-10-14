@@ -1,11 +1,11 @@
-import GameCard from '@/components/GameCard'
+import GameCard from '../components/GameCard'
 import InfiniteScroll from '@/components/InfiniteScroll'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
 import useDocumentTitle from '@/utils/useDocumentTitle'
 import useList from '@/utils/useList'
 import styled from '@emotion/styled'
 import { useEffect } from 'react'
-import { GameItem } from '../models'
+import { GameItem } from '../models/game'
 
 const Container = styled.div`
   display: grid;

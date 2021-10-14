@@ -1,11 +1,11 @@
-import { TrophyRarityColors } from '@/constants/game'
+import { TrophyRarityColors } from '../constants'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
-import { GameTrophy } from '@/pages/Games/models'
+import { GameTrophy } from '../models/gameTrophy'
 import styled from '@emotion/styled'
 import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import dayjs from 'dayjs'
 import { FC } from 'react'
-import Image from './Image'
+import Image from '@/components/Image'
 
 const Trophies = styled.div`
   display: grid;
