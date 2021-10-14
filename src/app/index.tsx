@@ -3,8 +3,10 @@ import ErrorMessage from '@/components/ErrorMessage'
 import Layout from '@/layouts/Layout'
 import games from './games'
 import home from './home'
+import gourmets from './gourmets'
+import movies from './movies'
 
-const routes = [games]
+const routes = [games, gourmets, movies]
 
 const App = () => (
   <ErrorMessage>

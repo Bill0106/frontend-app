@@ -1,10 +1,10 @@
-import { Gourmet } from '@/pages/Gourmets/model'
+import { Gourmet } from '../models/gourmet'
 import styled from '@emotion/styled'
 import { faMapMarkerAlt, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import dayjs from 'dayjs'
 import { FC } from 'react'
-import Image from './Image'
+import Image from '@/components/Image'
 
 const Card = styled.div`
   background: #fff;

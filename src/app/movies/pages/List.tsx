@@ -1,10 +1,10 @@
 import InfiniteScroll from '@/components/InfiniteScroll'
-import MovieCard, { MovieCardData } from '@/components/MovieCard'
+import MovieCard, { MovieCardData } from '../components/MovieCard'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
 import useList from '@/utils/useList'
 import styled from '@emotion/styled'
 import dayjs from 'dayjs'
-import { Movie } from './model'
+import { Movie } from '../models/movie'
 
 const Year = styled.p`
   font-size: 24px;
