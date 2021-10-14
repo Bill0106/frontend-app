@@ -25,8 +25,6 @@ const Gourmets = () => {
     setTitle('Gourmets')
   }, [setTitle])
 
-  console.log(list)
-
   return (
     <InfiniteScroll {...infiniteScrollProps}>
       <Container>
