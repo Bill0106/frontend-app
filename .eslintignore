@@ -2,3 +2,4 @@ build/
 scripts/*.js
 .eslintrc.js
 src/types/
+vite.config.ts
