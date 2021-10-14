@@ -4,6 +4,6 @@ WORKDIR /app
 
 RUN npm install -g serve
 
-COPY dist/index.html ./
+COPY dist ./
 
 CMD [ "serve", "-s", "-l", "80" ]
