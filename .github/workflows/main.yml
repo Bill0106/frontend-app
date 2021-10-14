@@ -17,20 +17,23 @@ jobs:
           node-version: '14.x'
       - run: yarn install
       - run: yarn build
-      - uses: actions/upload-artifact@v2
+      - uses: actions/cache@v2
         with:
-          name: build
           path: |
             dist
-            scripts/Dockerfile
+            Dockerfile
+          key: ${{ github.sha }}
 
   deploy:
     needs: build
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/cache@v2
         with:
-          name: build
+          path: |
+            dist
+            Dockerfile
+          key: ${{ github.sha }}
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
       - uses: docker/login-action@v1
@@ -42,22 +45,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./scripts/Dockerfile
           push: true
           tags: registry.eu-west-1.aliyuncs.com/zhuhaolin/frontend-app:${{ github.event.inputs.tag }}
-
-  upload:
-    needs: build
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: build
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
-      - name: Upload
-        run: |
-          aws s3 sync dist s3://zhuhaolin.com/static --exclude "*.html"
