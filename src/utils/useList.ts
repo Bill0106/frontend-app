@@ -60,7 +60,7 @@ const useList = <T>(path: string, pageSize = PAGE_SIZE) => {
 
       dispatch({ type: 'fulfilled', payload: res })
     } catch (error) {
-      setMessage(error.message)
+      setMessage((error as Error).message)
       dispatch({ type: 'error' })
     }
   }, [setMessage, path, page, pageSize])

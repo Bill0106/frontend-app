@@ -1,4 +1,4 @@
-import { RouteProps } from 'react-router'
+import { RouteProps } from 'react-router-dom'
 import List from './pages/List'
 
 const gourmets: RouteProps = {

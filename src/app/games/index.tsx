@@ -1,5 +1,4 @@
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { RouteProps } from 'react-router'
+import { Route, Switch, useRouteMatch, RouteProps } from 'react-router-dom'
 import Detail from './pages/Detail'
 import List from './pages/List'
 
