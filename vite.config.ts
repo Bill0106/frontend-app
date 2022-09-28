@@ -9,7 +9,18 @@ export default defineConfig({
       { find: '@/', replacement: '/' }
     ]
   },
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly'
+    },
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
   server: {
+    host: true,
     port: 1234
   },
   build: {
