@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { FC } from 'react'
 import Nav from './Nav'
+import { Outlet } from 'react-router-dom'
 
 const StyledLayout = styled.div`
   min-height: 100vh;
@@ -16,10 +16,12 @@ const Content = styled.div`
   box-sizing: border-box;
 `
 
-const Layout: FC = ({ children }) => (
+const Layout = () => (
   <StyledLayout>
     <Nav />
-    <Content>{children}</Content>
+    <Content>
+      <Outlet />
+    </Content>
   </StyledLayout>
 )
 

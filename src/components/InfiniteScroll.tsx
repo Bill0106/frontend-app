@@ -1,9 +1,10 @@
-import { FC, useCallback, useEffect, useRef } from 'react'
+import { FC, ReactNode, useCallback, useEffect, useRef } from 'react'
 import Loading from './Loading'
 
 export interface InfiniteScrollProps {
   isBusy: boolean
   hasMore: boolean
+  children?: ReactNode
   onLoadMore: () => void
 }
 

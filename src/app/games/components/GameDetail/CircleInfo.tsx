@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import CircleCanvas from '@/components/CircleCanvas'
 import { Circle } from './style'
 
@@ -6,6 +6,7 @@ export interface CircleInfoProps {
   title: string
   percent: number
   color: string
+  children?: ReactNode
 }
 
 const CircleInfo: FC<CircleInfoProps> = ({

@@ -8,10 +8,7 @@ export interface Response {
 }
 
 const request = () => {
-  const instance = axios.create({
-    baseURL: `${API_URI}/v1`,
-    headers: { session: localStorage.getItem('session') }
-  })
+  const instance = axios.create({ baseURL: `${API_URI}/v1` })
 
   instance.interceptors.response.use(
     res => {

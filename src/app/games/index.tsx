@@ -1,21 +1,15 @@
-import { Route, Switch, useRouteMatch, RouteProps } from 'react-router-dom'
+import { RouteObject } from 'react-router-dom'
 import Detail from './pages/Detail'
 import List from './pages/List'
+import Layout from '@/layouts/Layout'
 
-const Games = () => {
-  const { path } = useRouteMatch()
-
-  return (
-    <Switch>
-      <Route path={path} exact component={List} />
-      <Route path={`${path}/:id`} component={Detail} />
-    </Switch>
-  )
-}
-
-const games: RouteProps = {
-  path: '/games',
-  component: Games
+const games: RouteObject = {
+  path: 'games',
+  element: <Layout />,
+  children: [
+    { index: true, element: <List /> },
+    { path: ':id', element: <Detail /> }
+  ]
 }
 
 export default games

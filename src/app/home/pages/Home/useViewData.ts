@@ -3,10 +3,10 @@ import pages from '@/constants/pages'
 import loadImage from '@/utils/loadImage'
 import useDocumentTitle from '@/utils/useDocumentTitle'
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const useViewData = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { setTitle } = useDocumentTitle()
   const [background, setBackground] = useState(pages[0].image)
   const [show, setShow] = useState(false)
@@ -28,7 +28,7 @@ const useViewData = () => {
     }
 
     if (e.type === 'click') {
-      history.push(section.path)
+      navigate(section.path)
     } else if (e.type === 'mouseenter' && document.body.clientWidth >= 768) {
       setBackground(section.image)
     }

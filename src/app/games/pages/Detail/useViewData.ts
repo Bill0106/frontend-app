@@ -34,7 +34,7 @@ const useViewData = () => {
   }, [game, setTitle])
 
   useEffect(() => {
-    const gameId = parseInt(id)
+    const gameId = parseInt(id ?? '')
     if (!isNaN(gameId)) {
       fetch()
     }
