@@ -21,8 +21,6 @@ const GameDetail: FC<{ game: Game }> = ({ game }) => {
     dayjs.unix(game.buyAt).format('YYYY-MM-DD')
   ]
 
-  const companies = [...new Set([game.developer, game.publisher])]
-
   return (
     <div>
       <Header>
@@ -47,7 +45,6 @@ const GameDetail: FC<{ game: Game }> = ({ game }) => {
       </Header>
       <hr />
       <InfoList infos={infos} />
-      <InfoList infos={companies} />
     </div>
   )
 }

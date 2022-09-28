@@ -6,8 +6,6 @@ export interface Game {
   title: string
   subtitle: string
   cover: string
-  developer: string
-  publisher: string
   genre: Genre
   gameConsole: GameConsole
   rate: number
