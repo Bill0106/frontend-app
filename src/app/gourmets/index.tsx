@@ -4,11 +4,8 @@ import Layout from '@/layouts/Layout'
 
 const gourmets: RouteObject = {
   path: 'gourmets',
-  element: (
-    <Layout>
-      <List />
-    </Layout>
-  )
+  element: <Layout />,
+  children: [{ index: true, element: <List /> }]
 }
 
 export default gourmets
