@@ -5,10 +5,10 @@ import {
   enableBodyScroll
 } from 'body-scroll-lock'
 import { MouseEvent, useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const useViewData = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const menu = useRef<HTMLUListElement | null>(null)
   const [show, setShow] = useState(false)
 
@@ -33,7 +33,7 @@ const useViewData = () => {
       return false
     }
 
-    history.push(page.path)
+    navigate(page.path)
     show && handleClose()
   }
 

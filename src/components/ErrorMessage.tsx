@@ -2,7 +2,7 @@ import { MessageContext } from '@/utils/useMessage'
 import styled from '@emotion/styled'
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FC, useCallback, useRef, useState } from 'react'
+import { FC, ReactNode, useCallback, useRef, useState } from 'react'
 
 const Message = styled.div<{ show: boolean }>`
   position: fixed;
@@ -29,7 +29,7 @@ const Text = styled.p`
   line-height: 20px;
 `
 
-const ErrorMessage: FC = ({ children }) => {
+const ErrorMessage: FC<{ children?: ReactNode }> = ({ children }) => {
   const [message, setMessage] = useState('')
   const [visible, setVisible] = useState(false)
   const error = useRef('')

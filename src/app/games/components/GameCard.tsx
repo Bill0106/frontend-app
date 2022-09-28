@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
 import Image from '@/components/Image'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Card = styled.div`
   position: relative;
@@ -44,14 +44,14 @@ const Rate = styled.div`
 `
 
 const GameCard: FC<{ item: GameItem }> = ({ item }) => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const rates = Array(item.rate)
     .fill(null)
     .map((_, i) => <FontAwesomeIcon key={i} icon={faGamepad} />)
 
   const handleClick = () => {
-    history.push(`/games/${item.id}`)
+    navigate(`/games/${item.id}`)
   }
 
   return (
