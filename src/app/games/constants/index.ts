@@ -3,14 +3,17 @@ export enum GameConsole {
   PlayStation3,
   PlayStationVita,
   PlayStation4,
-  NintendoSwitch
+  NintendoSwitch,
+  PlayStation5,
+  XboxSeriesX,
 }
-
 export const GameConsoleMap = new Map([
   [GameConsole.PlayStation3, 'PlayStation 3'],
   [GameConsole.PlayStationVita, 'PlayStation Vita'],
   [GameConsole.PlayStation4, 'PlayStation 4'],
-  [GameConsole.NintendoSwitch, 'Nintendo Switch']
+  [GameConsole.PlayStation5, 'PlayStation 5'],
+  [GameConsole.NintendoSwitch, 'Nintendo Switch'],
+  [GameConsole.XboxSeriesX, 'Xbox Series X']
 ])
 
 export enum Genre {
