@@ -1,6 +1,6 @@
-const SCREEN_DESKTOP = 1200
-const SCREEN_LAPTOP = 992
-const SCREEN_TABLET = 768
+export const SCREEN_DESKTOP = 1200
+export const SCREEN_LAPTOP = 992
+export const SCREEN_TABLET = 768
 
 const MEDIA_QUERIES = {
   DESKTOP: `${SCREEN_DESKTOP}px`,

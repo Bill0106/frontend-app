@@ -3,14 +3,12 @@ import pages from '@/constants/pages'
 import loadImage from '@/utils/loadImage'
 import useDocumentTitle from '@/utils/useDocumentTitle'
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { SCREEN_TABLET } from '@/constants/mediaQueries'
 
 const useViewData = () => {
-  const navigate = useNavigate()
   const { setTitle } = useDocumentTitle()
   const [background, setBackground] = useState(pages[0].image)
   const [show, setShow] = useState(false)
-
 
   const preload = useCallback(async () => {
     await Promise.all(pages.map(v => loadImage(`${CDN_URI}/images/${v.image}`)))
@@ -20,16 +18,14 @@ const useViewData = () => {
 
   const handleTitleMouseEnter = () => setBackground(pages[0].image)
 
-  const handleEvent = (e: MouseEvent<HTMLDivElement>) => {
+  const handleEvent = (e: MouseEvent<HTMLAnchorElement>) => {
     const text = e.currentTarget.innerHTML
     const section = pages.find(v => v.title === text)
     if (!section) {
       return false
     }
 
-    if (e.type === 'click') {
-      navigate(section.path)
-    } else if (e.type === 'mouseenter' && document.body.clientWidth >= 768) {
+    if (document.body.clientWidth >= SCREEN_TABLET) {
       setBackground(section.image)
     }
   }
