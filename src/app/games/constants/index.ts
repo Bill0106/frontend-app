@@ -16,6 +16,24 @@ export const GameConsoleMap = new Map([
   [GameConsole.XboxSeriesX, 'Xbox Series X']
 ])
 
+export const GameConsoleShortMap = new Map([
+  [GameConsole.PlayStation3, 'PS3'],
+  [GameConsole.PlayStationVita, 'PSV'],
+  [GameConsole.PlayStation4, 'PS4'],
+  [GameConsole.PlayStation5, 'PS5'],
+  [GameConsole.NintendoSwitch, 'NS'],
+  [GameConsole.XboxSeriesX, 'XSX']
+])
+
+export const GameConsoleColorMap = new Map([
+  [GameConsole.PlayStation3, '#2E6DB4'],
+  [GameConsole.PlayStationVita, '#2E6DB4'],
+  [GameConsole.PlayStation4, '#2E6DB4'],
+  [GameConsole.PlayStation5, '#2E6DB4'],
+  [GameConsole.NintendoSwitch, '#dd2020'],
+  [GameConsole.XboxSeriesX, '#107C10']
+])
+
 export enum Genre {
   Invalid,
   Action,

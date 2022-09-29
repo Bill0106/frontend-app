@@ -12,7 +12,6 @@ const StyledLayout = styled.div`
 const Content = styled.div`
   margin: 0 auto;
   padding: 68px 16px 16px;
-  max-width: 1000px;
   box-sizing: border-box;
 `
 

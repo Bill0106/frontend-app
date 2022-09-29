@@ -9,8 +9,9 @@ export interface Game {
   genre: Genre
   gameConsole: GameConsole
   rate: number
+  playtime: number
   buyAt: number
   trophies?: GameTrophy[]
 }
 
-export type GameItem = Pick<Game, 'id' | 'title' | 'cover' | 'rate'>
+export type GameItem = Pick<Game, 'id' | 'title' | 'cover' | 'rate' | 'gameConsole' | 'playtime'>
