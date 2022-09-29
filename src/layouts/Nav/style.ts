@@ -1,5 +1,6 @@
 import MEDIA_QUERIES from '@/constants/mediaQueries'
 import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
 export const Navbar = styled.div`
   position: fixed;
@@ -51,17 +52,20 @@ export const Menu = styled.ul<{ show: boolean }>`
 export const MenuItem = styled.li`
   display: inline-block;
   margin: 0 16px;
-  font-size: 20px;
-  font-family: Copperplate, Copperplate Gothic Light, fantasy;
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  &:hover {
-    color: rgba(255, 255, 255, 1);
-  }
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
     display: block;
     margin: 20px 0;
     font-size: 28px;
+  }
+`
+
+export const MenuLink = styled(Link)`
+  font-size: 20px;
+  font-family: Copperplate, Copperplate Gothic Light, fantasy;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  &:hover {
+    color: rgba(255, 255, 255, 1);
   }
 `
 

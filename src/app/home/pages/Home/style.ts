@@ -1,6 +1,7 @@
 import MEDIA_QUERIES from '@/constants/mediaQueries'
 import { keyframes } from '@emotion/css'
 import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
 const loading = keyframes`
   0% {
@@ -47,10 +48,8 @@ export const Text = styled.div`
 `
 
 export const Container = styled(Page)<{ background: string; show: boolean }>`
-  background: url('${p => p.background}');
+  background: url('${p => p.background}') no-repeat center;
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   opacity: ${p => p.show ? 1 : 0};
   transition: all .5s ease-in-out;
 `
@@ -80,29 +79,28 @@ export const Title = styled.h1`
 `
 
 export const Sections = styled.div`
-  padding-top: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 20px;
   text-align: center;
   box-sizing: border-box;
 `
 
-export const Item = styled.div`
+export const Item = styled(Link)`
   display: inline-block;
-  width: ${100 / 3}%;
   font-size: 48px;
   font-family: Copperplate, Copperplate Gothic Light, fantasy;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.3s ease-in-out;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  &:hover {
+    transform: scale(1.25);
+  }
   @media (max-width: ${MEDIA_QUERIES.TABLET_MAX}) {
     display: block;
     margin: 20px 0;
     width: 100%;
-  }
-  > div {
-    display: inline-block;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    &:hover {
-      transform: scale(1.25);
-    }
   }
 `
 

@@ -13,7 +13,7 @@ module.exports = {
     'arrow-parens': ['error', 'as-needed'],
     'quote-props': ['error', 'as-needed'],
     'comma-dangle': ['error', 'never'],
-    'max-len': ['warn', { code: 80 }],
+    'max-len': ['warn', { code: 100 }],
     'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': ['error', { before: true, after: true }],
     'array-bracket-spacing': ['error', 'never'],

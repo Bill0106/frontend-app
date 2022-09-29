@@ -1,7 +1,7 @@
 import pages from '@/constants/pages'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Menu, MenuClose, MenuItem, Navbar } from './style'
+import { Button, Menu, MenuClose, MenuItem, MenuLink, Navbar } from './style'
 import useViewData from './useViewData'
 
 const Nav = () => {
@@ -14,8 +14,10 @@ const Nav = () => {
       </Button>
       <Menu ref={menu} show={show}>
         {pages.map(v => (
-          <MenuItem key={v.title} onClick={handleClick}>
-            {v.title.toLowerCase()}
+          <MenuItem key={v.title}>
+            <MenuLink to={v.path} onClick={handleClick}>
+              {v.title.toLowerCase()}
+            </MenuLink>
           </MenuItem>
         ))}
         <MenuClose onClick={handleClose}>&times;</MenuClose>

@@ -22,11 +22,11 @@ const Home = () => {
           <Title onMouseEnter={handleTitleMouseEnter}>{'Bill\'s Hobby'}</Title>
           <Sections>
             {pages.slice(1).map(v => (
-              <Item key={v.title}>
-                <div onClick={handleEvent} onMouseEnter={handleEvent}>
+              <div key={v.title}>
+                <Item to={v.path} onMouseEnter={handleEvent}>
                   {v.title}
-                </div>
-              </Item>
+                </Item>
+              </div>
             ))}
           </Sections>
         </Content>
