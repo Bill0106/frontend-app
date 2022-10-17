@@ -9,6 +9,7 @@ const ListContainer = styled.div`
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(6, 1fr);
+  margin: 0 auto;
   max-width: ${IMG_WIDTH * 6 + GAP * 5}px;
   @media (max-width: ${media(5)}px) {
     grid-template-columns: repeat(5, 1fr);

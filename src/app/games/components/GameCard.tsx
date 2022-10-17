@@ -97,7 +97,7 @@ const GameCard: FC<{ item: GameItem }> = ({ item }) => {
         {item.playtime !== 0 && (
           <Time>
             <FontAwesomeIcon icon={faClock}/>
-            <span>{item.playtime / 3600}h</span>
+            <span>{item.playtime}h</span>
           </Time>
         )}
       </Cover>

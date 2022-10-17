@@ -1,13 +1,13 @@
 import { RouteObject } from 'react-router-dom'
 import Detail from './pages/Detail'
-import List from './pages/List'
 import Layout from '@/layouts/Layout'
+import Stats from '@/app/games/pages/Stats'
 
 const games: RouteObject = {
   path: 'games',
   element: <Layout />,
   children: [
-    { index: true, element: <List /> },
+    { index: true, element: <Stats /> },
     { path: ':id', element: <Detail /> }
   ]
 }
