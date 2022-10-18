@@ -44,9 +44,9 @@ const List = () => {
   const [isFetching, setIsFetching] = useState(false)
 
   const pies = [
-    { title: 'Consoles', data: Object.entries(stats?.consoles ?? {}).map(v => ({ value: v[1], name: v[0] })) },
-    { title: 'Genres', data: Object.entries(stats?.genres ?? {}).map(v => ({ value: v[1], name: v[0] })) },
-    { title: 'Rates', data: Object.entries(stats?.rates ?? {}).map(v => ({ value: v[1], name: v[0] })) }
+    { title: 'Consoles', data: stats?.consoles ?? [] },
+    { title: 'Genres', data: stats?.genres ?? [] },
+    { title: 'Rates', data: stats?.rates ?? [] }
   ]
 
   const fetch = useCallback(async () => {

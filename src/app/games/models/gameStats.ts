@@ -1,15 +1,20 @@
 import { GameItem } from '@/app/games/models/game'
 
-interface Year {
+type Year = {
   count: number
   month: Record<string, number>
 }
 
+type Chart = {
+  name: string
+  value: number
+}
+
 export interface GameStats {
   totalPlayed: number
-  consoles: Record<string, number>
-  genres: Record<string, number>
-  rates: Record<string, number>
+  consoles: Chart[]
+  genres: Chart[]
+  rates: Chart[]
   years: Record<string, Year>
   recent: GameItem[]
   mostPlayed: GameItem[]

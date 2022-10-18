@@ -1,8 +1,9 @@
 import * as echarts from 'echarts/core'
 import { PieSeriesOption } from 'echarts/charts'
-import { FC, useEffect, useRef } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import { TitleComponentOption, TooltipComponentOption } from 'echarts/components'
+import useResize from '@/utils/useResize'
 
 type Options = echarts.ComposeOption<PieSeriesOption | TitleComponentOption | TooltipComponentOption>
 
@@ -11,13 +12,21 @@ const Container = styled.div`
 `
 
 const Pie: FC<{ title: string; data: { value: number; name: string }[] }> = ({ title, data }) => {
+  const { size } = useResize()
+  const [chart, setChart] = useState<echarts.ECharts | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (containerRef.current) {
-      const chart = echarts.init(containerRef.current, 'dark')
+    if (size && chart) {
+      chart.resize()
+    }
+  }, [chart, size])
 
-      chart.setOption<Options>({
+  useEffect(() => {
+    if (containerRef.current) {
+      const instance = echarts.init(containerRef.current, 'dark')
+
+      instance.setOption<Options>({
         title: {
           text: title
         },
@@ -32,6 +41,8 @@ const Pie: FC<{ title: string; data: { value: number; name: string }[] }> = ({ t
           data
         }
       })
+
+      setChart(instance)
     }
   }, [title, data])
 
