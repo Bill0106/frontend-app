@@ -38,6 +38,15 @@ const Pie: FC<{ title: string; data: { value: number; name: string }[] }> = ({ t
           name: title,
           type: 'pie',
           radius: '70%',
+          center: ['50%', '55%'],
+          label: { show: false },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          },
           data
         }
       })

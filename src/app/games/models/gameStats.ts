@@ -2,7 +2,7 @@ import { GameItem } from '@/app/games/models/game'
 
 type Year = {
   count: number
-  month: Record<string, number>
+  month: number[]
 }
 
 type Chart = {

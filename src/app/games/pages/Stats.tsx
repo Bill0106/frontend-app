@@ -8,8 +8,7 @@ import styled from '@emotion/styled'
 import Playtime from '@/app/games/components/Playtime'
 import Recent from '@/app/games/components/Recent'
 import Pie from '@/app/games/components/Pie'
-
-const color = 'rgba(229, 224, 216, 0.85)'
+import Bar from '@/app/games/components/Bar'
 
 const Container = styled.div`
   display: grid;
@@ -25,14 +24,20 @@ const FirstRow = styled.div`
 
 const Card = styled.div`
   padding: 16px;
-  color: ${color};
+  color: rgba(229, 224, 216, 0.85);
   border-radius: 4px;
   background: #242525;
 `
 
 const SecondRow = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr) 2fr;
+  column-gap: 16px;
+`
+
+const ThirdRow = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 2fr;
   column-gap: 16px;
 `
 
@@ -94,7 +99,12 @@ const List = () => {
             <Pie {...v} />
           </Card>
         ))}
+        <Card>
+          <Bar years={stats.years} />
+        </Card>
       </SecondRow>
+      <ThirdRow>
+      </ThirdRow>
     </Container>
   )
 }
