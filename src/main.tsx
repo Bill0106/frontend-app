@@ -1,7 +1,7 @@
 import * as ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import * as echarts from 'echarts/core'
-import { PieChart, BarChart } from 'echarts/charts'
+import { PieChart, BarChart, GaugeChart } from 'echarts/charts'
 import { SVGRenderer } from 'echarts/renderers'
 import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
 import { UniversalTransition, LabelLayout } from 'echarts/features'
@@ -15,6 +15,7 @@ if (container) {
   echarts.use([
     BarChart,
     PieChart,
+    GaugeChart,
     TitleComponent,
     TooltipComponent,
     GridComponent,

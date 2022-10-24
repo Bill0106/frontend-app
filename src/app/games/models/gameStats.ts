@@ -12,6 +12,8 @@ type Chart = {
 
 export interface GameStats {
   totalPlayed: number
+  earnedTrophies: number
+  totalTrophies: number
   consoles: Chart[]
   genres: Chart[]
   rates: Chart[]

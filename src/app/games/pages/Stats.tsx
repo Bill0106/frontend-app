@@ -1,14 +1,9 @@
-import useDocumentTitle from '@/utils/useDocumentTitle'
-import { useCallback, useEffect, useState } from 'react'
-import { GameStats } from '@/app/games/models/gameStats'
-import request from '@/utils/request'
-import useMessage from '@/utils/useMessage'
 import Loading from '@/components/Loading'
 import styled from '@emotion/styled'
 import Playtime from '@/app/games/components/Playtime'
 import Recent from '@/app/games/components/Recent'
-import Pie from '@/app/games/components/Pie'
-import Bar from '@/app/games/components/Bar'
+import Chart from '@/components/Chart'
+import useStatsData from '@/app/games/pages/useStatsData'
 
 const Container = styled.div`
   display: grid;
@@ -37,43 +32,12 @@ const SecondRow = styled.div`
 
 const ThirdRow = styled.div`
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 3fr;
   column-gap: 16px;
 `
 
-const List = () => {
-  const { setTitle } = useDocumentTitle()
-  const { setMessage } = useMessage()
-
-  const [stats, setStats] = useState<GameStats | null>(null)
-  const [isFetching, setIsFetching] = useState(false)
-
-  const pies = [
-    { title: 'Consoles', data: stats?.consoles ?? [] },
-    { title: 'Genres', data: stats?.genres ?? [] },
-    { title: 'Rates', data: stats?.rates ?? [] }
-  ]
-
-  const fetch = useCallback(async () => {
-    setIsFetching(true)
-    try {
-      const res = await request.get<GameStats>('game-stats')
-
-      setStats(res)
-    } catch (e) {
-      setMessage((e as Error).message)
-    } finally {
-      setIsFetching(false)
-    }
-  }, [setMessage])
-
-  useEffect(() => {
-    setTitle('Games')
-  }, [setTitle])
-
-  useEffect(() => {
-    fetch()
-  }, [fetch])
+const Stats = () => {
+  const { stats, pies, yearsOptions, trophyOptions, isFetching } = useStatsData()
 
   if (isFetching) {
     return <Loading />
@@ -94,19 +58,22 @@ const List = () => {
         </Card>
       </FirstRow>
       <SecondRow>
-        {pies.map(v => (
-          <Card key={v.title}>
-            <Pie {...v} />
+        {pies.map((v, i) => (
+          <Card key={i}>
+            <Chart options={v} />
           </Card>
         ))}
         <Card>
-          <Bar years={stats.years} />
+          <Chart options={yearsOptions} />
         </Card>
       </SecondRow>
       <ThirdRow>
+        <Card>
+          <Chart options={trophyOptions} />
+        </Card>
       </ThirdRow>
     </Container>
   )
 }
 
-export default List
+export default Stats
