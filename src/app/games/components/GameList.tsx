@@ -7,17 +7,18 @@ import Rates from '@/app/games/components/Rates'
 import Image from '@/components/Image'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
+import dayjs from 'dayjs'
 
 const Title = styled.h3`
   margin: 0 0 40px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   color: rgba(229, 224, 216, 0.45);
 `
 
-const List = styled.div`
+const List = styled.div<{ count: number }>`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(${p => p.count}, 1fr);
 `
 
 const Item = styled.div`
@@ -59,11 +60,15 @@ const Time = styled(Text)`
   }
 `
 
-const Recent: FC<{ items: GameItem[] }> = ({ items }) => {
+const Date = styled.p`
+  font-size: 16px;
+`
+
+const GameList: FC<{ title: string; items: GameItem[]; subtitle?: 'playtime' | 'buy_at' }> = ({ title, items, subtitle = 'playtime' }) => {
   return (
     <>
-      <Title>Recent Games</Title>
-      <List>
+      <Title>{title}</Title>
+      <List count={items.length}>
         {items.map(v => {
           return (
             <Item key={v.id}>
@@ -75,10 +80,15 @@ const Recent: FC<{ items: GameItem[] }> = ({ items }) => {
                 <Name>{v.title}</Name>
               </Text>
               <Rates rate={v.rate} align="center" size="lg" />
-              <Time>
-                <FontAwesomeIcon icon={faClock}/>
-                <span>{v.playtime}h</span>
-              </Time>
+              {subtitle === 'playtime' && (
+                <Time>
+                  <FontAwesomeIcon icon={faClock}/>
+                  <span>{v.playtime}h</span>
+                </Time>
+              )}
+              {subtitle === 'buy_at' && (
+                <Date>{dayjs.unix(v.buyAt).format('YYYY-MM-DD')}</Date>
+              )}
             </Item>
           )
         })}
@@ -87,4 +97,4 @@ const Recent: FC<{ items: GameItem[] }> = ({ items }) => {
   )
 }
 
-export default Recent
+export default GameList

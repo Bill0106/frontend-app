@@ -6,20 +6,26 @@ import { ChartOptions } from '@/components/Chart'
 import request from '@/utils/request'
 import { BarSeriesOption } from 'echarts/charts'
 import dayjs from 'dayjs'
+import { TitleComponentOption } from 'echarts/components'
 
-const useStatsData = () => {
+const useViewData = () => {
   const { setTitle } = useDocumentTitle()
   const { setMessage } = useMessage()
 
   const [stats, setStats] = useState<GameStats | null>(null)
   const [isFetching, setIsFetching] = useState(false)
 
+  const chartTitleStyle: TitleComponentOption['textStyle'] = {
+    color: 'rgba(229, 224, 216, 0.45)',
+    fontWeight: 'normal'
+  }
+
   const pies: ChartOptions[] = [
     { title: 'Consoles', data: stats?.consoles ?? [] },
     { title: 'Genres', data: stats?.genres ?? [] },
     { title: 'Rates', data: stats?.rates ?? [] }
   ].map(v => ({
-    title: { text: v.title },
+    title: { text: v.title, textStyle: chartTitleStyle },
     tooltip: { trigger: 'item' },
     backgroundColor: '',
     series: {
@@ -58,7 +64,7 @@ const useStatsData = () => {
     }))
 
   const yearsOptions: ChartOptions = {
-    title: { text: 'Games bought per year' },
+    title: { text: 'Games bought per year', textStyle: chartTitleStyle },
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'shadow' }
@@ -89,7 +95,7 @@ const useStatsData = () => {
   }
 
   const trophyOptions: ChartOptions = {
-    title: { text: 'Earned Trophies' },
+    title: { text: 'Earned Trophies', textStyle: chartTitleStyle },
     backgroundColor: '',
     tooltip: {
       formatter: `Total: ${stats?.totalTrophies} <br /> Earned: ${stats?.earnedTrophies}`
@@ -140,4 +146,4 @@ const useStatsData = () => {
   return { stats, pies, yearsOptions, trophyOptions, isFetching }
 }
 
-export default useStatsData
+export default useViewData

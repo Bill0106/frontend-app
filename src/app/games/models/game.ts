@@ -14,4 +14,4 @@ export interface Game {
   trophies?: GameTrophy[]
 }
 
-export type GameItem = Pick<Game, 'id' | 'title' | 'cover' | 'rate' | 'gameConsole' | 'playtime'>
+export type GameItem = Pick<Game, 'id' | 'title' | 'cover' | 'rate' | 'gameConsole' | 'playtime' | 'buyAt'>

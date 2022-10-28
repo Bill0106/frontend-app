@@ -11,6 +11,7 @@ type Chart = {
 }
 
 export interface GameStats {
+  total: number
   totalPlayed: number
   earnedTrophies: number
   totalTrophies: number
@@ -20,4 +21,5 @@ export interface GameStats {
   years: Record<string, Year>
   recent: GameItem[]
   mostPlayed: GameItem[]
+  platinum: GameItem[]
 }

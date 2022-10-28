@@ -1,9 +1,10 @@
 import Loading from '@/components/Loading'
 import styled from '@emotion/styled'
 import Playtime from '@/app/games/components/Playtime'
-import Recent from '@/app/games/components/Recent'
+import GameList from '@/app/games/components/GameList'
 import Chart from '@/components/Chart'
-import useStatsData from '@/app/games/pages/useStatsData'
+import useViewData from '@/app/games/pages/Stats/useViewData'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
   display: grid;
@@ -36,15 +37,28 @@ const ThirdRow = styled.div`
   column-gap: 16px;
 `
 
-const Stats = () => {
-  const { stats, pies, yearsOptions, trophyOptions, isFetching } = useStatsData()
+const All = styled.div`
+  text-align: center;
+`
+
+const To = styled(Link)`
+  font-size: 20px;
+  color: #fff;
+`
+
+const Index = () => {
+  const { stats, pies, yearsOptions, trophyOptions, isFetching } = useViewData()
 
   if (isFetching) {
     return <Loading />
   }
 
   if (!stats) {
-    return null
+    return (
+      <All>
+        <To to='/games/all'>All Games</To>
+      </All>
+    )
   }
 
   return (
@@ -54,7 +68,7 @@ const Stats = () => {
           <Playtime totalPlayed={stats.totalPlayed} mostPlayed={stats.mostPlayed} />
         </Card>
         <Card>
-          <Recent items={stats.recent} />
+          <GameList title="Recent Games" items={stats.recent} />
         </Card>
       </FirstRow>
       <SecondRow>
@@ -71,9 +85,15 @@ const Stats = () => {
         <Card>
           <Chart options={trophyOptions} />
         </Card>
+        <Card>
+          <GameList title="Platinum Games" items={stats.platinum} subtitle="buy_at" />
+        </Card>
       </ThirdRow>
+      <All>
+        <To to='/games/all'>All {stats.total} Games</To>
+      </All>
     </Container>
   )
 }
 
-export default Stats
+export default Index
