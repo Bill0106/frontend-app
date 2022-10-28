@@ -16,13 +16,31 @@ const Title = styled.h3`
   color: rgba(229, 224, 216, 0.45);
 `
 
+const Item = styled.div`
+  text-align: center;
+`
+
 const List = styled.div<{ count: number }>`
   display: grid;
   grid-template-columns: repeat(${p => p.count}, 1fr);
-`
-
-const Item = styled.div`
-  text-align: center;
+  @media (max-width: 1488px) {
+    grid-template-columns: repeat(${p => p.count - 1}, 1fr);
+    > ${Item}:last-child {
+      display: none;
+    }
+  }
+  @media (max-width: 1112px) {
+    grid-template-columns: repeat(3, 1fr);
+    > ${Item}:nth-of-type(n+4) {
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    > ${Item}:nth-of-type(n+2) {
+      display: none;
+    }
+  }
 `
 
 const Cover = styled.div`

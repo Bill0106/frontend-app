@@ -14,6 +14,7 @@ const Title = styled.h3`
 const Caption = styled.h1`
   margin: 36px 0;
   padding: 0 24px;
+  text-align: center;
   font-size: 48px;
 `
 

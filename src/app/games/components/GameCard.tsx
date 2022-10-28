@@ -5,10 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
 import Image from '@/components/Image'
-import { Link } from 'react-router-dom'
-import { GameConsole, GameConsoleColorMap, GameConsoleShortMap } from '@/app/games/constants'
+import { GameConsoleColorMap, GameConsoleShortMap } from '@/app/games/constants'
 
-const Card = styled(Link)`
+const Card = styled.div`
   display: block;
   position: relative;
   padding-bottom: 80px;
@@ -86,12 +85,8 @@ const GameCard: FC<{ item: GameItem }> = ({ item }) => {
     .fill(null)
     .map((_, i) => <FontAwesomeIcon key={i} size="sm" icon={faGamepad} />)
 
-  const Tag = [GameConsole.XboxSeriesX, GameConsole.NintendoSwitch].includes(item.gameConsole)
-    ? Card.withComponent('div')
-    : Card
-
   return (
-    <Tag to={`/games/${item.id}`}>
+    <Card>
       <Cover>
         <Image url={item.cover} icon={faGamepad} />
         {item.playtime !== 0 && (
@@ -110,7 +105,7 @@ const GameCard: FC<{ item: GameItem }> = ({ item }) => {
         </Above>
         <Rate>{rates}</Rate>
       </Text>
-    </Tag>
+    </Card>
   )
 }
 

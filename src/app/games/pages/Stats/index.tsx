@@ -16,6 +16,10 @@ const FirstRow = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 16px;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
 `
 
 const Card = styled.div`
@@ -29,12 +33,29 @@ const SecondRow = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr) 2fr;
   column-gap: 16px;
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 16px;
+  }
+  @media (min-width: 768px) and (max-width: 1000px) {
+    > ${Card}:last-child {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const ThirdRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr;
   column-gap: 16px;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
 `
 
 const All = styled.div`
