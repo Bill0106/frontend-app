@@ -2,10 +2,11 @@ import styled from '@emotion/styled'
 import { GameItem } from '../models/game'
 import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGamepad } from '@fortawesome/free-solid-svg-icons'
+import { faGamepad, faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
 import Image from '@/components/Image'
-import { GameConsoleColorMap, GameConsoleShortMap } from '@/app/games/constants'
+import Rates from '@/app/games/components/Rates'
+import Console from './Console'
 
 const Card = styled.div`
   display: block;
@@ -52,16 +53,6 @@ const Above = styled.div`
   margin-bottom: 12px;
 `
 
-const Label = styled.span<{ color: string }>`
-  padding: 0 4px;
-  line-height: 12px;
-  font-size: 10px;
-  font-weight: bolder;
-  color: ${p => p.color};
-  border: 1px solid ${p => p.color};
-  border-radius: 4px;
-`
-
 const Title = styled.p`
   margin: 0;
   line-height: 18px;
@@ -71,19 +62,25 @@ const Title = styled.p`
   overflow: hidden;
 `
 
-const Rate = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-column-gap: 8px;
-  justify-content: left;
-  height: 16px;
-  font-size: 16px;
+const Trophy = styled.button`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 `
 
-const GameCard: FC<{ item: GameItem }> = ({ item }) => {
-  const rates = Array(item.rate)
-    .fill(null)
-    .map((_, i) => <FontAwesomeIcon key={i} size="sm" icon={faGamepad} />)
+const GameCard: FC<{ item: GameItem; onTrophyClick: (id: number) => void }> = ({ item, onTrophyClick }) => {
+  const handleClick = () => {
+    onTrophyClick(item.id)
+  }
 
   return (
     <Card>
@@ -95,15 +92,18 @@ const GameCard: FC<{ item: GameItem }> = ({ item }) => {
             <span>{item.playtime}h</span>
           </Time>
         )}
+        {item.hasTrophy && (
+          <Trophy onClick={handleClick}>
+            <FontAwesomeIcon icon={faTrophy} />
+          </Trophy>
+        )}
       </Cover>
       <Text>
         <Above>
-          <Label color={GameConsoleColorMap.get(item.gameConsole) ?? ''}>
-            {GameConsoleShortMap.get(item.gameConsole)}
-          </Label>
+          <Console console={item.gameConsole} />
           <Title>{item.title}</Title>
         </Above>
-        <Rate>{rates}</Rate>
+        <Rates rate={item.rate} />
       </Text>
     </Card>
   )
