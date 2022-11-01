@@ -7,6 +7,7 @@ import gourmets from './gourmets'
 import movies from './movies'
 import { useEffect, useState } from 'react'
 import { isProduction } from '@/constants/env'
+import Resize from '@/components/Resize'
 
 const App = () => {
   const location = useLocation()
@@ -32,7 +33,9 @@ const App = () => {
 
   return (
     <ErrorMessage>
-      {useRoutes(routes)}
+      <Resize>
+        {useRoutes(routes)}
+      </Resize>
     </ErrorMessage>
   )
 }
