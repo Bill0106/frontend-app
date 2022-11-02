@@ -125,7 +125,7 @@ const useViewData = () => {
   const fetch = useCallback(async () => {
     setIsFetching(true)
     try {
-      const res = await request.get<GameStats>('game-stats')
+      const res = await request.get<GameStats>('stats/game')
 
       setStats(res)
     } catch (e) {
