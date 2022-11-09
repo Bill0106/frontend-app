@@ -4,12 +4,14 @@ import Loading from './Loading'
 export interface InfiniteScrollProps {
   isBusy: boolean
   hasMore: boolean
+  disabled?: boolean
   children?: ReactNode
   onLoadMore: () => void
 }
 
 const InfiniteScroll: FC<InfiniteScrollProps> = ({
   children,
+  disabled,
   isBusy,
   hasMore,
   onLoadMore
@@ -17,7 +19,7 @@ const InfiniteScroll: FC<InfiniteScrollProps> = ({
   const container = useRef<HTMLDivElement | null>(null)
 
   const handleScroll = useCallback(() => {
-    if (!container.current) {
+    if (!container.current || disabled) {
       return false
     }
 
@@ -25,7 +27,7 @@ const InfiniteScroll: FC<InfiniteScrollProps> = ({
     if (top - window.innerHeight < 100 && !isBusy) {
       onLoadMore()
     }
-  }, [isBusy, onLoadMore])
+  }, [disabled, isBusy, onLoadMore])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
