@@ -142,10 +142,10 @@ const TrophyList: FC<TrophyListProps> = ({ id, visible, onHide }) => {
           isFetching
             ? <Loading />
             : (
-                <Trophies>
-                  {trophies.map(v => <TrophyItem key={v.id} item={v} />)}
-                </Trophies>
-              )
+              <Trophies>
+                {trophies.map(v => <TrophyItem key={v.id} item={v} />)}
+              </Trophies>
+            )
         }
       </Container>
       <Mask onClick={handleClose} />

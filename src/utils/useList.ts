@@ -27,10 +27,7 @@ const listReducer = <T>() => (state: ListState<T>, action: ListAction<T>) => {
       () => ({
         ...state,
         ...(action.payload
-          ? {
-              list: [...state.list, ...action.payload.list],
-              total: action.payload.total
-            }
+          ? { list: [...state.list, ...action.payload.list], total: action.payload.total }
           : {}),
         isFetching: false
       })

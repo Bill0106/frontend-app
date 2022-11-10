@@ -10,7 +10,8 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build --emptyOutDir",
-    "check-type": "tsc --noEmit --skipLibCheck"
+    "check-type": "tsc --noEmit --skipLibCheck",
+    "format": "eslint --fix src"
   },
   "dependencies": {
     "@emotion/css": "^11.10.0",

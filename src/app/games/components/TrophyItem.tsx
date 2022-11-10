@@ -47,23 +47,23 @@ const TrophyEarned = styled.div`
 `
 
 const TrophyItem: FC<{ item: GameTrophy }> = ({ item }) => (
-    <Trophy>
-      <TrophyImg
-        color={TrophyRarityColors.get(item.rarity) || ''}
-        earned={Boolean(item.earnedAt)}
-      >
-        <Image url={item.image} iconSize={24} icon={faTrophy} />
-      </TrophyImg>
-      <TrophyText>
-        <p>{item.title}</p>
-        <span>{item.description}</span>
-      </TrophyText>
-      <TrophyEarned>
-        {item.earnedAt &&
+  <Trophy>
+    <TrophyImg
+      color={TrophyRarityColors.get(item.rarity) || ''}
+      earned={Boolean(item.earnedAt)}
+    >
+      <Image url={item.image} iconSize={24} icon={faTrophy} />
+    </TrophyImg>
+    <TrophyText>
+      <p>{item.title}</p>
+      <span>{item.description}</span>
+    </TrophyText>
+    <TrophyEarned>
+      {item.earnedAt &&
           `Earned at: ${dayjs.unix(item.earnedAt).format('MMMM D, YYYY')}`
-        }
-      </TrophyEarned>
-    </Trophy>
-  )
+      }
+    </TrophyEarned>
+  </Trophy>
+)
 
-  export default TrophyItem
+export default TrophyItem

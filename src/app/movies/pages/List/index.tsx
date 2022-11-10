@@ -1,17 +1,20 @@
-import MovieCard, { MovieCardData } from '../../components/MovieCard'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
 import styled from '@emotion/styled'
-import dayjs from 'dayjs'
 import useViewData from './useViewData'
+import MovieList from '../../components/MovieList'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 const Container = styled.div`
   position: relative;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 84px);
+  overflow: hidden;
 `
 
 const Year = styled.p`
+  margin: 0 0 20px;
+  line-height: 32px;
   font-size: 24px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-weight: bolder;
   color: #ffe400;
   @media (min-width: ${MEDIA_QUERIES.TABLET}) {
@@ -20,58 +23,67 @@ const Year = styled.p`
   }
 `
 
-const Item = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 24px;
-  position: relative;
-  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    display: block;
-  }
+const Content = styled.div`
+  margin: 0 -16px;
+  height: calc(100% - 52px);
+  overflow: auto;
 `
 
-const Line = styled.span`
+const Button = styled.button`
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin-left: -6px;
-  width: 12px;
-  background: #ffe400;
-  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    left: 24px;
-  }
-`
-
-const Spacer = styled.div`
-  @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
-    display: none;
+  right: 16px;
+  bottom: 16px;
+  padding: 14px 0 6px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffe400;
+  border: none;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  cursor: pointer;
+  > span {
+    display: block;
+    line-height: 20px;
   }
 `
 
 const Movies = () => {
-  const { year } = useViewData()
+  const { list, year, prevYear, nextYear, changeYear } = useViewData()
 
-  const renderItem = (v: MovieCardData, i: number, a: MovieCardData[]) => {
-    const dayDiff = i &&
-      dayjs.unix(a[i - 1].watchedAt).diff(dayjs.unix(v.watchedAt), 'day')
+  const handlePrev = () => {
+    if (prevYear) {
+      changeYear(prevYear)
+    }
+  }
 
-    const doms = [
-      <MovieCard key="card" data={v} dayDiff={dayDiff} />,
-      <Spacer key="spacer" />
-    ]
-
-    return (
-      <Item key={v.id}>
-        {v.isLeft ? doms : doms.reverse()}
-        <Line />
-      </Item>
-    )
+  const handleNext = () => {
+    if (nextYear) {
+      changeYear(nextYear)
+    }
   }
 
   return (
     <Container>
       <Year>{year}</Year>
+      <Content>
+        <MovieList list={list} />
+      </Content>
+      {prevYear && (
+        <Button onClick={handlePrev}>
+          <FontAwesomeIcon icon={faArrowUp} />
+          <span>{prevYear}</span>
+        </Button>
+      )}
+      {nextYear && (
+        <Button onClick={handleNext}>
+          <span>{nextYear}</span>
+          <FontAwesomeIcon icon={faArrowDown} />
+        </Button>
+      )}
     </Container>
   )
 }
