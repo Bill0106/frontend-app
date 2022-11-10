@@ -1,10 +1,13 @@
-import InfiniteScroll from '@/components/InfiniteScroll'
-import MovieCard, { MovieCardData } from '../components/MovieCard'
+import MovieCard, { MovieCardData } from '../../components/MovieCard'
 import MEDIA_QUERIES from '@/constants/mediaQueries'
-import useList from '@/utils/useList'
 import styled from '@emotion/styled'
 import dayjs from 'dayjs'
-import { Movie } from '../models/movie'
+import useViewData from './useViewData'
+
+const Container = styled.div`
+  position: relative;
+  height: calc(100vh - 80px);
+`
 
 const Year = styled.p`
   font-size: 24px;
@@ -32,7 +35,7 @@ const Line = styled.span`
   top: 0;
   bottom: 0;
   left: 50%;
-  margin-left: -4px;
+  margin-left: -6px;
   width: 12px;
   background: #ffe400;
   @media (max-width: ${MEDIA_QUERIES.MOBILE}) {
@@ -47,29 +50,7 @@ const Spacer = styled.div`
 `
 
 const Movies = () => {
-  const { list, infiniteScrollProps } = useList<Movie>('movies')
-
-  const years = [...new Set(list.map(v => dayjs.unix(v.watchedAt).year()))]
-
-  const movies = list
-    .reduce<MovieCardData[]>((res, item, index) => {
-      if (index === 0) {
-        return [...res, { ...item, isLeft: true }]
-      }
-
-      const prev = res[res.length - 1]
-      const isLeft = dayjs.unix(item.watchedAt).isSame(prev.watchedAt, 'month')
-        ? prev.isLeft
-        : !prev.isLeft
-
-      return [...res, { ...item, isLeft }]
-    }, [])
-    .reduce<{ [k: number]: MovieCardData[] }>((res, item) => {
-      const year = dayjs.unix(item.watchedAt).year()
-      const items = res[year]
-
-      return { ...res, [year]: items ? [...items, item] : [item] }
-    }, {})
+  const { year } = useViewData()
 
   const renderItem = (v: MovieCardData, i: number, a: MovieCardData[]) => {
     const dayDiff = i &&
@@ -88,17 +69,10 @@ const Movies = () => {
     )
   }
 
-  const renderYear = (v: number) => (
-    <div key={v}>
-      <Year>{v}</Year>
-      {movies[v].map(renderItem)}
-    </div>
-  )
-
   return (
-    <InfiniteScroll {...infiniteScrollProps}>
-      <div>{years.map(renderYear)}</div>
-    </InfiniteScroll>
+    <Container>
+      <Year>{year}</Year>
+    </Container>
   )
 }
 
