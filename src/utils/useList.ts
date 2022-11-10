@@ -44,13 +44,15 @@ const listReducer = <T>() => (state: ListState<T>, action: ListAction<T>) => {
 }
 
 const useList = <T>(path: string, pageSize = PAGE_SIZE) => {
-  const { setMessage } = useMessage()
   const [{ list, total, isFetching }, dispatch] = useReducer(listReducer<T>(), {
     list: [],
     total: 0,
     isFetching: false
   })
+  const { setMessage } = useMessage()
   const [page, setPage] = useState(1)
+  const [disableScroll, setDisableScroll] = useState(true)
+
   const maxPage = Math.ceil(total / pageSize)
 
   const fetch = useCallback(async () => {
@@ -59,8 +61,13 @@ const useList = <T>(path: string, pageSize = PAGE_SIZE) => {
       const res = await request.get<ListResponse<T>>(path, { page, pageSize })
 
       dispatch({ type: 'fulfilled', payload: res })
+      if (page === 1) {
+        setDisableScroll(false)
+      }
     } catch (error) {
-      setMessage((error as Error).message)
+      if (error instanceof Error) {
+        setMessage(error.message)
+      }
       dispatch({ type: 'error' })
     }
   }, [setMessage, path, page, pageSize])
@@ -78,6 +85,7 @@ const useList = <T>(path: string, pageSize = PAGE_SIZE) => {
   }, [fetch])
 
   const infiniteScrollProps: InfiniteScrollProps = {
+    disabled: disableScroll,
     hasMore: list.length === 0 || list.length < total,
     isBusy: isFetching,
     onLoadMore: handleLoadMore

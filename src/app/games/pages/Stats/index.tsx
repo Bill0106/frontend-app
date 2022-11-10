@@ -67,7 +67,7 @@ const To = styled(Link)`
   color: #fff;
 `
 
-const Index = () => {
+const Stats = () => {
   const { stats, pies, yearsOptions, trophyOptions, isFetching } = useViewData()
 
   if (isFetching) {
@@ -117,4 +117,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Stats
