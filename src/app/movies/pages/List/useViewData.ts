@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import useMessage from '@/utils/useMessage'
 import dayjs from 'dayjs'
-import { useCallback, useEffect, useReducer, useState } from 'react'
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import { MovieCardData } from '../../components/MovieCard'
 import { Movie } from '../../models/movie'
 
@@ -33,6 +33,7 @@ const reducer = (state: State, action: Action) => {
 const useViewData = () => {
   const [years, setYears] = useState<number[]>([])
   const [year, setYear] = useState(0)
+  const contentRef = useRef<HTMLDivElement | null>(null)
 
   const [{ movies, isFetching }, dispatch] = useReducer(reducer, { movies: {}, isFetching: false })
 
@@ -57,7 +58,23 @@ const useViewData = () => {
     }, [])
 
   const changeYear = (v: number) => {
+    if (contentRef.current) {
+      contentRef.current.scroll({ top: 0, behavior: 'smooth' })
+    }
+
     setYear(v)
+  }
+
+  const handlePrev = () => {
+    if (prevYear) {
+      changeYear(prevYear)
+    }
+  }
+
+  const handleNext = () => {
+    if (nextYear) {
+      changeYear(nextYear)
+    }
   }
 
   const fetchYears = useCallback(async () => {
@@ -97,7 +114,7 @@ const useViewData = () => {
     }
   }, [year, fetch])
 
-  return { list, year, prevYear, nextYear, isFetching, changeYear }
+  return { list, year, contentRef, prevYear, nextYear, isFetching, handlePrev, handleNext }
 }
 
 export default useViewData
