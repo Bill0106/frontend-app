@@ -14,9 +14,6 @@
     "format": "eslint --fix src"
   },
   "dependencies": {
-    "@emotion/css": "^11.10.0",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
@@ -31,8 +28,6 @@
     "react-router-dom": "^6.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@emotion/babel-plugin": "^11.10.2",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
