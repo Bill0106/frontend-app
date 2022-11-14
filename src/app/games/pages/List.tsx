@@ -4,7 +4,6 @@ import useDocumentTitle from '@/utils/useDocumentTitle'
 import useList from '@/utils/useList'
 import { useEffect, useState } from 'react'
 import { GameItem } from '../models/game'
-import ListContainer from '@/components/ListContainer'
 import TrophyList from '../components/TrophyList'
 
 const List = () => {
@@ -34,9 +33,9 @@ const List = () => {
   return (
     <>
       <InfiniteScroll {...infiniteScrollProps}>
-        <ListContainer>
+        <div className="games__list">
           {list.map(v => <GameCard key={v.id} item={v} onTrophyClick={handleTrophy} />)}
-        </ListContainer>
+        </div>
       </InfiniteScroll>
       <TrophyList id={gameId} visible={visible} onHide={handleTrophyHide} />
     </>

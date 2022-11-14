@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import dayjs from 'dayjs'
 import { FC } from 'react'
 import Image from '@/components/Image'
+import classnames from '@/utils/classnames'
 
 export interface MovieCardData extends Movie {
   isLeft: boolean
@@ -15,32 +16,27 @@ export interface MovieCardProps {
 }
 
 const MovieCard: FC<MovieCardProps> = ({ data, dayDiff }) => {
-  const baseClass = 'movies__card'
-  const cardClass = [baseClass, data.isLeft ? `${baseClass}--left` : ''].join(' ')
+  const classname = classnames('movies__card')
 
   const renderTickets = () => {
-    return Array(5).fill(null).map((_, index) => {
-      const ticketClass = ['movies__card-ticket', index < data.rate ? 'active' : ''].join(' ')
-
-      return (
-        <span key={index} className={ticketClass}>
-          <FontAwesomeIcon icon={faTicketAlt} />
-        </span>
-      )
-    })
+    return Array(5).fill(null).map((_, index) => (
+      <span key={index} {...classname('-ticket', { active: index < data.rate })}>
+        <FontAwesomeIcon icon={faTicketAlt} />
+      </span>
+    ))
   }
 
   return (
-    <div className={cardClass} style={{ paddingTop: `${dayDiff * 4 + 16}px` }}>
-      <div className="movies__card-poster">
+    <div {...classname('', { left: data.isLeft })} style={{ paddingTop: `${dayDiff * 4 + 16}px` }}>
+      <div {...classname('-poster')}>
         <Image url={data.poster} icon={faFilm} height={148} />
       </div>
-      <div className="movies__card-text">
-        <div className="movies__card-date">
+      <div {...classname('-text')}>
+        <div {...classname('-date')}>
           {dayjs.unix(data.watchedAt).format('MM-DD')}
         </div>
-        <p className="movies__card-title">{data.title}</p>
-        <div className="movies__card-rate">
+        <p {...classname('-title')}>{data.title}</p>
+        <div {...classname('-rate')}>
           {renderTickets()}
         </div>
       </div>

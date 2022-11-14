@@ -1,0 +1,85 @@
+@import './card.less';
+
+@movie-text-color: #ffe400;
+
+.movies {
+  position: relative;
+  height: calc(100vh - 84px);
+  overflow: hidden;
+  @media (max-width: @screen-sm-max) {
+    height: calc(100vh - 76px);
+  }
+  &__year {
+    margin: 0 0 20px;
+    line-height: 32px;
+    font-size: 24px;
+    color: @movie-text-color;
+    @media (min-width: @screen-md) {
+      font-size: 28px;
+      text-align: center;
+    }
+    @media (max-width: @screen-sm-max) {
+      margin-bottom: 12px;
+    }
+  }
+  &__content {
+    margin: 0 -16px;
+    height: calc(100% - 52px);
+    overflow: auto;
+  }
+  &__btn {
+    position: absolute;
+    right: 16px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: @movie-text-color;
+    border: none;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-sizing: border-box;
+    cursor: pointer;
+    &--prev {
+      top: 16px;
+      padding: 6px 0 14px;
+    }
+    &--next {
+      bottom: 16px;
+      padding: 14px 0 6px;
+    }
+    > span {
+      display: block;
+      line-height: 20px;
+    }
+  }
+  &__spacer {
+    @media (max-width: @screen-sm-max) {
+      display: none;
+    }
+  }
+  &__item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+    position: relative;
+    @media (max-width: @screen-sm-max) {
+      display: block;
+    }
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -6px;
+      width: 12px;
+      background: @movie-text-color;
+      content: "";
+      @media (max-width: @screen-sm-max) {
+        left: 24px;
+        margin-left: 10px;
+      }
+    }
+  }
+}

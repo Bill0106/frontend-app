@@ -1,41 +1,35 @@
 import pages from '@/constants/pages'
-import {
-  Container,
-  Content,
-  Item,
-  Loading,
-  Mask,
-  Page,
-  Sections,
-  Text,
-  Title
-} from './style'
+import classnames from '@/utils/classnames'
+import { Link } from 'react-router-dom'
 import useViewData from './useViewData'
 
 const Home = () => {
+  const classname = classnames('home')
   const { background, show, handleEvent, handleTitleMouseEnter } = useViewData()
 
   return (
-    <Page>
-      <Container background={background} show={show}>
-        <Content>
-          <Title onMouseEnter={handleTitleMouseEnter}>{'Bill\'s Hobby'}</Title>
-          <Sections>
+    <div {...classname()}>
+      <div {...classname('container', { show })} style={{ backgroundImage: `url(${background})` }}>
+        <div {...classname('content')}>
+          <h1 {...classname('title')} onMouseEnter={handleTitleMouseEnter}>
+            {'Bill\'s Hobby'}
+          </h1>
+          <div {...classname('sections')}>
             {pages.slice(1).map(v => (
               <div key={v.title}>
-                <Item to={v.path} onMouseEnter={handleEvent}>
+                <Link {...classname('link')} to={v.path} onMouseEnter={handleEvent}>
                   {v.title}
-                </Item>
+                </Link>
               </div>
             ))}
-          </Sections>
-        </Content>
-        <Mask />
-      </Container>
-      <Loading show={!show}>
-        <Text>Loading...</Text>
-      </Loading>
-    </Page>
+          </div>
+        </div>
+        <div {...classname('mask')} />
+      </div>
+      <div {...classname('loading', { show: !show })}>
+        <p {...classname('loading-text')}>Loading...</p>
+      </div>
+    </div>
   )
 }
 

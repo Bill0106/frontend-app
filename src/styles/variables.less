@@ -1,0 +1,38 @@
+@screen-xxl: 1400px;
+@screen-xl-max: @screen-xxl - 1px;
+@screen-xl: 1200px;
+@screen-lg-max: @screen-xl - 1px;
+@screen-lg: 992px;
+@screen-md-max: @screen-lg - 1px;
+@screen-md: 768px;
+@screen-sm-max: @screen-md - 1px;
+@screen-sm: 576px;
+
+@img-width: 360px;
+@img-gap: 16px;
+@img-max-width: @img-width * 6 + @img-gap * 5;
+
+.columnLayout(@num) {
+  @width: (@img-width * @num + @img-gap * (@num + 1));
+}
+
+.list-container {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0 auto;
+  max-width: @img-max-width;
+  each(range(5), {
+    @media (max-width: .columnLayout(@value)[@width]) {
+      grid-template-columns: repeat(@value, 1fr);
+    }
+  });
+}
+
+.full-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -6,10 +6,9 @@ import { SVGRenderer } from 'echarts/renderers'
 import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
 import { UniversalTransition, LabelLayout } from 'echarts/features'
 import App from './app'
-import './styles/style.less'
+import './styles/index.less'
 
 const container = document.getElementById('app')
-
 if (container) {
   const root = ReactDOM.createRoot(container)
 
