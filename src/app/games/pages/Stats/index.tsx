@@ -1,12 +1,12 @@
 import Loading from '@/components/Loading'
 import Playtime from '@/app/games/components/Playtime'
-import GameList from '@/app/games/components/GameList'
+import Rank from '@/app/games/components/Rank'
 import Chart from '@/components/Chart'
 import useViewData from '@/app/games/pages/Stats/useViewData'
 import { Link } from 'react-router-dom'
 
 const Stats = () => {
-  const { stats, pies, yearsOptions, trophyOptions, isFetching, classname } = useViewData()
+  const { stats, pies, yearsOptions, trophyOptions, isFetching, classname: { block, element } } = useViewData()
 
   if (isFetching) {
     return <Loading />
@@ -14,42 +14,42 @@ const Stats = () => {
 
   if (!stats) {
     return (
-      <div {...classname('all')}>
-        <Link {...classname('link')} to='/games/all'>All Games</Link>
+      <div {...element('all').class}>
+        <Link {...element('link').class} to='/games/all'>All Games</Link>
       </div>
     )
   }
 
   return (
-    <div {...classname()}>
-      <div {...classname('first-row')}>
-        <div {...classname('card')}>
+    <div {...block().class}>
+      <div {...element('first-row').class}>
+        <div {...element('card').class}>
           <Playtime totalPlayed={stats.totalPlayed} mostPlayed={stats.mostPlayed} />
         </div>
-        <div {...classname('card')}>
-          <GameList title="Recent Games" items={stats.recent} />
+        <div {...element('card').class}>
+          <Rank title="Recent Games" items={stats.recent} />
         </div>
       </div>
-      <div {...classname('second-row')}>
+      <div {...element('second-row').class}>
         {pies.map((v, i) => (
-          <div key={i} {...classname('card')}>
+          <div key={i} {...element('card').class}>
             <Chart options={v} />
           </div>
         ))}
-        <div {...classname('card')}>
+        <div {...element('card').class}>
           <Chart options={yearsOptions} />
         </div>
       </div>
-      <div {...classname('third-row')}>
-        <div {...classname('card')}>
+      <div {...element('third-row').class}>
+        <div {...element('card').class}>
           <Chart options={trophyOptions} />
         </div>
-        <div {...classname('card')}>
-          <GameList title="Platinum Games" items={stats.platinum} subtitle="buy_at" />
+        <div {...element('card').class}>
+          <Rank title="Platinum Games" items={stats.platinum} subtitle="buy_at" />
         </div>
       </div>
-      <div {...classname('all')}>
-        <Link {...classname('link')} to='/games/all'>All {stats.total} Games</Link>
+      <div {...element('all').class}>
+        <Link {...element('link').class} to='/games/all'>All {stats.total} Games</Link>
       </div>
     </div>
   )

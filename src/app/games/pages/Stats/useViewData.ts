@@ -7,10 +7,10 @@ import request from '@/utils/request'
 import { BarSeriesOption } from 'echarts/charts'
 import dayjs from 'dayjs'
 import { TitleComponentOption } from 'echarts/components'
-import classnames from '@/utils/classnames'
+import bem from '@/utils/bem'
 
 const useViewData = () => {
-  const classname = classnames('games')
+  const classname = bem('games')
   const { setTitle } = useDocumentTitle()
   const { setMessage } = useMessage()
 

@@ -1,0 +1,119 @@
+.game-trophy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 100;
+  overflow: hidden;
+  @media (max-width: @screen-md-max) {
+    top: 52px;
+  }
+  &--show {
+    width: 100%;
+    height: 100%;
+    @media (max-width: @screen-md-max) {
+      height: calc(100% - 52px);
+    }
+  }
+  &__container {
+    position: relative;
+    margin: 100px auto 0;
+    padding: 16px 0;
+    width: 80vw;
+    height: 800px;
+    border-radius: 4px;
+    background: #393e49;
+    overflow: hidden;
+    box-sizing: border-box;
+    transform: translateY(200%);
+    transition: transform .3s ease-in-out;
+    z-index: 2;
+    &--show {
+      transform: translateY(0);
+    }
+    @media (max-width: @screem-md-max) {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__header {
+    margin-bottom: 8px;
+    padding: 0 16px;
+    height: 20px;
+    text-align: right;
+  }
+  &__close {
+    padding: 0;
+    line-height: 20px;
+    font-size: 32px;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  &__list {
+    display: grid;
+    grid-gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 16px;
+    height: calc(100% - 28px);
+    overflow: auto;
+    z-index: 100;
+    @media (max-width: .columnLayout(5)[@width]) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: .columnLayout(3)[@width]) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: @screen-sm-max) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  &__item {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 12px;
+    padding: 12px;
+    color: #fff;
+    background: #31353e;
+    box-sizing: border-box;
+    &-img {
+      border: 4px solid;
+      opacity: 0.5;
+      box-sizing: border-box;
+      &--earned {
+        opacity: 1;
+      }
+    }
+    &-title {
+      margin: 0 0 4px;
+      font-weight: bold;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    &-desc {
+      display: block;
+      height: 40px;
+      line-height: 20px;
+      overflow: hidden;
+    }
+    &-earned {
+      grid-column-start: 1;
+      grid-column-end: span 2;
+      height: 16px;
+      font-weight: bold;
+      color: #61bf19;
+    }
+  }
+}

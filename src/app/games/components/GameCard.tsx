@@ -6,35 +6,35 @@ import { faClock } from '@fortawesome/free-regular-svg-icons'
 import Image from '@/components/Image'
 import Rates from './Rates'
 import Console from './Console'
-import classnames from '@/utils/classnames'
+import bem from '@/utils/bem'
 
 const GameCard: FC<{ item: GameItem; onTrophyClick: (id: number) => void }> = ({ item, onTrophyClick }) => {
-  const classname = classnames('game-card')
+  const { block, element } = bem('game-card')
 
   const handleClick = () => {
     onTrophyClick(item.id)
   }
 
   return (
-    <div {...classname()}>
-      <div {...classname('cover')}>
+    <div {...block().class}>
+      <div {...element('cover').class}>
         <Image url={item.cover} icon={faGamepad} />
         {item.playtime !== 0 && (
-          <div {...classname('time')}>
+          <div {...element('time').class}>
             <FontAwesomeIcon icon={faClock}/>
             <span>{item.playtime}h</span>
           </div>
         )}
         {item.hasTrophy && (
-          <button {...classname('trophy')} onClick={handleClick}>
+          <button {...element('trophy').class} onClick={handleClick}>
             <FontAwesomeIcon icon={faTrophy} />
           </button>
         )}
       </div>
-      <div {...classname('text')}>
-        <div {...classname('above')}>
+      <div {...element('text').class}>
+        <div {...element('above').class}>
           <Console console={item.gameConsole} />
-          <p {...classname('title')}>{item.title}</p>
+          <p {...element('title').class}>{item.title}</p>
         </div>
         <Rates rate={item.rate} />
       </div>

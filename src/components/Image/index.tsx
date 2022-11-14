@@ -1,4 +1,4 @@
-import classnames from '@/utils/classnames'
+import bem from '@/utils/bem'
 import loadImage from '@/utils/loadImage'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +15,7 @@ const placeholder = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAA
 AC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=`
 
 const Image: FC<ImageProps> = ({ url, icon, iconSize, height }) => {
-  const classname = classnames('image')
+  const { block, element } = bem('image')
   const [show, setShow] = useState(false)
   const isMounted = useRef(true)
 
@@ -38,10 +38,10 @@ const Image: FC<ImageProps> = ({ url, icon, iconSize, height }) => {
   }, [show, load])
 
   return (
-    <div {...classname()} style={{ height: height ? `${height}px` : 'auto' }}>
-      <img {...classname('placeholder')} src={placeholder} alt="placeholder" />
-      <img {...classname('img', { show })} src={url} />
-      <i {...classname('icon', { show: !show })} style={{ fontSize: `${iconSize || 50}px` }}>
+    <div {...block().class} style={{ height: height ? `${height}px` : 'auto' }}>
+      <img {...element('placeholder').class} src={placeholder} alt="placeholder" />
+      <img {...element('img').modifiers({ show })} src={url} />
+      <i {...element('icon').modifiers({ show: !show })} style={{ fontSize: `${iconSize || 50}px` }}>
         <FontAwesomeIcon icon={icon} />
       </i>
     </div>

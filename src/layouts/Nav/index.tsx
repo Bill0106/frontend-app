@@ -5,22 +5,22 @@ import { Link } from 'react-router-dom'
 import useViewData from './useViewData'
 
 const Nav = () => {
-  const { menu, show, handleClick, handleClose, handleOpen, classname } = useViewData()
+  const { menu, show, classname: { element }, handleClick, handleClose, handleOpen } = useViewData()
 
   return (
-    <div {...classname('nav')}>
-      <button {...classname('menu-btn')} onClick={handleOpen}>
+    <div {...element('nav').class}>
+      <button {...element('menu-btn').class} onClick={handleOpen}>
         <FontAwesomeIcon icon={faBars} />
       </button>
-      <ul ref={menu} {...classname('menu', { show })}>
+      <ul ref={menu} {...element('menu').modifiers({ show })}>
         {pages.map(v => (
-          <li key={v.title} {...classname('menu-item')}>
-            <Link {...classname('link')} to={v.path} onClick={handleClick}>
+          <li key={v.title} {...element('menu-item').class}>
+            <Link {...element('link').class} to={v.path} onClick={handleClick}>
               {v.title.toUpperCase()}
             </Link>
           </li>
         ))}
-        <li {...classname('close')} onClick={handleClose}>&times;</li>
+        <li {...element('close').class} onClick={handleClose}>&times;</li>
       </ul>
     </div>
   )

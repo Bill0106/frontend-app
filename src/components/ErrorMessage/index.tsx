@@ -1,11 +1,11 @@
-import classnames from '@/utils/classnames'
+import bem from '@/utils/bem'
 import { MessageContext } from '@/utils/useMessage'
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FC, ReactNode, useCallback, useRef, useState } from 'react'
 
 const ErrorMessage: FC<{ children?: ReactNode }> = ({ children }) => {
-  const classname = classnames('message')
+  const { block, element } = bem('message')
   const [message, setMessage] = useState('')
   const [show, setShow] = useState(false)
   const error = useRef('')
@@ -25,10 +25,10 @@ const ErrorMessage: FC<{ children?: ReactNode }> = ({ children }) => {
   return (
     <MessageContext.Provider value={{ setMessage: setError }}>
       {children}
-      <div {...classname('', { show })}>
-        <div {...classname('content')}>
+      <div {...block().modifiers({ show })}>
+        <div {...element('content').class}>
           <FontAwesomeIcon icon={faExclamationCircle} color="red" />
-          <p {...classname('text')}>{message}</p>
+          <p {...element('text').class}>{message}</p>
         </div>
       </div>
     </MessageContext.Provider>

@@ -1,33 +1,31 @@
 import pages from '@/constants/pages'
-import classnames from '@/utils/classnames'
 import { Link } from 'react-router-dom'
 import useViewData from './useViewData'
 
 const Home = () => {
-  const classname = classnames('home')
-  const { background, show, handleEvent, handleTitleMouseEnter } = useViewData()
+  const { classname: { block, element }, background, show, handleEvent, handleTitleMouseEnter } = useViewData()
 
   return (
-    <div {...classname()}>
-      <div {...classname('container', { show })} style={{ backgroundImage: `url(${background})` }}>
-        <div {...classname('content')}>
-          <h1 {...classname('title')} onMouseEnter={handleTitleMouseEnter}>
+    <div {...block().class}>
+      <div {...element('container').modifiers({ show })} style={{ backgroundImage: `url(${background})` }}>
+        <div {...element('content').class}>
+          <h1 {...element('title').class} onMouseEnter={handleTitleMouseEnter}>
             {'Bill\'s Hobby'}
           </h1>
-          <div {...classname('sections')}>
+          <div {...element('sections').class}>
             {pages.slice(1).map(v => (
               <div key={v.title}>
-                <Link {...classname('link')} to={v.path} onMouseEnter={handleEvent}>
+                <Link {...element('link').class} to={v.path} onMouseEnter={handleEvent}>
                   {v.title}
                 </Link>
               </div>
             ))}
           </div>
         </div>
-        <div {...classname('mask')} />
+        <div {...element('mask').class} />
       </div>
-      <div {...classname('loading', { show: !show })}>
-        <p {...classname('loading-text')}>Loading...</p>
+      <div {...element('loading').modifiers({ show: !show })}>
+        <p {...element('loading').sub('text').class}>Loading...</p>
       </div>
     </div>
   )

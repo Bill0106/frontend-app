@@ -1,4 +1,4 @@
-import classnames from '@/utils/classnames'
+import bem from '@/utils/bem'
 import {
   clearAllBodyScrollLocks,
   disableBodyScroll,
@@ -10,7 +10,7 @@ const useViewData = () => {
   const menu = useRef<HTMLUListElement | null>(null)
   const [show, setShow] = useState(false)
 
-  const classname = classnames('layout')
+  const classname = bem('layout')
 
   const handleOpen = () => {
     setShow(true)
@@ -34,7 +34,7 @@ const useViewData = () => {
     return () => clearAllBodyScrollLocks()
   }, [])
 
-  return { menu, show, handleOpen, handleClose, handleClick, classname }
+  return { menu, show, classname, handleOpen, handleClose, handleClick }
 }
 
 export default useViewData
