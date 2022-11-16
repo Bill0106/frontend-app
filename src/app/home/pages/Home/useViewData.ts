@@ -3,9 +3,10 @@ import pages from '@/constants/pages'
 import loadImage from '@/utils/loadImage'
 import useDocumentTitle from '@/utils/useDocumentTitle'
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
-import { SCREEN_TABLET } from '@/constants/mediaQueries'
+import bem from '@/utils/bem'
 
 const useViewData = () => {
+  const classname = bem('home')
   const { setTitle } = useDocumentTitle()
   const [background, setBackground] = useState(pages[0].image)
   const [show, setShow] = useState(false)
@@ -25,7 +26,7 @@ const useViewData = () => {
       return false
     }
 
-    if (document.body.clientWidth >= SCREEN_TABLET) {
+    if (document.body.clientWidth >= 768) {
       setBackground(section.image)
     }
   }
@@ -40,6 +41,7 @@ const useViewData = () => {
 
   return {
     show,
+    classname,
     background: `${CDN_URI}/images/${background}`,
     handleEvent,
     handleTitleMouseEnter

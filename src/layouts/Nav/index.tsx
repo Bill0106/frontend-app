@@ -1,28 +1,28 @@
 import pages from '@/constants/pages'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Menu, MenuClose, MenuItem, MenuLink, Navbar } from './style'
+import { Link } from 'react-router-dom'
 import useViewData from './useViewData'
 
 const Nav = () => {
-  const { menu, show, handleClick, handleClose, handleOpen } = useViewData()
+  const { menu, show, classname: { element }, handleClick, handleClose, handleOpen } = useViewData()
 
   return (
-    <Navbar>
-      <Button onClick={handleOpen}>
+    <div {...element('nav').class}>
+      <button {...element('menu-btn').class} onClick={handleOpen}>
         <FontAwesomeIcon icon={faBars} />
-      </Button>
-      <Menu ref={menu} show={show}>
+      </button>
+      <ul ref={menu} {...element('menu').modifiers({ show })}>
         {pages.map(v => (
-          <MenuItem key={v.title}>
-            <MenuLink to={v.path} onClick={handleClick}>
-              {v.title.toLowerCase()}
-            </MenuLink>
-          </MenuItem>
+          <li key={v.title} {...element('menu-item').class}>
+            <Link {...element('link').class} to={v.path} onClick={handleClick}>
+              {v.title.toUpperCase()}
+            </Link>
+          </li>
         ))}
-        <MenuClose onClick={handleClose}>&times;</MenuClose>
-      </Menu>
-    </Navbar>
+        <li {...element('close').class} onClick={handleClose}>&times;</li>
+      </ul>
+    </div>
   )
 }
 

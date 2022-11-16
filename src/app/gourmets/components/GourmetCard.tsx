@@ -1,52 +1,27 @@
 import { Gourmet } from '../models/gourmet'
-import styled from '@emotion/styled'
 import { faMapMarkerAlt, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import dayjs from 'dayjs'
 import { FC } from 'react'
 import Image from '@/components/Image'
+import bem from '@/utils/bem'
 
-const Card = styled.div`
-  background: #fff;
-`
+const GourmetCard: FC<{ item: Gourmet }> = ({ item }) => {
+  const { block, element } = bem('gourmet-card')
 
-const Header = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-column-gap: 8px;
-  align-items: center;
-  padding: 16px;
-  > span {
-    font-size: 16px;
-  }
-`
-
-const Content = styled.div`
-  padding: 16px;
-`
-
-const Title = styled.p`
-  margin: 0 0 8px;
-  font-size: 18px;
-  font-weight: bold;
-`
-
-const EatAt = styled.span`
-  color: #999;
-`
-
-const GourmetCard: FC<{ item: Gourmet }> = ({ item }) => (
-  <Card>
-    <Header>
-      <FontAwesomeIcon icon={faMapMarkerAlt} color="#ccc" />
-      <span>{item.restaurant}</span>
-    </Header>
-    <Image url={item.image} icon={faUtensils} />
-    <Content>
-      <Title>{item.food}</Title>
-      <EatAt>{dayjs.unix(item.eatAt).format('YYYY-MM-DD')}</EatAt>
-    </Content>
-  </Card>
-)
+  return (
+    <div {...block().class}>
+      <div {...element('header').class}>
+        <FontAwesomeIcon icon={faMapMarkerAlt} color="#ccc" />
+        <span>{item.restaurant}</span>
+      </div>
+      <Image url={item.image} icon={faUtensils} />
+      <div {...element('content').class}>
+        <p {...element('title').class}>{item.food}</p>
+        <span {...element('eat-at').class}>{dayjs.unix(item.eatAt).format('YYYY-MM-DD')}</span>
+      </div>
+    </div>
+  )
+}
 
 export default GourmetCard

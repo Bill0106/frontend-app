@@ -1,0 +1,25 @@
+.message {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  text-align: center;
+  transition: all 1s ease-in-out;
+  z-index: 9999;
+  &--show {
+    top: 20px;
+  }
+  &__content {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  &__text {
+    display: inline-block;
+    margin: 0 0 0 4px;
+    line-height: 20px;
+  }
+}

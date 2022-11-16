@@ -4,22 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 const Movies = () => {
-  const { list, year, contentRef, prevYear, nextYear, handleNext, handlePrev } = useViewData()
+  const { classname: { block, element }, list, year, contentRef, prevYear, nextYear, handleNext, handlePrev } = useViewData()
 
   return (
-    <div className="movies">
-      <h3 className="movies__year">{year}</h3>
-      <div ref={contentRef} className="movies__content">
+    <div {...block().class}>
+      <h3 {...element('year').class}>{year}</h3>
+      <div ref={contentRef} {...element('content').class}>
         <MovieList list={list} />
       </div>
       {prevYear && (
-        <button className="movies__btn movies__btn--prev" onClick={handlePrev}>
+        <button {...element('btn').modifiers({ prev: true })} onClick={handlePrev}>
           <FontAwesomeIcon icon={faArrowUp} />
           <span>{prevYear}</span>
         </button>
       )}
       {nextYear && (
-        <button className="movies__btn movies__btn--next" onClick={handleNext}>
+        <button {...element('btn').modifiers({ next: true })} onClick={handleNext}>
           <span>{nextYear}</span>
           <FontAwesomeIcon icon={faArrowDown} />
         </button>

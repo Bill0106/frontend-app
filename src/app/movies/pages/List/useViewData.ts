@@ -1,3 +1,4 @@
+import bem from '@/utils/bem'
 import request from '@/utils/request'
 import useMessage from '@/utils/useMessage'
 import dayjs from 'dayjs'
@@ -31,6 +32,7 @@ const reducer = (state: State, action: Action) => {
 }
 
 const useViewData = () => {
+  const classname = bem('movies')
   const [years, setYears] = useState<number[]>([])
   const [year, setYear] = useState(0)
   const contentRef = useRef<HTMLDivElement | null>(null)
@@ -114,7 +116,7 @@ const useViewData = () => {
     }
   }, [year, fetch])
 
-  return { list, year, contentRef, prevYear, nextYear, isFetching, handlePrev, handleNext }
+  return { classname, list, year, contentRef, prevYear, nextYear, isFetching, handlePrev, handleNext }
 }
 
 export default useViewData

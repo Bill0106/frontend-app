@@ -7,8 +7,10 @@ import request from '@/utils/request'
 import { BarSeriesOption } from 'echarts/charts'
 import dayjs from 'dayjs'
 import { TitleComponentOption } from 'echarts/components'
+import bem from '@/utils/bem'
 
 const useViewData = () => {
+  const classname = bem('games')
   const { setTitle } = useDocumentTitle()
   const { setMessage } = useMessage()
 
@@ -143,7 +145,7 @@ const useViewData = () => {
     fetch()
   }, [fetch])
 
-  return { stats, pies, yearsOptions, trophyOptions, isFetching }
+  return { stats, pies, yearsOptions, trophyOptions, isFetching, classname }
 }
 
 export default useViewData

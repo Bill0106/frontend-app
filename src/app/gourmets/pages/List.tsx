@@ -4,7 +4,6 @@ import useDocumentTitle from '@/utils/useDocumentTitle'
 import useList from '@/utils/useList'
 import { useEffect } from 'react'
 import { Gourmet } from '../models/gourmet'
-import ListContainer from '@/components/ListContainer'
 
 const Gourmets = () => {
   const { setTitle } = useDocumentTitle()
@@ -16,9 +15,9 @@ const Gourmets = () => {
 
   return (
     <InfiniteScroll {...infiniteScrollProps}>
-      <ListContainer>
+      <div className="gourmets">
         {list.map(v => <GourmetCard key={v.id} item={v} />)}
-      </ListContainer>
+      </div>
     </InfiniteScroll>
   )
 }

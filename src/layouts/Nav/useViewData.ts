@@ -1,3 +1,4 @@
+import bem from '@/utils/bem'
 import {
   clearAllBodyScrollLocks,
   disableBodyScroll,
@@ -8,6 +9,8 @@ import { useEffect, useRef, useState } from 'react'
 const useViewData = () => {
   const menu = useRef<HTMLUListElement | null>(null)
   const [show, setShow] = useState(false)
+
+  const classname = bem('layout')
 
   const handleOpen = () => {
     setShow(true)
@@ -31,7 +34,7 @@ const useViewData = () => {
     return () => clearAllBodyScrollLocks()
   }, [])
 
-  return { menu, show, handleOpen, handleClose, handleClick }
+  return { menu, show, classname, handleOpen, handleClose, handleClick }
 }
 
 export default useViewData

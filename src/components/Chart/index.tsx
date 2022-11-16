@@ -2,16 +2,11 @@ import * as echarts from 'echarts/core'
 import { BarSeriesOption, GaugeSeriesOption, PieSeriesOption } from 'echarts/charts'
 import { TitleComponentOption, TooltipComponentOption } from 'echarts/components'
 import { FC, useEffect, useRef, useState } from 'react'
-import styled from '@emotion/styled'
 import useResize from '@/utils/useResize'
 
 export type ChartOptions = echarts.ComposeOption<
   BarSeriesOption | PieSeriesOption | GaugeSeriesOption | TitleComponentOption | TooltipComponentOption
 >
-
-const Container = styled.div`
-  height: 320px;
-`
 
 const Chart: FC<{ options: ChartOptions }> = ({ options }) => {
   const { size } = useResize()
@@ -34,7 +29,7 @@ const Chart: FC<{ options: ChartOptions }> = ({ options }) => {
     }
   }, [options])
 
-  return <Container ref={containerRef} />
+  return <div ref={containerRef} className="chart" />
 }
 
 export default Chart

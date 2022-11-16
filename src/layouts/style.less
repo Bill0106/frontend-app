@@ -1,0 +1,92 @@
+.layout {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background: #303030;
+  &__content {
+    margin: 0 auto;
+    padding: 68px 16px 16px;
+    box-sizing: border-box;
+  }
+  &__nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    @media (max-width: @screen-sm-max) {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+  &__menu-btn {
+    display: inline-block;
+    position: relative;
+    margin: 12px 0 0 16px;
+    padding: 4px 8px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    @media (min-width: @screen-md) {
+      display: none;
+    }
+  }
+  &__menu {
+    margin: 0;
+    padding: 16px 0;
+    text-align: center;
+    line-height: 20px;
+    list-style: none;
+    @media (max-width: @screen-sm-max) {
+      position: fixed;
+      top: -100%;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      padding-top: 100px;
+      background: rgba(0, 0, 0, 0.7);
+      transition: all 0.3s ease-in-out;
+      z-index: 9999;
+      &--show {
+        top: 0;
+        bottom: 0;
+      }
+    }
+  }
+  &__menu-item {
+    display: inline-block;
+    margin: 0 16px;
+    @media (max-width: @screen-sm-max) {
+      display: block;
+      margin: 20px 0;
+      font-size: 32px;
+    }
+  }
+  &__link {
+    font-size: 20px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+  &__close {
+    display: inline-block;
+    margin-top: 48px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 100%;
+    cursor: pointer;
+    @media (min-width: @screen-md) {
+      display: none;
+    }
+  }
+}

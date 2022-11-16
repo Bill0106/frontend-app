@@ -1,0 +1,76 @@
+.game-card {
+  display: block;
+  position: relative;
+  padding-bottom: 80px;
+  &__cover {
+    position: relative;
+  }
+  &__time {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 8px;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 4px 8px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+  }
+  &__text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 16px 8px;
+    width: 100%;
+    line-height: 20px;
+    color: #fff;
+    background: #161616;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+  &__above {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 4px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  &__title {
+    margin: 0;
+    line-height: 18px;
+    font-size: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  &__console {
+    padding: 0 4px;
+    line-height: 12px;
+    font-size: 10px;
+    font-weight: bolder;
+    border: 1px solid;
+    border-radius: 4px;
+  }
+  &__trophy {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  &__rate {
+    display: grid;
+    grid-column-gap: 8px;
+    height: 16px;
+    font-size: 16px;
+  }
+}
