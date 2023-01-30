@@ -18,7 +18,7 @@ const Rank: FC<{ title: string; items: GameItem[]; subtitle?: 'playtime' | 'buy_
       <div {...sub('list').class}>
         {items.map(v => {
           return (
-            <div key={v.id} {...sub('item')}>
+            <div key={v.id} {...sub('item').class}>
               <div {...sub('cover').class}>
                 <Image url={v.cover} icon={faGamepad} />
               </div>
