@@ -21,20 +21,10 @@
       row-gap: 16px;
     }
   }
-  &__second-row {
+  &__pies {
     display: grid;
-    grid-template-columns: repeat(3, 1fr) 2fr;
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 16px;
-    @media (max-width: 1000px) {
-      grid-template-columns: repeat(3, 1fr);
-      row-gap: 16px;
-    }
-    @media (min-width: 768px) and (max-width: 1000px) {
-      > .games__card:last-child {
-        grid-column-start: 1;
-        grid-column-end: 4;
-      }
-    }
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
@@ -55,44 +45,49 @@
     font-size: 20px;
     color: #fff;
   }
-  &__playtime {
+  &__summary {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    row-gap: 36px;
+    padding: 36px 0;
+    &-divider {
+      height: 1px;
+      background: rgba(229, 224, 216, 0.2);
+    }
     &-title {
-      margin: 0;
+      margin: 0 0 20px;
       text-align: center;
       font-size: 20px;
       font-weight: normal;
       color: rgba(229, 224, 216, 0.45);
+      &--bottom {
+        margin: 20px 0 0;
+      }
     }
     &-caption {
-      margin: 36px 0;
+      margin: 0;
       padding: 0 24px;
       text-align: center;
       font-size: 48px;
+      font-weight: bold;
     }
-    &-list {
-      margin-bottom: -24px;
-      padding: 0;
-      list-style: none;
+    &-bar {
+      position: relative;
+      margin: 0 16px 20px;
+      height: 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      overflow: hidden;
     }
-    &-item {
-      display: grid;
-      grid-template-columns: 20px auto 1fr auto;
-      column-gap: 8px;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-    &-order {
-      width: 20px;
-      height: 20px;
-      line-height: 20px;
-      text-align: center;
-      background: #33404b;
-      border-radius: 100%;
-    }
-    &-order-title {
-      margin: 0;
-      line-height: 20px;
-      font-size: 16px;
+    &-progress {
+      position: absolute;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-radius: 20px;
+      background: #2E6DB4;
+      transition: width 0.3s ease-in-out;
     }
   }
   &__rank {
