@@ -59,7 +59,7 @@ const useViewData = () => {
     .map<BarSeriesOption>((v, i) => ({
       name: dayjs().month(i).format('MMM'),
       type: 'bar',
-      barWidth: 5,
+      barWidth: 10,
       stack: 'Total',
       emphasis: { focus: 'series' },
       data: v
@@ -96,34 +96,6 @@ const useViewData = () => {
     ]
   }
 
-  const trophyOptions: ChartOptions = {
-    title: { text: 'Earned Trophies', textStyle: chartTitleStyle },
-    backgroundColor: '',
-    tooltip: {
-      formatter: `Total: ${stats?.totalTrophies} <br /> Earned: ${stats?.earnedTrophies}`
-    },
-    series: [{
-      name: 'Earned Trophies',
-      type: 'gauge',
-      progress: {
-        show: true
-      },
-      detail: {
-        valueAnimation: true,
-        formatter: '{value}%'
-      },
-      startAngle: 180,
-      endAngle: 0,
-      center: ['50%', '70%'],
-      radius: '100%',
-      data: [
-        {
-          value: stats? Math.round((stats.earnedTrophies / stats.totalTrophies) * 100) : 0
-        }
-      ]
-    }]
-  }
-
   const fetch = useCallback(async () => {
     setIsFetching(true)
     try {
@@ -145,7 +117,7 @@ const useViewData = () => {
     fetch()
   }, [fetch])
 
-  return { stats, pies, yearsOptions, trophyOptions, isFetching, classname }
+  return { stats, pies, yearsOptions, isFetching, classname }
 }
 
 export default useViewData

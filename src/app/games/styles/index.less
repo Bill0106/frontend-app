@@ -1,5 +1,6 @@
 @import './card.less';
 @import './trophy.less';
+@import './rank-item.less';
 
 .games {
   display: grid;
@@ -8,11 +9,11 @@
   max-width: 2240px;
   &__card {
     padding: 16px;
-    color: rgba(229, 224, 216, 0.85);
+    color: @games-card-text-color;
     border-radius: 4px;
-    background: #242525;
+    background: @games-card-background-color;
   }
-  &__first-row {
+  &__header {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 16px;
@@ -21,31 +22,12 @@
       row-gap: 16px;
     }
   }
-  &__second-row {
+  &__pies {
     display: grid;
-    grid-template-columns: repeat(3, 1fr) 2fr;
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 16px;
-    @media (max-width: 1000px) {
-      grid-template-columns: repeat(3, 1fr);
-      row-gap: 16px;
-    }
-    @media (min-width: 768px) and (max-width: 1000px) {
-      > .games__card:last-child {
-        grid-column-start: 1;
-        grid-column-end: 4;
-      }
-    }
-    @media (max-width: 768px) {
+    @media (max-width: @screen-sm-max) {
       grid-template-columns: 1fr;
-    }
-  }
-  &__third-row {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    column-gap: 16px;
-    @media (max-width: 1000px) {
-      grid-template-columns: 1fr;
-      row-gap: 16px;
     }
   }
   &__all {
@@ -55,119 +37,129 @@
     font-size: 20px;
     color: #fff;
   }
-  &__playtime {
+  &__summary {
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    row-gap: 36px;
+    padding: 36px 0;
+    &-divider {
+      height: 1px;
+      background: @games-card-border-color;
+    }
     &-title {
-      margin: 0;
+      margin: 0 0 20px;
       text-align: center;
       font-size: 20px;
       font-weight: normal;
-      color: rgba(229, 224, 216, 0.45);
+      color: @games-card-title-color;
+      &--bottom {
+        margin: 20px 0 0;
+      }
     }
     &-caption {
-      margin: 36px 0;
+      margin: 0;
       padding: 0 24px;
       text-align: center;
       font-size: 48px;
+      font-weight: bold;
     }
-    &-list {
-      margin-bottom: -24px;
-      padding: 0;
-      list-style: none;
+    &-bar {
+      position: relative;
+      margin: 0 16px 20px;
+      height: 12px;
+      border-radius: 20px;
+      background: @games-card-border-color;
+      overflow: hidden;
     }
-    &-item {
-      display: grid;
-      grid-template-columns: 20px auto 1fr auto;
-      column-gap: 8px;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-    &-order {
-      width: 20px;
-      height: 20px;
-      line-height: 20px;
-      text-align: center;
-      background: #33404b;
-      border-radius: 100%;
-    }
-    &-order-title {
-      margin: 0;
-      line-height: 20px;
-      font-size: 16px;
+    &-progress {
+      position: absolute;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-radius: 20px;
+      background: @games-card-active-color;
+      transition: width 0.3s ease-in-out;
     }
   }
   &__rank {
-    &-title {
-      margin: 0 0 40px;
-      font-size: 18px;
-      font-weight: normal;
-      color: rgba(229, 224, 216, 0.45);
-    }
-    &-item {
-      text-align: center;
-    }
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    row-gap: 36px;
+    padding: 36px 0;
     &-list {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       column-gap: 16px;
-      @media (max-width: 1488px) {
+      @media (max-width: @screen-xl-max) {
         grid-template-columns: repeat(4, 1fr);
-        > .games__rank-item:last-child {
+        > .games-rank-item:last-child {
           display: none;
         }
       }
-      @media (max-width: 1112px) {
+      @media (max-width: @screen-lg-max) {
         grid-template-columns: repeat(3, 1fr);
-        > .games__rank-item:nth-of-type(n+4) {
+        > .games-rank-item:nth-of-type(n+4) {
           display: none;
         }
       }
-      @media (max-width: 768px) {
+      @media (max-width: @screen-sm-max) {
         grid-template-columns: 1fr;
-        > .games__rank-item:nth-of-type(n+2) {
+        > .games-rank-item:nth-of-type(n+2) {
           display: none;
         }
       }
     }
-    &-cover {
-      margin: 0 auto 24px;
-      width: 160px;
-      height: 160px;
-      border-radius: 100%;
-      overflow: hidden;
-      > img {
-        width: 100%;
+    &-buttons {
+      text-align: center;
+    }
+    &-button {
+      padding: 0 16px;
+      line-height: 30px;
+      color: @games-card-text-color;
+      border: 1px solid @games-card-border-color;
+      background: none;
+      cursor: pointer;
+      &--active, &:hover {
+        color: @games-card-active-color;
       }
-    }
-    &-text {
-      display: grid;
-      grid-template-columns: repeat(2, auto);
-      justify-content: center;
-      align-items: center;
-      column-gap: 12px;
-      margin-bottom: 12px;
-    }
-    &-name {
-      margin: 0;
-      font-size: 18px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    &-date {
-      font-size: 16px;
-    }
-    &-time {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 12px 0 0;
-      font-size: 14px;
-      > span {
-        margin-left: 8px;
+      &:first-child {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+      &:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+      &:not(:first-child) {
+        border-left: none;
+      }
+      @media (max-width: @screen-sm-max) {
+        padding: 0 12px;
       }
     }
   }
   &__list {
-    .list-container();
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 0 auto;
+    max-width: @img-max-width;
+    @media (max-width: .columnLayout(5)[@width]) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    @media (max-width: .columnLayout(4)[@width]) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: .columnLayout(3)[@width]) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: .columnLayout(2)[@width]) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: .columnLayout(1)[@width]) {
+      grid-template-columns: 1fr;
+    }
   }
 }
