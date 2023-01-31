@@ -3,7 +3,8 @@ import Summary from '@/app/games/components/Summary'
 import Rank from '@/app/games/components/Rank'
 import Chart from '@/components/Chart'
 import useViewData from '@/app/games/pages/Stats/useViewData'
-import { Link } from 'react-router-dom'
+import IndexCard from '@/app/games/components/IndexCard'
+import All from '@/app/games/components/All'
 
 const Stats = () => {
   const { stats, pies, yearsOptions, isFetching, classname: { block, element } } = useViewData()
@@ -13,36 +14,30 @@ const Stats = () => {
   }
 
   if (!stats) {
-    return (
-      <div {...element('all').class}>
-        <Link {...element('link').class} to='/games/all'>All Games</Link>
-      </div>
-    )
+    return <All />
   }
 
   return (
     <div {...block().class}>
-      <div {...element('first-row').class}>
-        <div {...element('card').class}>
+      <div {...element('header').class}>
+        <IndexCard>
           <Summary totalPlayed={stats.totalPlayed} totalTrophies={stats.totalTrophies} earnedTrophies={stats.earnedTrophies} />
-        </div>
-        <div {...element('card').class}>
-          <Rank title="Recent Games" items={stats.recent} />
-        </div>
+        </IndexCard>
+        <IndexCard>
+          <Rank mostPlayed={stats.mostPlayed} platinum={stats.platinum} recent={stats.recent} />
+        </IndexCard>
       </div>
-      <div {...element('pies').class}>
+      <section {...element('pies').class}>
         {pies.map((v, i) => (
-          <div key={i} {...element('card').class}>
+          <IndexCard key={i}>
             <Chart options={v} />
-          </div>
+          </IndexCard>
         ))}
-      </div>
-      <div {...element('card').class}>
+      </section>
+      <IndexCard>
         <Chart options={yearsOptions} />
-      </div>
-      <div {...element('all').class}>
-        <Link {...element('link').class} to='/games/all'>All {stats.total} Games</Link>
-      </div>
+      </IndexCard>
+      <All total={stats.total} />
     </div>
   )
 }

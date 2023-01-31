@@ -59,7 +59,7 @@ const useViewData = () => {
     .map<BarSeriesOption>((v, i) => ({
       name: dayjs().month(i).format('MMM'),
       type: 'bar',
-      barWidth: 5,
+      barWidth: 10,
       stack: 'Total',
       emphasis: { focus: 'series' },
       data: v
