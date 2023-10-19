@@ -1,33 +1,24 @@
-import { Movie } from '../models/movie'
-import { faFilm, faTicketAlt } from '@fortawesome/free-solid-svg-icons'
+import { Movie, MovieType } from '../models/movie'
+import { faFilm, faTicket, faTv } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import dayjs from 'dayjs'
 import { FC } from 'react'
 import Image from '@/components/Image'
 import bem from '@/utils/bem'
+import dayjs from 'dayjs'
 
-export interface MovieCardData extends Movie {
-  isLeft: boolean
-}
-
-export interface MovieCardProps {
-  data: MovieCardData
-  dayDiff: number
-}
-
-const MovieCard: FC<MovieCardProps> = ({ data, dayDiff }) => {
-  const { modifiers, sub } = bem('movies').element('card')
+const MovieCard: FC<{ data: Movie }> = ({ data }) => {
+  const { class: classname, sub } = bem('movies').element('card')
 
   const renderTickets = () => {
     return Array(5).fill(null).map((_, index) => (
       <span key={index} {...sub('ticket').modifiers({ active: index < data.rate })}>
-        <FontAwesomeIcon icon={faTicketAlt} />
+        <FontAwesomeIcon icon={data.movieType === MovieType.Cinema ? faTicket : faTv} />
       </span>
     ))
   }
 
   return (
-    <div {...modifiers({ left: data.isLeft })} style={{ paddingTop: `${dayDiff * 4 + 16}px` }}>
+    <div {...classname}>
       <div {...sub('poster').class}>
         <Image url={data.poster} icon={faFilm} height={148} />
       </div>

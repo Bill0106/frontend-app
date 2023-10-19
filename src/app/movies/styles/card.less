@@ -4,13 +4,7 @@
   grid-template-columns: 100px 1fr;
   column-gap: 16px;
   padding: 16px;
-  @media (min-width: @screen-md) {
-    text-align: left;
-  }
-  @media (max-width: @screen-sm-max) {
-    column-gap: 8px;
-    padding-left: 70px;
-  }
+  grid-column-start: 2;
   &-poster {
     position: relative;
     width: 100px;
@@ -37,9 +31,6 @@
   }
   &-text {
     color: #14a76c;
-    @media (min-width: @screen-md) {
-      grid-row-start: 1;
-    }
   }
   &-date {
     font-size: 40px;
@@ -56,16 +47,6 @@
       font-size: 18px;
     }
   }
-  &-ticket {
-    margin: 0 4px;
-    opacity: 0.3;
-    &.active {
-      opacity: 1;
-    }
-    @media (max-width: @screen-md-max) {
-      margin: 0 4px;
-    }
-  }
   &-rate {
     display: flex;
     margin: 0 -4px;
@@ -75,24 +56,14 @@
       font-size: 24px;
     }
   }
-  &--left {
-    @media (min-width: @screen-md) {
-      grid-template-columns: 1fr 100px;
-      text-align: right;
-      .movies__card-poster {
-        grid-column-start: 2;
-        grid-column-end: 3;
-        &::after {
-          left: 100px;
-        }
-      }
-      .movies__card-text {
-        grid-column-start: 1;
-        grid-column-end: 2;
-      }
-      .movies__card-rate {
-        flex-direction: row-reverse;
-      }
+  &-ticket {
+    margin: 0 4px;
+    opacity: 0.3;
+    &--active {
+      opacity: 1;
+    }
+    @media (max-width: @screen-md-max) {
+      margin: 0 4px;
     }
   }
 }
