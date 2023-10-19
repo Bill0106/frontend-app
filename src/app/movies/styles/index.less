@@ -4,22 +4,48 @@
 
 .movies {
   position: relative;
-  height: calc(100vh - 84px);
-  overflow: hidden;
+  padding-top: 50px;
   @media (max-width: @screen-sm-max) {
-    height: calc(100vh - 76px);
+    padding-top: 24px;
+  }
+  &__years {
+    margin: 0 -16px;
+    border-bottom: 6px solid @movie-text-color;
+  }
+  &__years-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 16px 16px;
+    max-width: 2240px;
+    list-style: none;
+    white-space: nowrap;
+    overflow: auto;
   }
   &__year {
-    margin: 0 0 20px;
+    position: relative;
+    display: block;
     line-height: 32px;
-    font-size: 24px;
+    font-size: 28px;
     color: @movie-text-color;
-    @media (min-width: @screen-md) {
-      font-size: 28px;
-      text-align: center;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    &--active {
+      border-bottom-color: @movie-text-color;
+      &::after {
+        display: block;
+        position: absolute;
+        bottom: -19px;
+        left: 50%;
+        margin-left: -1px;
+        width: 2px;
+        height: 18px;
+        background: @movie-text-color;
+        content: "";
+      }
     }
-    @media (max-width: @screen-sm-max) {
-      margin-bottom: 12px;
+    & + .movies__year {
+      margin-left: 24px;
     }
   }
   &__content {
@@ -27,47 +53,14 @@
     height: calc(100% - 52px);
     overflow: auto;
   }
-  &__btn {
-    position: absolute;
-    right: 16px;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    color: @movie-text-color;
-    border: none;
-    border-radius: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
-    box-sizing: border-box;
-    cursor: pointer;
-    &--prev {
-      top: 16px;
-      padding: 6px 0 14px;
-    }
-    &--next {
-      bottom: 16px;
-      padding: 14px 0 6px;
-    }
-    > span {
-      display: block;
-      line-height: 20px;
-    }
-  }
-  &__spacer {
-    @media (max-width: @screen-sm-max) {
-      display: none;
-    }
-  }
   &__item {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 24px;
+    align-items: center;
     position: relative;
-    @media (max-width: @screen-sm-max) {
-      display: block;
-    }
-    &::after {
+    padding-top: 32px;
+    &::before {
       position: absolute;
       top: 0;
       bottom: 0;
@@ -79,6 +72,16 @@
       @media (max-width: @screen-sm-max) {
         left: 24px;
         margin-left: 10px;
+      }
+    }
+    &-date {
+      padding-right: 16px;
+      text-align: right;
+      font-size: 40px;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      color: @movie-text-color;
+      @media (max-width: @screen-sm-max) {
+        font-size: 32px;
       }
     }
   }

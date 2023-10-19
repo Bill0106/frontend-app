@@ -1,25 +1,17 @@
-import dayjs from 'dayjs'
-import { FC } from 'react'
-import MovieCard, { MovieCardData } from './MovieCard'
+import type { FC } from 'react'
+import MovieCard from './MovieCard'
+import type { Movie } from '@/app/movies/models/movie'
 
-const MovieList: FC<{ list: MovieCardData[] }> = ({ list }) => {
-  const renderItem = (v: MovieCardData, i: number, a: MovieCardData[]) => {
-    const dayDiff = i &&
-      dayjs.unix(a[i - 1].watchedAt).diff(dayjs.unix(v.watchedAt), 'day')
-
-    const doms = [
-      <MovieCard key="card" data={v} dayDiff={dayDiff} />,
-      <div key="spacer" className="movies__spacer" />
-    ]
-
-    return (
-      <div key={v.id} className="movies__item">
-        {v.isLeft ? doms : doms.reverse()}
-      </div>
-    )
-  }
-
-  return <div>{list.map(renderItem)}</div>
+const MovieList: FC<{ list: Movie[] }> = ({ list }) => {
+  return (
+    <div>
+      {list.map((v: Movie) => (
+        <div key={v.id} className="movies__item">
+          <MovieCard key="card" data={v} />
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default MovieList

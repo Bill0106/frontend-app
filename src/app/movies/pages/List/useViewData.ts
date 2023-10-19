@@ -1,9 +1,7 @@
 import bem from '@/utils/bem'
 import request from '@/utils/request'
 import useMessage from '@/utils/useMessage'
-import dayjs from 'dayjs'
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
-import { MovieCardData } from '../../components/MovieCard'
 import { Movie } from '../../models/movie'
 
 type ActionType = 'pending' | 'fulfilled' | 'error'
@@ -32,34 +30,17 @@ const reducer = (state: State, action: Action) => {
 }
 
 const useViewData = () => {
-  const classname = bem('movies')
+  const { setMessage } = useMessage()
+  const [{ movies, isFetching }, dispatch] = useReducer(reducer, { movies: {}, isFetching: false })
   const [years, setYears] = useState<number[]>([])
   const [year, setYear] = useState(0)
+  const [isFetchingYears, setIsFetchingYears] = useState(false)
   const contentRef = useRef<HTMLDivElement | null>(null)
 
-  const [{ movies, isFetching }, dispatch] = useReducer(reducer, { movies: {}, isFetching: false })
-
-  const { setMessage } = useMessage()
-
-  const yearIndex = years.indexOf(year)
-  const prevYear = yearIndex === 0 ? null : years[yearIndex - 1]
-  const nextYear = yearIndex === years.length - 1 ? null : years[yearIndex + 1]
-
-  const list = (movies[year] ?? [])
-    .reduce<MovieCardData[]>((res, item, index) => {
-      if (index === 0) {
-        return [...res, { ...item, isLeft: true }]
-      }
-
-      const prev = res[res.length - 1]
-      const isLeft = dayjs.unix(item.watchedAt).isSame(prev.watchedAt, 'month')
-        ? prev.isLeft
-        : !prev.isLeft
-
-      return [...res, { ...item, isLeft }]
-    }, [])
-
-  const changeYear = (v: number) => {
+  const handleYearChange = (v: number) => {
+    if (!years.includes(v)) {
+      return
+    }
     if (contentRef.current) {
       contentRef.current.scroll({ top: 0, behavior: 'smooth' })
     }
@@ -67,19 +48,8 @@ const useViewData = () => {
     setYear(v)
   }
 
-  const handlePrev = () => {
-    if (prevYear) {
-      changeYear(prevYear)
-    }
-  }
-
-  const handleNext = () => {
-    if (nextYear) {
-      changeYear(nextYear)
-    }
-  }
-
   const fetchYears = useCallback(async () => {
+    setIsFetchingYears(true)
     try {
       const res = await request.get<{ years: number[] }>('movies/years')
 
@@ -89,6 +59,8 @@ const useViewData = () => {
       if (error instanceof Error) {
         setMessage(error.message)
       }
+    } finally {
+      setIsFetchingYears(false)
     }
   }, [setMessage])
 
@@ -111,12 +83,12 @@ const useViewData = () => {
   }, [fetchYears])
 
   useEffect(() => {
-    if (year) {
+    if (year && !movies[year]) {
       fetch()
     }
-  }, [year, fetch])
+  }, [movies, year, fetch])
 
-  return { classname, list, year, contentRef, prevYear, nextYear, isFetching, handlePrev, handleNext }
+  return { classname: bem('movies'), list: movies[year] ?? [], years, year, contentRef, isFetching, isFetchingYears, handleYearChange }
 }
 
 export default useViewData
